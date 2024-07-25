@@ -50,6 +50,9 @@ public class TextHandler : MonoBehaviour
         {
             dialogueBox.text = dialogueLines[dialogueTracker];
             dialogueTracker++;
+        } else
+        {
+            Debug.Log("The End");
         }
     }
 

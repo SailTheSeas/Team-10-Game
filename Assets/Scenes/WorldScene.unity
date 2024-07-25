@@ -1095,13 +1095,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueLines:
-  - "You slowly Open the door\t"
-  - Get on the floor
-  - EVERYBODY WALK THE DINOSAUR
-  - Stuff
-  - Idk
-  - Nothing
-  - Stuff
+  - "Time to free the WSOA building\t"
+  - Time to go up the stairs
+  - I am now up the stairs
+  - Oh no an enemy
+  - Phew
+  - "Up the stairs again!\t"
+  - OH NO
+  - That went well
+  - "Time to carry on\t"
+  - Some more enemies
+  - I hope that was the last of them
+  - Up and up
+  - This reminds me of my youth
+  - Of when I was young and free
+  - of when I was ignorant and stupid
+  - How far I have come
+  - Why do I hear boss music?
+  - THATS ALOT OF ENEMIES
+  - That was easy
+  - GGS EZ
   dialogueBox: {fileID: 257277666}
   nextDialogue: {fileID: 1267880464}
   imageDisplay: {fileID: 1600481320}
@@ -1110,9 +1123,15 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 10665c090d8eaa34a98a2cf5836a78a3, type: 3}
   - {fileID: 21300000, guid: 38066493bf5381f4b9a856cbf9991d44, type: 3}
   - {fileID: 21300000, guid: 1e21498e782ec284d903d576e3759315, type: 3}
-  totalDialogue: 7
-  battleTriggerPoints: 0300000006000000
-  backgroundTriggerPoints: 02000000030000000500000006000000
+  - {fileID: 21300000, guid: 87ba57dd22ea7a642891c0e46d936289, type: 3}
+  - {fileID: 21300000, guid: ee65aa837f3514d46853307886b1a6a6, type: 3}
+  - {fileID: 21300000, guid: 595e07dd130acac478cb35629d436a40, type: 3}
+  - {fileID: 21300000, guid: c277dad352900d44192d3e90298948c1, type: 3}
+  - {fileID: 21300000, guid: e9abd9e8db73daf489d8223b6f668e32, type: 3}
+  - {fileID: 21300000, guid: c1a61b4f0edb5a74b92b1b10640cc5b2, type: 3}
+  totalDialogue: 20
+  battleTriggerPoints: 0400000006000000090000001200000063000000
+  backgroundTriggerPoints: 0100000002000000050000000600000008000000090000000b0000000d0000000e0000001000000063000000
 --- !u!4 &1851236031
 Transform:
   m_ObjectHideFlags: 0

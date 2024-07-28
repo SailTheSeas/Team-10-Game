@@ -1130,8 +1130,12 @@ MonoBehaviour:
   - {fileID: 21300000, guid: e9abd9e8db73daf489d8223b6f668e32, type: 3}
   - {fileID: 21300000, guid: c1a61b4f0edb5a74b92b1b10640cc5b2, type: 3}
   totalDialogue: 20
-  battleTriggerPoints: 0400000006000000090000001200000063000000
+  battleTriggerPoints: 04000000070000000a0000001200000063000000
   backgroundTriggerPoints: 0100000002000000050000000600000008000000090000000b0000000d0000000e0000001000000063000000
+  textStartDelay: 0
+  textCharacterDelay: 0.05
+  typingChar: _
+  hasTypingChar: 1
 --- !u!4 &1851236031
 Transform:
   m_ObjectHideFlags: 0

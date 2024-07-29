@@ -139,6 +139,7 @@ public class MenuController : MonoBehaviour
         HidePlayerReticles();
         UpdateEnemyReticleTarget(currentEnemyTCount);
         mainMenuPanel.SetActive(true);
+        //combatStateMachine.ChangeState(2);
     }
 
     public void ShowItemMenu()

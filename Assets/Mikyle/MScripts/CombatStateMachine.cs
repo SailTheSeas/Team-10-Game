@@ -14,6 +14,8 @@ public class CombatStateMachine : MonoBehaviour
 
     int enemyCount = 2;
     [SerializeField] int currentEnemyTCount = 1;
+    int playersCount = 4;
+    [SerializeField] int currentPlayersCount = 1;
 
     public enum CombatState
     {
@@ -25,12 +27,11 @@ public class CombatStateMachine : MonoBehaviour
         PersonaAttack,
         GunAttack,
         PlayerTurnEnd,
-        //ChooseAction,
-        //ResolveAction,
         EnemyTurn,
         HoldUp,
         AllOutAttack,
-        CombatEnd
+        CombatEnd,
+        Healing
     }
 
     void Start()
@@ -53,7 +54,7 @@ public class CombatStateMachine : MonoBehaviour
                 if (currentEnemyTCount < 1)
                     currentEnemyTCount = enemyCount;
 
-                menuController.UpdateReticleTarget(currentEnemyTCount);
+                menuController.UpdateEnemyReticleTarget(currentEnemyTCount);
             }
 
             if (Input.GetKeyDown(KeyCode.A))
@@ -63,7 +64,30 @@ public class CombatStateMachine : MonoBehaviour
                 if (currentEnemyTCount > enemyCount)
                     currentEnemyTCount = 1;
 
-                menuController.UpdateReticleTarget(currentEnemyTCount);
+                menuController.UpdateEnemyReticleTarget(currentEnemyTCount);
+            }
+        }
+
+        if (currentState == CombatState.Heal)
+        {
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                Debug.Log("A was pressed");
+                currentPlayersCount--;
+                if (currentPlayersCount < 1)
+                    currentPlayersCount = playersCount;
+
+                menuController.UpdatePlayerReticleTarget(currentPlayersCount);
+            }
+
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                Debug.Log("D was pressed");
+                currentPlayersCount++;
+                if (currentPlayersCount > playersCount)
+                    currentPlayersCount = 1;
+
+                menuController.UpdatePlayerReticleTarget(currentPlayersCount);
             }
         }
     }
@@ -101,8 +125,7 @@ public class CombatStateMachine : MonoBehaviour
                 break;
 
             case CombatState.Heal:
-                menuController.UpdateStateText($"P{currentPlayerIndex + 1} - Healing");
-                StartCoroutine(Heal());
+                menuController.UpdateStateText($"P{currentPlayerIndex + 1} - Heal?");
                 break;
 
             case CombatState.Gaurd:
@@ -140,6 +163,10 @@ public class CombatStateMachine : MonoBehaviour
             case CombatState.CombatEnd:
                 EndCombat();
                 break;
+
+            case CombatState.Healing:
+                StartCoroutine(Healing());
+                break;
         }
     }
 
@@ -174,6 +201,9 @@ public class CombatStateMachine : MonoBehaviour
             case 9:
                 currentState = CombatState.EnemyTurn;
                 break;
+            case 13:
+                currentState = CombatState.Healing;
+                break;
             default:
                 break;
         }
@@ -194,7 +224,7 @@ public class CombatStateMachine : MonoBehaviour
         currentEnemyIndex = 0;
 
         yield return new WaitForSeconds(2f);
-        menuController.UpdateReticleTarget(1);
+        menuController.UpdateEnemyReticleTarget(1);
         ChangeState(2);
     }
 
@@ -239,8 +269,10 @@ public class CombatStateMachine : MonoBehaviour
 
     }
 
-    IEnumerator Heal()
+    IEnumerator Healing()
     {
+        menuController.UpdateStateText($"P{currentPlayerIndex + 1} - Healing");
+        Debug.Log($"Healing Player: {currentPlayersCount}");
         //Put Heal Anim here
         //Put Heal Calc here
 

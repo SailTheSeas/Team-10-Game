@@ -12,6 +12,9 @@ public class CombatStateMachine : MonoBehaviour
     [SerializeField] private List<PlayerCharacter> players;
     [SerializeField] private List<EnemyCharacter> enemies;
 
+    int enemyCount = 2;
+    [SerializeField] int currentEnemyTCount = 1;
+
     public enum CombatState
     {
         CombatStart,
@@ -39,6 +42,30 @@ public class CombatStateMachine : MonoBehaviour
     void Update()
     {
         //HandleState();
+
+
+        if (currentState == CombatState.PlayerTurn)
+        {
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                Debug.Log("D was pressed");
+                currentEnemyTCount--;
+                if (currentEnemyTCount < 1)
+                    currentEnemyTCount = enemyCount;
+
+                menuController.UpdateReticleTarget(currentEnemyTCount);
+            }
+
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                Debug.Log("A was pressed");
+                currentEnemyTCount++;
+                if (currentEnemyTCount > enemyCount)
+                    currentEnemyTCount = 1;
+
+                menuController.UpdateReticleTarget(currentEnemyTCount);
+            }
+        }
     }
 
     void HandleState()
@@ -54,6 +81,7 @@ public class CombatStateMachine : MonoBehaviour
             case CombatState.PlayerTurn:
                 menuController.UpdateStateText($"P{currentPlayerIndex + 1} - Aiming");
                 menuController.ShowMainMenu();
+
 
                 if (currentPlayerIndex < players.Count)
                 {
@@ -166,6 +194,7 @@ public class CombatStateMachine : MonoBehaviour
         currentEnemyIndex = 0;
 
         yield return new WaitForSeconds(2f);
+        menuController.UpdateReticleTarget(1);
         ChangeState(2);
     }
 

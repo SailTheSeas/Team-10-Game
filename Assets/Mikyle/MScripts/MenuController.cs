@@ -7,17 +7,60 @@ public class MenuController : MonoBehaviour
     public GameObject mainMenuPanel;
     public GameObject itemMenuPanel;
     public GameObject personaMenuPanel;
-
+    public GameObject mainPanel;
+    public Camera cam;
     public CombatStateMachine combatStateMachine;
 
     TextMeshProUGUI stateTMP;
 
+    Transform reticle1;
+    Transform reticle2;
+
+    Transform enemy1Location;
+    Transform enemy2Location;
+
+    int enemyCount = 2;
+    int currentEnemyTCount = 1;
 
 
     void Start()
     {
         stateTMP = statePanel.GetComponentInChildren<TextMeshProUGUI>();
         //ShowMainMenu();
+        reticle1 = mainPanel.transform.GetChild(0);
+        reticle2 = mainPanel.transform.GetChild(1);
+
+        enemy1Location = GameObject.Find("E1").transform;
+        enemy2Location = GameObject.Find("E2").transform;
+
+        Vector3 screenPos = cam.WorldToScreenPoint(enemy1Location.position);
+        reticle1.position = screenPos;
+
+        screenPos = cam.WorldToScreenPoint(enemy2Location.position);
+        reticle2.position = screenPos;
+
+        reticle1.gameObject.SetActive(false);
+        reticle2.gameObject.SetActive(false);
+    }
+
+    public void UpdateReticleTarget(int newTarget)
+    {
+        switch (newTarget)
+        {
+            case 1:
+                currentEnemyTCount = 1;
+                reticle1.gameObject.SetActive(true);
+                reticle2.gameObject.SetActive(false);
+                break;
+            case 2:
+                currentEnemyTCount = 2;
+                reticle1.gameObject.SetActive(false);
+                reticle2.gameObject.SetActive(true);
+                break;
+
+        }
+
+
     }
 
     public void ShowMainMenu()
@@ -84,7 +127,7 @@ public class MenuController : MonoBehaviour
 
     public void UpdateStateText(string text)
     {
-        stateTMP.text = $"State: {text}";
+        stateTMP.text = $"State:\n {text}";
     }
 
     public void AttackPerformed()

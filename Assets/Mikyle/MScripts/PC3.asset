@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4bf60543fa5cc449935c8ca3c4a6910, type: 3}
+  m_Name: PC3
+  m_EditorClassIdentifier: 
+  characterName: Morgana
+  health: 250
+  mp: 100
+  physicalAttack: 35
+  bulletAmount: 10
+  bulletDamage: 15
+  personaMoves:
+  - moveName: Garu
+    damageValue: 40
+    elementalType: WIND
+    mpCost: 0
+  - moveName: Garula
+    damageValue: 100
+    elementalType: WIND
+    mpCost: 0
+  - moveName: Magarula
+    damageValue: 160
+    elementalType: WIND
+    mpCost: 0
+  - moveName: na
+    damageValue: 0
+    elementalType: '-'
+    mpCost: 0

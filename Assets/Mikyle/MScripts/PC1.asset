@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4bf60543fa5cc449935c8ca3c4a6910, type: 3}
+  m_Name: PC1
+  m_EditorClassIdentifier: 
+  characterName: Joker
+  health: 250
+  mp: 100
+  physicalAttack: 35
+  bulletAmount: 10
+  bulletDamage: 15
+  personaMoves:
+  - moveName: Agi
+    damageValue: 40
+    elementalType: FIRE
+    mpCost: 0
+  - moveName: Agilao
+    damageValue: 100
+    elementalType: FIRE
+    mpCost: 0
+  - moveName: Agidyne
+    damageValue: 160
+    elementalType: FIRE
+    mpCost: 0
+  - moveName: na
+    damageValue: 0
+    elementalType: '-'
+    mpCost: 0

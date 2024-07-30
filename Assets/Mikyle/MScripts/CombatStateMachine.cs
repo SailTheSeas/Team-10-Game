@@ -5,13 +5,26 @@ using UnityEngine;
 public class CombatStateMachine : MonoBehaviour
 {
     public CombatState currentState;
-    public PlayerTurnStateMachine playerTurnStateMachine;
+    //public PlayerTurnStateMachine playerTurnStateMachine;
     public MenuController menuController;
-    private int currentPlayerIndex = 0;
+    [SerializeField] private int currentPlayerIndex = 0;
     private int currentEnemyIndex = 0;
+    [SerializeField] List<Item> items;
     [SerializeField] private List<PlayerCharacter> players;
     [SerializeField] private List<EnemyCharacter> enemies;
 
+    int enemyCount = 2;
+    [SerializeField] int currentEnemyTCount = 1;
+    int playersCount = 4;
+    [SerializeField] int currentPlayersCount = 1;
+
+
+
+    public Camera cam;
+    Transform cameraPlayerPos1;
+    Transform cameraPlayerPos2;
+    Transform cameraPlayerPos3;
+    Transform cameraPlayerPos4;
     public enum CombatState
     {
         CombatStart,
@@ -22,12 +35,12 @@ public class CombatStateMachine : MonoBehaviour
         PersonaAttack,
         GunAttack,
         PlayerTurnEnd,
-        //ChooseAction,
-        //ResolveAction,
         EnemyTurn,
         HoldUp,
         AllOutAttack,
-        CombatEnd
+        CombatEnd,
+        Healing,
+        PersonaAttacking
     }
 
     void Start()
@@ -39,6 +52,53 @@ public class CombatStateMachine : MonoBehaviour
     void Update()
     {
         //HandleState();
+
+
+        if (currentState == CombatState.PlayerTurn || currentState == CombatState.PersonaAttack)
+        {
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                Debug.Log("D was pressed");
+                currentEnemyTCount--;
+                if (currentEnemyTCount < 1)
+                    currentEnemyTCount = enemyCount;
+
+                menuController.UpdateEnemyReticleTarget(currentEnemyTCount);
+            }
+
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                Debug.Log("A was pressed");
+                currentEnemyTCount++;
+                if (currentEnemyTCount > enemyCount)
+                    currentEnemyTCount = 1;
+
+                menuController.UpdateEnemyReticleTarget(currentEnemyTCount);
+            }
+        }
+
+        if (currentState == CombatState.Heal)
+        {
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                Debug.Log("A was pressed");
+                currentPlayersCount--;
+                if (currentPlayersCount < 1)
+                    currentPlayersCount = playersCount;
+
+                menuController.UpdatePlayerReticleTarget(currentPlayersCount);
+            }
+
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                Debug.Log("D was pressed");
+                currentPlayersCount++;
+                if (currentPlayersCount > playersCount)
+                    currentPlayersCount = 1;
+
+                menuController.UpdatePlayerReticleTarget(currentPlayersCount);
+            }
+        }
     }
 
     void HandleState()
@@ -52,12 +112,14 @@ public class CombatStateMachine : MonoBehaviour
                 break;
 
             case CombatState.PlayerTurn:
-                menuController.UpdateStateText($"P{currentPlayerIndex + 1} - Aiming");
+                menuController.UpdateStateText($"{players[currentPlayerIndex].characterName} is Aiming");
                 menuController.ShowMainMenu();
+
 
                 if (currentPlayerIndex < players.Count)
                 {
                     PlayerCharacter currentPlayer = players[currentPlayerIndex];
+                    UpdateCameraPosition();
                     //playerTurnStateMachine.StartPlayerTurn(currentPlayer);
                 }
                 else
@@ -67,28 +129,29 @@ public class CombatStateMachine : MonoBehaviour
                 break;
 
             case CombatState.Attack:
-                menuController.UpdateStateText($"P{currentPlayerIndex + 1} - Attacking");
+                menuController.UpdateStateText($"{players[currentPlayerIndex].characterName} is Attacking");
                 StartCoroutine(Attack());
 
                 break;
 
             case CombatState.Heal:
-                menuController.UpdateStateText($"P{currentPlayerIndex + 1} - Healing");
-                StartCoroutine(Heal());
+                menuController.UpdateStateText($"Will {players[currentPlayerIndex].characterName} Heal?");
                 break;
 
             case CombatState.Gaurd:
-                menuController.UpdateStateText($"P{currentPlayerIndex + 1} - Gaurding");
+                menuController.UpdateStateText($"{players[currentPlayerIndex].characterName} is Gaurding");
                 StartCoroutine(Gaurd());
                 break;
 
             case CombatState.PersonaAttack:
-                menuController.UpdateStateText($"P{currentPlayerIndex + 1} - PersAttck");
-                StartCoroutine(PersonaAttack());
+                menuController.UpdateStateText($"{players[currentPlayerIndex].characterName} summons their Persona!");
+                menuController.SetUpPersonaMoves(players[currentPlayerIndex].playerMoves);
+                Debug.Log(players[currentPlayerIndex].playerMoves);
+                //StartCoroutine(PersonaAttack());
                 break;
 
             case CombatState.GunAttack:
-                menuController.UpdateStateText($"P{currentPlayerIndex + 1} - GunAttck");
+                menuController.UpdateStateText($"{players[currentPlayerIndex].characterName} - GunAttck");
                 //StartCoroutine(Attack());
                 break;
 
@@ -111,6 +174,16 @@ public class CombatStateMachine : MonoBehaviour
 
             case CombatState.CombatEnd:
                 EndCombat();
+                break;
+
+            case CombatState.Healing:
+                menuController.UpdateStateText($"{players[currentPlayerIndex].characterName} is Healing");
+                StartCoroutine(Healing());
+                break;
+
+            case CombatState.PersonaAttacking:
+                menuController.UpdateStateText($"{players[currentPlayerIndex].characterName} uses Persona Attack!");
+                StartCoroutine(PersonaAttacking());
                 break;
         }
     }
@@ -146,6 +219,12 @@ public class CombatStateMachine : MonoBehaviour
             case 9:
                 currentState = CombatState.EnemyTurn;
                 break;
+            case 13:
+                currentState = CombatState.Healing;
+                break;
+            case 14:
+                currentState = CombatState.PersonaAttacking;
+                break;
             default:
                 break;
         }
@@ -154,24 +233,34 @@ public class CombatStateMachine : MonoBehaviour
         HandleState();
     }
 
-    public void ChangeStateToResolve()
-    {
-        //currentState = CombatState.ResolveAction;
-        HandleState();
-    }
+    //public void ChangeStateToResolve()
+    //{
+    //    //currentState = CombatState.ResolveAction;
+    //    HandleState();
+    //}
 
     IEnumerator SetupCombat()
     {
         currentPlayerIndex = 0;
         currentEnemyIndex = 0;
 
+        //Camera Handling
+        cameraPlayerPos1 = GameObject.Find("CameraFirstPos").transform;
+        cameraPlayerPos2 = GameObject.Find("CameraThirdPos").transform;
+        cameraPlayerPos3 = GameObject.Find("CameraForthPos").transform;
+        cameraPlayerPos4 = GameObject.Find("CameraFifthPos").transform;
+
         yield return new WaitForSeconds(2f);
+        menuController.SetUpItems(items);
+        menuController.UpdateEnemyReticleTarget(1);
         ChangeState(2);
     }
 
 
     IEnumerator Attack()
     {
+        menuController.HideEnemyReticles();
+        menuController.HideAllMenus();
         //Put Attack Anim here
         //Put damage Calc here
 
@@ -192,6 +281,7 @@ public class CombatStateMachine : MonoBehaviour
 
     IEnumerator Gaurd()
     {
+        menuController.HideAllMenus();
         //Put Gaurd Anim here
         //Put Gaurd Calc here
 
@@ -210,8 +300,10 @@ public class CombatStateMachine : MonoBehaviour
 
     }
 
-    IEnumerator Heal()
+    IEnumerator Healing()
     {
+        menuController.HideAllMenus();
+        Debug.Log($"Healing Player: {currentPlayersCount}");
         //Put Heal Anim here
         //Put Heal Calc here
 
@@ -230,8 +322,9 @@ public class CombatStateMachine : MonoBehaviour
 
     }
 
-    IEnumerator PersonaAttack()
+    IEnumerator PersonaAttacking()
     {
+        menuController.HideAllMenus();
         //Put Persona Attack Anim here
         //Put Damage Calc here
 
@@ -247,6 +340,7 @@ public class CombatStateMachine : MonoBehaviour
         {
             ChangeState(2);
         }
+
 
     }
 
@@ -272,7 +366,9 @@ public class CombatStateMachine : MonoBehaviour
 
     IEnumerator PlayerTurnEnd()
     {
+        UpdateCameraPosition();
         menuController.HideAllMenus();
+        menuController.HideEnemyReticles();
         yield return new WaitForSeconds(2f);
         ChangeState(9);
     }
@@ -286,6 +382,36 @@ public class CombatStateMachine : MonoBehaviour
     void EndCombat()
     {
         // End combat
+    }
+
+    public void UpdateCameraPosition()
+    {
+        if (currentPlayerIndex == 0)
+        {
+            cam.transform.position = cameraPlayerPos1.position;
+            cam.transform.rotation = cameraPlayerPos1.rotation;
+        }
+
+        if (currentPlayerIndex == 1)
+        {
+            cam.transform.position = cameraPlayerPos2.position;
+            cam.transform.rotation = cameraPlayerPos2.rotation;
+        }
+
+        if (currentPlayerIndex == 2)
+        {
+            cam.transform.position = cameraPlayerPos3.position;
+            cam.transform.rotation = cameraPlayerPos3.rotation;
+        }
+
+        if (currentPlayerIndex == 3)
+        {
+            cam.transform.position = cameraPlayerPos4.position;
+            cam.transform.rotation = cameraPlayerPos4.rotation;
+        }
+
+
+        menuController.UpdateReticlePlacement();
     }
 }
 

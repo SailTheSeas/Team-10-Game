@@ -12,9 +12,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bf60543fa5cc449935c8ca3c4a6910, type: 3}
   m_Name: PC4
   m_EditorClassIdentifier: 
-  characterName: Ann
-  health: 30
-  mp: 30
-  physicalAttack: 20
-  bulletAmount: 5
-  bulletDamage: 10
+  characterName: Yusuke
+  health: 250
+  mp: 100
+  physicalAttack: 35
+  bulletAmount: 10
+  bulletDamage: 15
+  personaMoves:
+  - moveName: Bafu
+    damageValue: 40
+    elementalType: ICE
+    mpCost: 0
+  - moveName: Bafula
+    damageValue: 100
+    elementalType: ICE
+    mpCost: 0
+  - moveName: Bufudyne
+    damageValue: 160
+    elementalType: ICE
+    mpCost: 0
+  - moveName: na
+    damageValue: 0
+    elementalType: '-'
+    mpCost: 0

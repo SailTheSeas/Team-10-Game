@@ -13,8 +13,25 @@ MonoBehaviour:
   m_Name: PC2
   m_EditorClassIdentifier: 
   characterName: Ryuji
-  health: 50
-  mp: 25
-  physicalAttack: 30
-  bulletAmount: 4
-  bulletDamage: 12
+  health: 250
+  mp: 100
+  physicalAttack: 35
+  bulletAmount: 10
+  bulletDamage: 15
+  personaMoves:
+  - moveName: Lunge
+    damageValue: 60
+    elementalType: PHYSICAL
+    mpCost: 0
+  - moveName: CLEAVE
+    damageValue: 65
+    elementalType: PHYSICAL
+    mpCost: 0
+  - moveName: GIANT SLICE
+    damageValue: 90
+    elementalType: PHYSICAL
+    mpCost: 0
+  - moveName: Megaton Raid
+    damageValue: 300
+    elementalType: PHYSICAL
+    mpCost: 0

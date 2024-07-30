@@ -25,6 +25,39 @@ public class CombatStateMachine : MonoBehaviour
     Transform cameraPlayerPos2;
     Transform cameraPlayerPos3;
     Transform cameraPlayerPos4;
+
+    #region For Data Values Vars
+    public GameObject P1;
+    public GameObject P2;
+    public GameObject P3;
+    public GameObject P4;
+
+    PlayerCharacter P1Stats;
+    PlayerCharacter P2Stats;
+    PlayerCharacter P3Stats;
+    PlayerCharacter P4Stats;
+
+
+    public GameObject E1;
+    public GameObject E2;
+    public GameObject E3;
+    public GameObject E4;
+
+    EnemyCharacter E1Stats;     //Overall we have 4 enemy types. Though the enemies go thepugh 3 diffrent stages. Instead of making 9 enemies, we can make other data sets to be used for the diffrent levels. So scrptable objects[SObj] that all contain data, but the level will detemine which SObj to use, creating varations of enemies without having to make other physical versions. 
+    EnemyCharacter E2Stats;
+    EnemyCharacter E3Stats;
+    EnemyCharacter E4Stats;
+
+
+
+
+
+
+
+    #endregion
+
+
+
     public enum CombatState
     {
         CombatStart,
@@ -43,8 +76,24 @@ public class CombatStateMachine : MonoBehaviour
         PersonaAttacking
     }
 
-    void Start()
+    void Start() //Maybe we can use Awake here 
     {
+        #region For Data Values [Gets]
+        P1Stats = P1.GetComponent<PlayerCharacter>();
+        P2Stats = P2.GetComponent<PlayerCharacter>();
+        P3Stats = P3.GetComponent<PlayerCharacter>();
+        P4Stats = P4.GetComponent<PlayerCharacter>();
+
+
+
+        E1Stats = E1.GetComponent<EnemyCharacter>();
+        E2Stats = E2.GetComponent<EnemyCharacter>();
+        E3Stats = E3.GetComponent<EnemyCharacter>();
+        E4Stats = E4.GetComponent<EnemyCharacter>();
+
+        #endregion
+
+
         //ChangeState(1);
         HandleState();
     }

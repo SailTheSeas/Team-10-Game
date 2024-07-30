@@ -4163,6 +4163,14 @@ MonoBehaviour:
   currentEnemyTCount: 1
   currentPlayersCount: 1
   cam: {fileID: 426901156}
+  P1: {fileID: 1411513502}
+  P2: {fileID: 1479236795}
+  P3: {fileID: 1556385372}
+  P4: {fileID: 1176259990}
+  E1: {fileID: 1849510621}
+  E2: {fileID: 2125350157}
+  E3: {fileID: 0}
+  E4: {fileID: 0}
 --- !u!4 &1302582441
 Transform:
   m_ObjectHideFlags: 0

@@ -21,7 +21,7 @@ public class PlayerTurnStateMachine : MonoBehaviour
 
     void Update()
     {
-        HandleState();
+        //HandleState();
     }
 
     //public void StartPlayerTurn(PlayerCharacter player)
@@ -30,52 +30,52 @@ public class PlayerTurnStateMachine : MonoBehaviour
     //    ChangeState(PlayerTurnState.ChooseAction);
     //}
 
-    void HandleState()
-    {
-        switch (currentState)
-        {
-            case PlayerTurnState.Pause:
+    //void HandleState()
+    //{
+    //    switch (currentState)
+    //    {
+    //        case PlayerTurnState.Pause:
 
-                break;
+    //            break;
 
-            case PlayerTurnState.ChooseAction:
-                // Show action menu
-                break;
+    //        case PlayerTurnState.ChooseAction:
+    //            // Show action menu
+    //            break;
 
-            case PlayerTurnState.Attacking:
-                // Handle attacking logic
-                combatStateMachine.ChangeStateToResolve();
-                break;
+    //        case PlayerTurnState.Attacking:
+    //            // Handle attacking logic
+    //            combatStateMachine.ChangeStateToResolve();
+    //            break;
 
-            case PlayerTurnState.SelectingEnemy:
-                // Handle enemy selection logic
-                break;
+    //        case PlayerTurnState.SelectingEnemy:
+    //            // Handle enemy selection logic
+    //            break;
 
-            case PlayerTurnState.SelectingAlly:
-                // Handle ally selection logic
-                break;
+    //        case PlayerTurnState.SelectingAlly:
+    //            // Handle ally selection logic
+    //            break;
 
-            case PlayerTurnState.UsingItem:
-                // Handle item usage logic
-                combatStateMachine.ChangeStateToResolve();
-                break;
+    //        case PlayerTurnState.UsingItem:
+    //            // Handle item usage logic
+    //            combatStateMachine.ChangeStateToResolve();
+    //            break;
 
-            case PlayerTurnState.UsingPersona:
-                // Handle persona usage logic
-                combatStateMachine.ChangeStateToResolve();
-                break;
+    //        case PlayerTurnState.UsingPersona:
+    //            // Handle persona usage logic
+    //            combatStateMachine.ChangeStateToResolve();
+    //            break;
 
-            case PlayerTurnState.UsingGun:
-                // Handle gun usage logic
-                combatStateMachine.ChangeStateToResolve();
-                break;
-        }
-    }
+    //        case PlayerTurnState.UsingGun:
+    //            // Handle gun usage logic
+    //            combatStateMachine.ChangeStateToResolve();
+    //            break;
+    //    }
+    //}
 
     void ChangeState(PlayerTurnState newState)
     {
         currentState = newState;
-        HandleState();
+        //HandleState();
     }
 }
 

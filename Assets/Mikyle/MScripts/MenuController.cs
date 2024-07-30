@@ -34,8 +34,8 @@ public class MenuController : MonoBehaviour
 
     Transform enemy1Location;
     Transform enemy2Location;
-    public Transform cameraPos1;
-    public Transform cameraPos2;
+    Transform cameraPos1;
+    Transform cameraPos2;
 
     int enemyCount = 2;
     int currentEnemyTCount = 1;
@@ -158,8 +158,9 @@ public class MenuController : MonoBehaviour
 
     public void ShowMainMenu()
     {
-        cam.transform.position = cameraPos1.position;
-        cam.transform.rotation = cameraPos1.rotation;
+        //cam.transform.position = cameraPos1.position;
+        //cam.transform.rotation = cameraPos1.rotation;
+        combatStateMachine.UpdateCameraPosition();
 
         HideAllMenus();
         HidePlayerReticles();
@@ -226,42 +227,42 @@ public class MenuController : MonoBehaviour
 
 
 
-    public void OnMainMenuOptionSelected(string option)
-    {
-        switch (option)
-        {
-            case "Attack":
-                // Handle attack action
-                combatStateMachine.ChangeStateToResolve();
-                break;
-            case "Guard":
-                // Handle guard action
-                combatStateMachine.ChangeStateToResolve();
-                break;
-            case "Item":
-                ShowItemMenu();
-                break;
-            case "Persona":
-                ShowPersonaMenu();
-                break;
-            case "Gun":
-                // Handle gun action
-                combatStateMachine.ChangeStateToResolve();
-                break;
-        }
-    }
+    //public void OnMainMenuOptionSelected(string option)
+    //{
+    //    switch (option)
+    //    {
+    //        case "Attack":
+    //            // Handle attack action
+    //            combatStateMachine.ChangeStateToResolve();
+    //            break;
+    //        case "Guard":
+    //            // Handle guard action
+    //            combatStateMachine.ChangeStateToResolve();
+    //            break;
+    //        case "Item":
+    //            ShowItemMenu();
+    //            break;
+    //        case "Persona":
+    //            ShowPersonaMenu();
+    //            break;
+    //        case "Gun":
+    //            // Handle gun action
+    //            combatStateMachine.ChangeStateToResolve();
+    //            break;
+    //    }
+    //}
 
-    public void OnItemSelected(string item)
-    {
-        // Handle item selection
-        combatStateMachine.ChangeStateToResolve();
-    }
+    //public void OnItemSelected(string item)
+    //{
+    //    // Handle item selection
+    //    combatStateMachine.ChangeStateToResolve();
+    //}
 
-    public void OnPersonaAttackSelected(string attack)
-    {
-        // Handle persona attack selection
-        combatStateMachine.ChangeStateToResolve();
-    }
+    //public void OnPersonaAttackSelected(string attack)
+    //{
+    //    // Handle persona attack selection
+    //    combatStateMachine.ChangeStateToResolve();
+    //}
 
     public void UpdateStateText(string text)
     {
@@ -280,7 +281,14 @@ public class MenuController : MonoBehaviour
     }
 
 
+    public void UpdateReticlePlacement()
+    {
+        Vector3 screenPos = cam.WorldToScreenPoint(enemy1Location.position);
+        enemyReticle1.position = screenPos;
 
+        screenPos = cam.WorldToScreenPoint(enemy2Location.position);
+        enemyReticle2.position = screenPos;
+    }
 
 
     public void UpdateMenuItems()

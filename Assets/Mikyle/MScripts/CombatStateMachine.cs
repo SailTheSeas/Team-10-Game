@@ -18,6 +18,13 @@ public class CombatStateMachine : MonoBehaviour
     int playersCount = 4;
     [SerializeField] int currentPlayersCount = 1;
 
+
+
+    public Camera cam;
+    Transform cameraPlayerPos1;
+    Transform cameraPlayerPos2;
+    Transform cameraPlayerPos3;
+    Transform cameraPlayerPos4;
     public enum CombatState
     {
         CombatStart,
@@ -47,7 +54,7 @@ public class CombatStateMachine : MonoBehaviour
         //HandleState();
 
 
-        if (currentState == CombatState.PlayerTurn)
+        if (currentState == CombatState.PlayerTurn || currentState == CombatState.PersonaAttack)
         {
             if (Input.GetKeyDown(KeyCode.D))
             {
@@ -112,6 +119,7 @@ public class CombatStateMachine : MonoBehaviour
                 if (currentPlayerIndex < players.Count)
                 {
                     PlayerCharacter currentPlayer = players[currentPlayerIndex];
+                    UpdateCameraPosition();
                     //playerTurnStateMachine.StartPlayerTurn(currentPlayer);
                 }
                 else
@@ -225,16 +233,22 @@ public class CombatStateMachine : MonoBehaviour
         HandleState();
     }
 
-    public void ChangeStateToResolve()
-    {
-        //currentState = CombatState.ResolveAction;
-        HandleState();
-    }
+    //public void ChangeStateToResolve()
+    //{
+    //    //currentState = CombatState.ResolveAction;
+    //    HandleState();
+    //}
 
     IEnumerator SetupCombat()
     {
         currentPlayerIndex = 0;
         currentEnemyIndex = 0;
+
+        //Camera Handling
+        cameraPlayerPos1 = GameObject.Find("CameraFirstPos").transform;
+        cameraPlayerPos2 = GameObject.Find("CameraThirdPos").transform;
+        cameraPlayerPos3 = GameObject.Find("CameraForthPos").transform;
+        cameraPlayerPos4 = GameObject.Find("CameraFifthPos").transform;
 
         yield return new WaitForSeconds(2f);
         menuController.SetUpItems(items);
@@ -310,7 +324,7 @@ public class CombatStateMachine : MonoBehaviour
 
     IEnumerator PersonaAttacking()
     {
-
+        menuController.HideAllMenus();
         //Put Persona Attack Anim here
         //Put Damage Calc here
 
@@ -352,6 +366,7 @@ public class CombatStateMachine : MonoBehaviour
 
     IEnumerator PlayerTurnEnd()
     {
+        UpdateCameraPosition();
         menuController.HideAllMenus();
         menuController.HideEnemyReticles();
         yield return new WaitForSeconds(2f);
@@ -367,6 +382,36 @@ public class CombatStateMachine : MonoBehaviour
     void EndCombat()
     {
         // End combat
+    }
+
+    public void UpdateCameraPosition()
+    {
+        if (currentPlayerIndex == 0)
+        {
+            cam.transform.position = cameraPlayerPos1.position;
+            cam.transform.rotation = cameraPlayerPos1.rotation;
+        }
+
+        if (currentPlayerIndex == 1)
+        {
+            cam.transform.position = cameraPlayerPos2.position;
+            cam.transform.rotation = cameraPlayerPos2.rotation;
+        }
+
+        if (currentPlayerIndex == 2)
+        {
+            cam.transform.position = cameraPlayerPos3.position;
+            cam.transform.rotation = cameraPlayerPos3.rotation;
+        }
+
+        if (currentPlayerIndex == 3)
+        {
+            cam.transform.position = cameraPlayerPos4.position;
+            cam.transform.rotation = cameraPlayerPos4.rotation;
+        }
+
+
+        menuController.UpdateReticlePlacement();
     }
 }
 

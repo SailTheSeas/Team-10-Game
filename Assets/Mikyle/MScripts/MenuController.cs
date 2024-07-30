@@ -265,7 +265,8 @@ public class MenuController : MonoBehaviour
 
     public void UpdateStateText(string text)
     {
-        stateTMP.text = $"State:\n {text}";
+        stateTMP.text = $"{text}";
+        //stateTMP.text = $"State:\n {text}";
     }
 
     public void AttackPerformed()

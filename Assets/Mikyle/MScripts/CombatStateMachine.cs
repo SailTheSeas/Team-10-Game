@@ -353,6 +353,7 @@ public class CombatStateMachine : MonoBehaviour
     IEnumerator PlayerTurnEnd()
     {
         menuController.HideAllMenus();
+        menuController.HideEnemyReticles();
         yield return new WaitForSeconds(2f);
         ChangeState(9);
     }

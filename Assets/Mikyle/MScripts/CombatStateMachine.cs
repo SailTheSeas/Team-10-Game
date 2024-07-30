@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CombatStateMachine : MonoBehaviour
 {
+    [Header("Admin")]
     public CombatState currentState;
     //public PlayerTurnStateMachine playerTurnStateMachine;
     public MenuController menuController;
@@ -13,18 +14,22 @@ public class CombatStateMachine : MonoBehaviour
     [SerializeField] private List<PlayerCharacter> players;
     [SerializeField] private List<EnemyCharacter> enemies;
 
+    [Header("Enemy")]
     int enemyCount = 2;
     [SerializeField] int currentEnemyTCount = 1;
     int playersCount = 4;
     [SerializeField] int currentPlayersCount = 1;
 
 
-
+    [Header("Camera")]
     public Camera cam;
     Transform cameraPlayerPos1;
     Transform cameraPlayerPos2;
     Transform cameraPlayerPos3;
     Transform cameraPlayerPos4;
+
+    
+
     public enum CombatState
     {
         CombatStart,
@@ -148,6 +153,10 @@ public class CombatStateMachine : MonoBehaviour
                 menuController.SetUpPersonaMoves(players[currentPlayerIndex].playerMoves);
                 Debug.Log(players[currentPlayerIndex].playerMoves);
                 //StartCoroutine(PersonaAttack());
+
+                //Player Summons Persona Animation
+                players[currentPlayerIndex].playerAnim.SetInteger("CallPersona", 1);
+
                 break;
 
             case CombatState.GunAttack:
@@ -243,7 +252,7 @@ public class CombatStateMachine : MonoBehaviour
     {
         currentPlayerIndex = 0;
         currentEnemyIndex = 0;
-
+        
         //Camera Handling
         cameraPlayerPos1 = GameObject.Find("CameraFirstPos").transform;
         cameraPlayerPos2 = GameObject.Find("CameraThirdPos").transform;
@@ -261,10 +270,16 @@ public class CombatStateMachine : MonoBehaviour
     {
         menuController.HideEnemyReticles();
         menuController.HideAllMenus();
-        //Put Attack Anim here
+
+        //do the attack animation
+        players[currentPlayerIndex].playerAnim.SetInteger("BasicAttack", 1);
+
         //Put damage Calc here
 
         yield return new WaitForSeconds(2f);
+
+        //return to idle animation
+        players[currentPlayerIndex].playerAnim.SetInteger("BasicAttack", 0);
 
         currentPlayerIndex++;
         if (currentPlayerIndex >= players.Count)
@@ -282,7 +297,10 @@ public class CombatStateMachine : MonoBehaviour
     IEnumerator Gaurd()
     {
         menuController.HideAllMenus();
-        //Put Gaurd Anim here
+        
+        //do guard animation
+        players[currentPlayerIndex].playerAnim.SetInteger("Guard", 1);
+
         //Put Gaurd Calc here
 
         yield return new WaitForSeconds(2f);
@@ -304,10 +322,16 @@ public class CombatStateMachine : MonoBehaviour
     {
         menuController.HideAllMenus();
         Debug.Log($"Healing Player: {currentPlayersCount}");
-        //Put Heal Anim here
+
+        //Do heal animation
+        players[currentPlayerIndex].playerAnim.SetInteger("Heal", 1);
+
         //Put Heal Calc here
 
         yield return new WaitForSeconds(2f);
+
+        //Return to Idle Animation
+        players[currentPlayerIndex].playerAnim.SetInteger("Heal", 0);
 
         currentPlayerIndex++;
         if (currentPlayerIndex >= players.Count)
@@ -330,6 +354,9 @@ public class CombatStateMachine : MonoBehaviour
 
         yield return new WaitForSeconds(2f);
 
+        //Revert to Idle Animation
+        players[currentPlayerIndex].playerAnim.SetInteger("CallPersona", 0);
+
         currentPlayerIndex++;
         if (currentPlayerIndex >= players.Count)
         {
@@ -347,10 +374,16 @@ public class CombatStateMachine : MonoBehaviour
     IEnumerator EnemyAttack()
     {
         //Put Enemy Attack Anim here
+        //Do enemy attack animation
+        enemies[currentEnemyIndex].enemyAnim.SetInteger("EnemyAttack", 1);
+
         //Randomise Party member to hit
         //Put Damage Calc here
 
         yield return new WaitForSeconds(2f);
+
+        //Return to Enemy Idle Animation
+        enemies[currentEnemyIndex].enemyAnim.SetInteger("EnemyAttack", 0);
 
         currentEnemyIndex++;
         if (currentEnemyIndex >= enemies.Count)

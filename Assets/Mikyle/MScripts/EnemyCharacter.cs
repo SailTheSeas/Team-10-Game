@@ -16,6 +16,9 @@ public class EnemyCharacter : MonoBehaviour
     public string EnemyWeakness { get => enemyWeakness; set => enemyWeakness = value; }
     public string EnemyResistance { get => enemyResistance; set => enemyResistance = value; }
 
+    [Header("Animatins")]
+    public Animator enemyAnim;
+
     //What are we communicating with the state machine?
     //Communicate the Player Affordance (decisions they can make/actions they can take) from discrete states
 
@@ -26,6 +29,8 @@ public class EnemyCharacter : MonoBehaviour
         EnemyDamage = enemyData.damage;
         EnemyWeakness = enemyData.weakness;
         EnemyResistance = enemyData.resistance;
+
+        enemyAnim = GetComponent<Animator>();
     }
 
     // Update is called once per frame

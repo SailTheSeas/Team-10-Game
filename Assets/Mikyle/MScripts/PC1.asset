@@ -13,8 +13,25 @@ MonoBehaviour:
   m_Name: PC1
   m_EditorClassIdentifier: 
   characterName: Joker
-  health: 40
-  mp: 30
-  physicalAttack: 20
-  bulletAmount: 6
-  bulletDamage: 8
+  health: 250
+  mp: 100
+  physicalAttack: 35
+  bulletAmount: 10
+  bulletDamage: 15
+  personaMoves:
+  - moveName: Agi
+    damageValue: 40
+    elementalType: FIRE
+    mpCost: 0
+  - moveName: Agilao
+    damageValue: 100
+    elementalType: FIRE
+    mpCost: 0
+  - moveName: Agidyne
+    damageValue: 160
+    elementalType: FIRE
+    mpCost: 0
+  - moveName: na
+    damageValue: 0
+    elementalType: '-'
+    mpCost: 0

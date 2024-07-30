@@ -13,8 +13,25 @@ MonoBehaviour:
   m_Name: PC3
   m_EditorClassIdentifier: 
   characterName: Morgana
-  health: 25
-  mp: 20
-  physicalAttack: 15
-  bulletAmount: 12
-  bulletDamage: 5
+  health: 250
+  mp: 100
+  physicalAttack: 35
+  bulletAmount: 10
+  bulletDamage: 15
+  personaMoves:
+  - moveName: Garu
+    damageValue: 40
+    elementalType: WIND
+    mpCost: 0
+  - moveName: Garula
+    damageValue: 100
+    elementalType: WIND
+    mpCost: 0
+  - moveName: Magarula
+    damageValue: 160
+    elementalType: WIND
+    mpCost: 0
+  - moveName: na
+    damageValue: 0
+    elementalType: '-'
+    mpCost: 0

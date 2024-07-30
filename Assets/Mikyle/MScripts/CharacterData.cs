@@ -11,6 +11,6 @@ public class CharacterData : ScriptableObject
     public int bulletAmount;
     public int bulletDamage;
     public List<PersonaMove> personaMoves;
-    public List<Item> items;
+    //public List<Item> items;
 }
 

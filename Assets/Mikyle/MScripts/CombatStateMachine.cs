@@ -5,10 +5,11 @@ using UnityEngine;
 public class CombatStateMachine : MonoBehaviour
 {
     public CombatState currentState;
-    public PlayerTurnStateMachine playerTurnStateMachine;
+    //public PlayerTurnStateMachine playerTurnStateMachine;
     public MenuController menuController;
-    private int currentPlayerIndex = 0;
+    [SerializeField] private int currentPlayerIndex = 0;
     private int currentEnemyIndex = 0;
+    [SerializeField] List<Item> items;
     [SerializeField] private List<PlayerCharacter> players;
     [SerializeField] private List<EnemyCharacter> enemies;
 
@@ -31,7 +32,8 @@ public class CombatStateMachine : MonoBehaviour
         HoldUp,
         AllOutAttack,
         CombatEnd,
-        Healing
+        Healing,
+        PersonaAttacking
     }
 
     void Start()
@@ -103,7 +105,7 @@ public class CombatStateMachine : MonoBehaviour
                 break;
 
             case CombatState.PlayerTurn:
-                menuController.UpdateStateText($"P{currentPlayerIndex + 1} - Aiming");
+                menuController.UpdateStateText($"{players[currentPlayerIndex].characterName} is Aiming");
                 menuController.ShowMainMenu();
 
 
@@ -119,27 +121,29 @@ public class CombatStateMachine : MonoBehaviour
                 break;
 
             case CombatState.Attack:
-                menuController.UpdateStateText($"P{currentPlayerIndex + 1} - Attacking");
+                menuController.UpdateStateText($"{players[currentPlayerIndex].characterName} is Attacking");
                 StartCoroutine(Attack());
 
                 break;
 
             case CombatState.Heal:
-                menuController.UpdateStateText($"P{currentPlayerIndex + 1} - Heal?");
+                menuController.UpdateStateText($"Will {players[currentPlayerIndex].characterName} Heal?");
                 break;
 
             case CombatState.Gaurd:
-                menuController.UpdateStateText($"P{currentPlayerIndex + 1} - Gaurding");
+                menuController.UpdateStateText($"{players[currentPlayerIndex].characterName} is Gaurding");
                 StartCoroutine(Gaurd());
                 break;
 
             case CombatState.PersonaAttack:
-                menuController.UpdateStateText($"P{currentPlayerIndex + 1} - PersAttck");
-                StartCoroutine(PersonaAttack());
+                menuController.UpdateStateText($"{players[currentPlayerIndex].characterName} summons their Persona!");
+                menuController.SetUpPersonaMoves(players[currentPlayerIndex].playerMoves);
+                Debug.Log(players[currentPlayerIndex].playerMoves);
+                //StartCoroutine(PersonaAttack());
                 break;
 
             case CombatState.GunAttack:
-                menuController.UpdateStateText($"P{currentPlayerIndex + 1} - GunAttck");
+                menuController.UpdateStateText($"{players[currentPlayerIndex].characterName} - GunAttck");
                 //StartCoroutine(Attack());
                 break;
 
@@ -165,7 +169,13 @@ public class CombatStateMachine : MonoBehaviour
                 break;
 
             case CombatState.Healing:
+                menuController.UpdateStateText($"{players[currentPlayerIndex].characterName} is Healing");
                 StartCoroutine(Healing());
+                break;
+
+            case CombatState.PersonaAttacking:
+                menuController.UpdateStateText($"{players[currentPlayerIndex].characterName} uses Persona Attack!");
+                StartCoroutine(PersonaAttacking());
                 break;
         }
     }
@@ -204,6 +214,9 @@ public class CombatStateMachine : MonoBehaviour
             case 13:
                 currentState = CombatState.Healing;
                 break;
+            case 14:
+                currentState = CombatState.PersonaAttacking;
+                break;
             default:
                 break;
         }
@@ -224,6 +237,7 @@ public class CombatStateMachine : MonoBehaviour
         currentEnemyIndex = 0;
 
         yield return new WaitForSeconds(2f);
+        menuController.SetUpItems(items);
         menuController.UpdateEnemyReticleTarget(1);
         ChangeState(2);
     }
@@ -231,6 +245,8 @@ public class CombatStateMachine : MonoBehaviour
 
     IEnumerator Attack()
     {
+        menuController.HideEnemyReticles();
+        menuController.HideAllMenus();
         //Put Attack Anim here
         //Put damage Calc here
 
@@ -251,6 +267,7 @@ public class CombatStateMachine : MonoBehaviour
 
     IEnumerator Gaurd()
     {
+        menuController.HideAllMenus();
         //Put Gaurd Anim here
         //Put Gaurd Calc here
 
@@ -271,7 +288,7 @@ public class CombatStateMachine : MonoBehaviour
 
     IEnumerator Healing()
     {
-        menuController.UpdateStateText($"P{currentPlayerIndex + 1} - Healing");
+        menuController.HideAllMenus();
         Debug.Log($"Healing Player: {currentPlayersCount}");
         //Put Heal Anim here
         //Put Heal Calc here
@@ -291,8 +308,9 @@ public class CombatStateMachine : MonoBehaviour
 
     }
 
-    IEnumerator PersonaAttack()
+    IEnumerator PersonaAttacking()
     {
+
         //Put Persona Attack Anim here
         //Put Damage Calc here
 
@@ -308,6 +326,7 @@ public class CombatStateMachine : MonoBehaviour
         {
             ChangeState(2);
         }
+
 
     }
 

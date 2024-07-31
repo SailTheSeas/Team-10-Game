@@ -5,7 +5,7 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
     [SerializeField] private AudioSource audioPlayer;
-    [SerializeField] private AudioClip personaClip, attackClip, gunClip;
+    [SerializeField] private AudioClip personaClip, attackClip, gunClip, blockClip;
     void Start()
     {
         
@@ -21,11 +21,18 @@ public class SoundManager : MonoBehaviour
     {
         audioPlayer.PlayOneShot(attackClip);
     }
+
     public void PlayPersona()
     {
         audioPlayer.PlayOneShot(personaClip);
     }
+
     public void PlayGun()
+    {
+        audioPlayer.PlayOneShot(gunClip);
+    }
+
+    public void PlayBlock()
     {
         audioPlayer.PlayOneShot(gunClip);
     }

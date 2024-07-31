@@ -21,6 +21,8 @@ public class TextHandler : MonoBehaviour
     [SerializeField] private int[] battleTriggerPoints;
     [SerializeField] private int[] backgroundTriggerPoints;
 
+    [SerializeField] private GameObject enemyDisp;
+
     [SerializeField] private float textStartDelay;
     [SerializeField] private float textCharacterDelay;
     [SerializeField] private string typingChar;
@@ -72,10 +74,13 @@ public class TextHandler : MonoBehaviour
                 
             }
 
+            if (dialogueTracker == (battleTriggerPoints[battleTriggerTracker]-1))
+                enemyDisp.SetActive(true);
+
             if (dialogueTracker == battleTriggerPoints[battleTriggerTracker])
             {
                 startBattle = true;
-                
+
                 battleTriggerTracker++;
                 if (DH != null)
                     DH.SetCurrentCombat(battleTriggerTracker);
@@ -90,6 +95,7 @@ public class TextHandler : MonoBehaviour
                 if (startBattle)
                 {
                     startBattle = false;
+                    enemyDisp.SetActive(false);
                     SceneManager.LoadScene("CombatScene");
                 }
                 StartCoroutine(TypeTMP());

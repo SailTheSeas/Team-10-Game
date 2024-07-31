@@ -3804,6 +3804,7 @@ MonoBehaviour:
   playerBulletAmount: 10
   playerBulletDamage: 15
   playerMoves: []
+  isGuarding: 0
   playerAnim: {fileID: 0}
 --- !u!95 &1176259996
 Animator:
@@ -4544,17 +4545,9 @@ MonoBehaviour:
   enemies:
   - {fileID: 2125350162}
   - {fileID: 1849510626}
-  currentEnemyTCount: 1
-  currentPlayersCount: 1
+  currentEnemyTCount: 0
+  currentPlayersTCount: 0
   cam: {fileID: 426901156}
-  P1: {fileID: 1411513502}
-  P2: {fileID: 1479236795}
-  P3: {fileID: 1556385372}
-  P4: {fileID: 1176259990}
-  E1: {fileID: 1849510621}
-  E2: {fileID: 2125350157}
-  E3: {fileID: 0}
-  E4: {fileID: 0}
 --- !u!4 &1302582441
 Transform:
   m_ObjectHideFlags: 0
@@ -5065,6 +5058,7 @@ MonoBehaviour:
     damageValue: 160
     elementalType: FIRE
     mpCost: 0
+  isGuarding: 0
   playerAnim: {fileID: 0}
 --- !u!95 &1411513508
 Animator:
@@ -5317,6 +5311,7 @@ MonoBehaviour:
     damageValue: 300
     elementalType: PHYSICAL
     mpCost: 0
+  isGuarding: 0
   playerAnim: {fileID: 0}
 --- !u!95 &1479236801
 Animator:
@@ -5787,6 +5782,7 @@ MonoBehaviour:
     damageValue: 160
     elementalType: WIND
     mpCost: 0
+  isGuarding: 0
   playerAnim: {fileID: 0}
 --- !u!95 &1556385378
 Animator:

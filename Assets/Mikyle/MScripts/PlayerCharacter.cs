@@ -13,6 +13,7 @@ public class PlayerCharacter : MonoBehaviour
     public int playerBulletAmount;
     public int playerBulletDamage;
     public List<PersonaMove> playerMoves;
+    public bool isGuarding = false;
     //[SerializeField] List<Item> items;
 
     public string CharacterName { get => characterName; set => characterName = value; }

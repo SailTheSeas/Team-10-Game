@@ -119,6 +119,7 @@ public class CombatStateMachine : MonoBehaviour
 
             case CombatState.PlayerTurn:
                 menuController.UpdateStateText($"{players[currentPlayerIndex].characterName} is Aiming");
+                players[currentPlayerIndex].playerAnim.SetInteger("CallPersona", 0);
                 menuController.ShowMainMenu();
                 playerLight.position = new Vector3(players[currentPlayerIndex].transform.position.x, players[currentPlayerIndex].transform.position.y + 3, players[currentPlayerIndex].transform.position.z);
 

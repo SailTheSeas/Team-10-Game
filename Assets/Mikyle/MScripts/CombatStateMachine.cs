@@ -51,7 +51,7 @@ public class CombatStateMachine : MonoBehaviour
 
     void Start()
     {
-        CurrentMove[0] = players[currentPlayerIndex].playerMoves[0];
+       
 
         //ChangeState(1);
         HandleState();

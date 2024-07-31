@@ -1663,8 +1663,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1302582440}
         m_TargetAssemblyTypeName: CombatStateMachine, Assembly-CSharp
-        m_MethodName: ChangeState
-        m_Mode: 3
+        m_MethodName: PButton3
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2014,8 +2014,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1302582440}
         m_TargetAssemblyTypeName: CombatStateMachine, Assembly-CSharp
-        m_MethodName: ChangeState
-        m_Mode: 3
+        m_MethodName: PButton4
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -6440,8 +6440,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1302582440}
         m_TargetAssemblyTypeName: CombatStateMachine, Assembly-CSharp
-        m_MethodName: ChangeState
-        m_Mode: 3
+        m_MethodName: PButton2
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -6813,6 +6813,11 @@ MonoBehaviour:
   currentPlayersTCount: 0
   cam: {fileID: 426901156}
   playerLight: {fileID: 1228878561}
+  CurrentMove:
+  - moveName: 
+    damageValue: 0
+    elementalType: 
+    mpCost: 0
 --- !u!4 &1302582441
 Transform:
   m_ObjectHideFlags: 0
@@ -8597,8 +8602,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1302582440}
         m_TargetAssemblyTypeName: CombatStateMachine, Assembly-CSharp
-        m_MethodName: ChangeState
-        m_Mode: 3
+        m_MethodName: PButton1
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

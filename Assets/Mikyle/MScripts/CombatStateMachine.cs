@@ -151,7 +151,7 @@ public class CombatStateMachine : MonoBehaviour
             case CombatState.PersonaAttack:
                 menuController.UpdateStateText($"{players[currentPlayerIndex].characterName} summons their Persona!");
                 menuController.SetUpPersonaMoves(players[currentPlayerIndex].playerMoves);
-                Debug.Log(players[currentPlayerIndex].playerMoves);
+                //Debug.Log(players[currentPlayerIndex].playerMoves);
                 //StartCoroutine(PersonaAttack());
 
                 //Player Summons Persona Animation
@@ -356,6 +356,8 @@ public class CombatStateMachine : MonoBehaviour
         //Put Persona Attack Anim here
         //Put Damage Calc here
 
+        //=--------------------
+
         yield return new WaitForSeconds(2f);
 
         //Revert to Idle Animation
@@ -383,6 +385,8 @@ public class CombatStateMachine : MonoBehaviour
 
         //Randomise Party member to hit
         //Put Damage Calc here
+
+        //---------------
 
         yield return new WaitForSeconds(2f);
 

@@ -27,6 +27,8 @@ public class PlayerCharacter : MonoBehaviour
     [Header("Animation")]
     public Animator playerAnim;
 
+    
+
     void Start()
     {
         CharacterName = playerData.characterName;
@@ -47,5 +49,6 @@ public class PlayerCharacter : MonoBehaviour
 
     }
 
+    
 
 }

@@ -95,13 +95,13 @@ public class MenuController : MonoBehaviour
         switch (newTarget)
         {
             case 0:
-                Debug.Log("case 0 ran");
+                //Debug.Log("case 0 ran");
                 currentEnemyTCount = 0;
                 enemyReticle1.gameObject.SetActive(true);
                 enemyReticle2.gameObject.SetActive(false);
                 break;
             case 1:
-                Debug.Log("case 1 ran");
+                //Debug.Log("case 1 ran");
                 currentEnemyTCount = 1;
                 enemyReticle1.gameObject.SetActive(false);
                 enemyReticle2.gameObject.SetActive(true);

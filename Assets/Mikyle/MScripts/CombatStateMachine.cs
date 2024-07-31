@@ -29,7 +29,7 @@ public class CombatStateMachine : MonoBehaviour
     Transform cameraPlayerPos4;
     [SerializeField] Transform playerLight;
 
-
+    public List<PersonaMove> CurrentMove = new List<PersonaMove>(1);
 
     public enum CombatState
     {
@@ -51,6 +51,8 @@ public class CombatStateMachine : MonoBehaviour
 
     void Start()
     {
+        CurrentMove[0] = players[currentPlayerIndex].playerMoves[0];
+
         //ChangeState(1);
         HandleState();
     }
@@ -359,6 +361,9 @@ public class CombatStateMachine : MonoBehaviour
         //Put Persona Attack Anim here
         //Put Damage Calc here
 
+        enemies[currentEnemyTCount].enemyHealth -= CurrentMove[0].damageValue;
+
+
         //=--------------------
 
         yield return new WaitForSeconds(2f);
@@ -476,5 +481,52 @@ public class CombatStateMachine : MonoBehaviour
 
         //menuController.UpdateReticlePlacement();
     }
+
+    public void PButton1()
+    {
+       
+       CurrentMove[0] = players[currentPlayerIndex].playerMoves[0];
+         ChangeState(14); 
+
+
+    }
+
+    public void PButton2()
+    {
+        CurrentMove[0] = players[currentPlayerIndex].playerMoves[1];
+         ChangeState(14); 
+
+
+    }
+
+    public void PButton3()
+    {
+        CurrentMove[0] = players[currentPlayerIndex].playerMoves[2];
+        ChangeState(14); 
+
+
+    }
+
+    public void PButton4()
+    {
+        CurrentMove[0] = players[currentPlayerIndex].playerMoves[3];
+  
+         ChangeState(14); 
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 

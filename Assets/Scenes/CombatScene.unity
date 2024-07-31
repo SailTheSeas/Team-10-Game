@@ -597,6 +597,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: ff385d665e7b98549977f80863cfc7e7, type: 3}
       insertIndex: -1
       addedObject: {fileID: 559720664}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: ff385d665e7b98549977f80863cfc7e7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1059390845}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff385d665e7b98549977f80863cfc7e7, type: 3}
 --- !u!4 &340654938 stripped
@@ -2998,6 +3001,72 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1028601981}
   m_CullTransparentMesh: 1
+--- !u!1001 &1059390844
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 340654938}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: d9273c4a7ce925d4db296a8ad6ec0348, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d9273c4a7ce925d4db296a8ad6ec0348, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.341
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d9273c4a7ce925d4db296a8ad6ec0348, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d9273c4a7ce925d4db296a8ad6ec0348, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9999593
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d9273c4a7ce925d4db296a8ad6ec0348, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d9273c4a7ce925d4db296a8ad6ec0348, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.009025126
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d9273c4a7ce925d4db296a8ad6ec0348, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d9273c4a7ce925d4db296a8ad6ec0348, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d9273c4a7ce925d4db296a8ad6ec0348, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d9273c4a7ce925d4db296a8ad6ec0348, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: d9273c4a7ce925d4db296a8ad6ec0348, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: f6cdac521b84f8a44934588af482d14c, type: 2}
+    - target: {fileID: 919132149155446097, guid: d9273c4a7ce925d4db296a8ad6ec0348, type: 3}
+      propertyPath: m_Name
+      value: Assignment 1 Persona Wind Persona
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d9273c4a7ce925d4db296a8ad6ec0348, type: 3}
+--- !u!4 &1059390845 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d9273c4a7ce925d4db296a8ad6ec0348, type: 3}
+  m_PrefabInstance: {fileID: 1059390844}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1061386307
 GameObject:
   m_ObjectHideFlags: 0

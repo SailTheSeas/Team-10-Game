@@ -16,9 +16,9 @@ public class CombatStateMachine : MonoBehaviour
 
     [Header("Enemy")]
     int enemyCount = 2;
-    [SerializeField] int currentEnemyTCount = 1;
+    [SerializeField] int currentEnemyTCount = 0;
     int playersCount = 4;
-    [SerializeField] int currentPlayersCount = 1;
+    [SerializeField] int currentPlayersTCount = 0;
 
 
     [Header("Camera")]
@@ -65,8 +65,8 @@ public class CombatStateMachine : MonoBehaviour
             {
                 Debug.Log("D was pressed");
                 currentEnemyTCount--;
-                if (currentEnemyTCount < 1)
-                    currentEnemyTCount = enemyCount;
+                if (currentEnemyTCount < 0)
+                    currentEnemyTCount = enemyCount - 1;
 
                 menuController.UpdateEnemyReticleTarget(currentEnemyTCount);
             }
@@ -75,8 +75,8 @@ public class CombatStateMachine : MonoBehaviour
             {
                 Debug.Log("A was pressed");
                 currentEnemyTCount++;
-                if (currentEnemyTCount > enemyCount)
-                    currentEnemyTCount = 1;
+                if (currentEnemyTCount >= enemyCount)
+                    currentEnemyTCount = 0;
 
                 menuController.UpdateEnemyReticleTarget(currentEnemyTCount);
             }
@@ -87,21 +87,21 @@ public class CombatStateMachine : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.A))
             {
                 Debug.Log("A was pressed");
-                currentPlayersCount--;
-                if (currentPlayersCount < 1)
-                    currentPlayersCount = playersCount;
+                currentPlayersTCount--;
+                if (currentPlayersTCount < 0)
+                    currentPlayersTCount = playersCount - 1;
 
-                menuController.UpdatePlayerReticleTarget(currentPlayersCount);
+                menuController.UpdatePlayerReticleTarget(currentPlayersTCount);
             }
 
             if (Input.GetKeyDown(KeyCode.D))
             {
                 Debug.Log("D was pressed");
-                currentPlayersCount++;
-                if (currentPlayersCount > playersCount)
-                    currentPlayersCount = 1;
+                currentPlayersTCount++;
+                if (currentPlayersTCount >= playersCount)
+                    currentPlayersTCount = 0;
 
-                menuController.UpdatePlayerReticleTarget(currentPlayersCount);
+                menuController.UpdatePlayerReticleTarget(currentPlayersTCount);
             }
         }
     }
@@ -261,7 +261,7 @@ public class CombatStateMachine : MonoBehaviour
 
         yield return new WaitForSeconds(2f);
         menuController.SetUpItems(items);
-        menuController.UpdateEnemyReticleTarget(1);
+        menuController.UpdateEnemyReticleTarget(0);
         ChangeState(2);
     }
 
@@ -275,6 +275,9 @@ public class CombatStateMachine : MonoBehaviour
         players[currentPlayerIndex].playerAnim.SetInteger("BasicAttack", 1);
 
         //Put damage Calc here
+
+          enemies[currentEnemyTCount].enemyHealth -= players[currentPlayerIndex].playerPhysAttack;
+
 
         yield return new WaitForSeconds(2f);
 
@@ -300,14 +303,15 @@ public class CombatStateMachine : MonoBehaviour
 
         //do guard animation
         players[currentPlayerIndex].playerAnim.SetInteger("Guard", 1);
-
+        players[currentPlayerIndex].isGuarding = true;
         //Put Gaurd Calc here
-
+        
         yield return new WaitForSeconds(2f);
 
         currentPlayerIndex++;
         if (currentPlayerIndex >= players.Count)
         {
+
             currentPlayerIndex = 0;
             ChangeState(8);
         }
@@ -321,7 +325,7 @@ public class CombatStateMachine : MonoBehaviour
     IEnumerator Healing()
     {
         menuController.HideAllMenus();
-        Debug.Log($"Healing Player: {currentPlayersCount}");
+        Debug.Log($"Healing Player: {currentPlayersTCount}");
 
         //Do heal animation
         players[currentPlayerIndex].playerAnim.SetInteger("Heal", 1);
@@ -388,6 +392,16 @@ public class CombatStateMachine : MonoBehaviour
         currentEnemyIndex++;
         if (currentEnemyIndex >= enemies.Count)
         {
+            for (int i = 0; i <= playersCount -1; i++)
+            {
+
+                players[i].isGuarding = false;
+                players[i].playerAnim.SetInteger("Guard", 0);
+
+
+            }
+
+
             currentEnemyIndex = 0;
             ChangeState(2);
         }

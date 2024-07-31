@@ -38,9 +38,9 @@ public class MenuController : MonoBehaviour
     Transform cameraPos2;
 
     int enemyCount = 2;
-    int currentEnemyTCount = 1;
+    int currentEnemyTCount = 0;
     int playerCount = 4;
-    int currentPlayerCount = 1;
+    int currentPlayerCount = 0;
 
 
 
@@ -92,13 +92,13 @@ public class MenuController : MonoBehaviour
     {
         switch (newTarget)
         {
-            case 1:
-                currentEnemyTCount = 1;
+            case 0:
+                currentEnemyTCount = 0;
                 enemyReticle1.gameObject.SetActive(true);
                 enemyReticle2.gameObject.SetActive(false);
                 break;
-            case 2:
-                currentEnemyTCount = 2;
+            case 1:
+                currentEnemyTCount = 1;
                 enemyReticle1.gameObject.SetActive(false);
                 enemyReticle2.gameObject.SetActive(true);
                 break;
@@ -110,29 +110,29 @@ public class MenuController : MonoBehaviour
     {
         switch (newTarget)
         {
-            case 1:
-                currentPlayerCount = 1;
+            case 0:
+                currentPlayerCount = 0;
                 playerReticle1.gameObject.SetActive(true);
                 playerReticle2.gameObject.SetActive(false);
+                playerReticle3.gameObject.SetActive(false);
+                playerReticle4.gameObject.SetActive(false);
+                break;
+            case 1:
+                currentPlayerCount = 1;
+                playerReticle1.gameObject.SetActive(false);
+                playerReticle2.gameObject.SetActive(true);
                 playerReticle3.gameObject.SetActive(false);
                 playerReticle4.gameObject.SetActive(false);
                 break;
             case 2:
                 currentPlayerCount = 2;
                 playerReticle1.gameObject.SetActive(false);
-                playerReticle2.gameObject.SetActive(true);
-                playerReticle3.gameObject.SetActive(false);
-                playerReticle4.gameObject.SetActive(false);
-                break;
-            case 3:
-                currentPlayerCount = 3;
-                playerReticle1.gameObject.SetActive(false);
                 playerReticle2.gameObject.SetActive(false);
                 playerReticle3.gameObject.SetActive(true);
                 playerReticle4.gameObject.SetActive(false);
                 break;
-            case 4:
-                currentPlayerCount = 4;
+            case 3:
+                currentPlayerCount = 3;
                 playerReticle1.gameObject.SetActive(false);
                 playerReticle2.gameObject.SetActive(false);
                 playerReticle3.gameObject.SetActive(false);

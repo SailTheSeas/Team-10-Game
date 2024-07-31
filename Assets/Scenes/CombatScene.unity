@@ -904,7 +904,7 @@ Transform:
   m_GameObject: {fileID: 398693683}
   serializedVersion: 2
   m_LocalRotation: {x: 0.11016403, y: -0.2286791, z: 0.026054703, w: 0.9668976}
-  m_LocalPosition: {x: 5.58, y: 2.75, z: -5.92}
+  m_LocalPosition: {x: 5.58, y: 2.23, z: -5.92}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1919,13 +1919,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 598243872}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.11294313, y: 0.06731237, z: -0.0076692593, w: 0.9912891}
-  m_LocalPosition: {x: 0.52, y: 2.74, z: -5.85}
+  m_LocalRotation: {x: 0.11227632, y: 0.12688367, z: -0.014456558, w: 0.9854368}
+  m_LocalPosition: {x: 0.52, y: 2.1, z: -5.85}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 13, y: 7.769, z: 0}
+  m_LocalEulerAnglesHint: {x: 13, y: 14.674, z: 0}
 --- !u!1 &606584918
 GameObject:
   m_ObjectHideFlags: 0
@@ -4518,6 +4518,7 @@ MonoBehaviour:
   currentState: 0
   menuController: {fileID: 1302582438}
   currentPlayerIndex: 0
+  currentEnemyIndex: 0
   items:
   - itemName: Recover-R 50mg
     amount: 0
@@ -5355,13 +5356,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1510086545}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.11044361, y: -0.21804495, z: 0.024843078, w: 0.96935105}
-  m_LocalPosition: {x: 3.7, y: 2.74, z: -5.85}
+  m_LocalRotation: {x: 0.112848386, y: -0.07860535, z: 0.008955939, w: 0.9904576}
+  m_LocalPosition: {x: 3.12, y: 2.02, z: -5.85}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 13, y: -25.354, z: 0}
+  m_LocalEulerAnglesHint: {x: 13, y: -9.075, z: 0}
 --- !u!1 &1532674619
 GameObject:
   m_ObjectHideFlags: 0
@@ -6885,7 +6886,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1901568173
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7756,7 +7757,7 @@ SceneRoots:
   - {fileID: 1479236799}
   - {fileID: 1556385376}
   - {fileID: 1176259994}
-  - {fileID: 2125350161}
   - {fileID: 1849510625}
+  - {fileID: 2125350161}
   - {fileID: 1846446465}
   - {fileID: 1008764247}

@@ -9,7 +9,7 @@ public class CombatStateMachine : MonoBehaviour
     //public PlayerTurnStateMachine playerTurnStateMachine;
     public MenuController menuController;
     [SerializeField] private int currentPlayerIndex = 0;
-    private int currentEnemyIndex = 0;
+    [SerializeField] private int currentEnemyIndex = 0;
     [SerializeField] List<Item> items;
     [SerializeField] private List<PlayerCharacter> players;
     [SerializeField] private List<EnemyCharacter> enemies;
@@ -28,7 +28,7 @@ public class CombatStateMachine : MonoBehaviour
     Transform cameraPlayerPos3;
     Transform cameraPlayerPos4;
 
-    
+
 
     public enum CombatState
     {
@@ -252,7 +252,7 @@ public class CombatStateMachine : MonoBehaviour
     {
         currentPlayerIndex = 0;
         currentEnemyIndex = 0;
-        
+
         //Camera Handling
         cameraPlayerPos1 = GameObject.Find("CameraFirstPos").transform;
         cameraPlayerPos2 = GameObject.Find("CameraThirdPos").transform;
@@ -297,7 +297,7 @@ public class CombatStateMachine : MonoBehaviour
     IEnumerator Gaurd()
     {
         menuController.HideAllMenus();
-        
+
         //do guard animation
         players[currentPlayerIndex].playerAnim.SetInteger("Guard", 1);
 
@@ -388,7 +388,7 @@ public class CombatStateMachine : MonoBehaviour
         currentEnemyIndex++;
         if (currentEnemyIndex >= enemies.Count)
         {
-            currentPlayerIndex = 0;
+            currentEnemyIndex = 0;
             ChangeState(2);
         }
         else
@@ -402,6 +402,7 @@ public class CombatStateMachine : MonoBehaviour
         UpdateCameraPosition();
         menuController.HideAllMenus();
         menuController.HideEnemyReticles();
+        menuController.HidePlayerReticles();
         yield return new WaitForSeconds(2f);
         ChangeState(9);
     }

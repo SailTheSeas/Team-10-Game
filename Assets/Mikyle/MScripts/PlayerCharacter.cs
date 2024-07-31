@@ -24,6 +24,9 @@ public class PlayerCharacter : MonoBehaviour
     public List<PersonaMove> PlayerMoves { get => playerMoves; set => playerMoves = value; }
     //public List<Item> Items { get => items; set => items = value; }
 
+    [Header("Animation")]
+    public Animator playerAnim;
+
     void Start()
     {
         CharacterName = playerData.characterName;
@@ -34,6 +37,8 @@ public class PlayerCharacter : MonoBehaviour
         PlayerBulletDamage = playerData.bulletDamage;
         PlayerMoves = playerData.personaMoves;
         //Items = playerData.items;
+
+        playerAnim = GetComponent<Animator>();
     }
 
     // Update is called once per frame

@@ -4,57 +4,29 @@ using UnityEngine;
 
 public class CombatStateMachine : MonoBehaviour
 {
+    [Header("Admin")]
     public CombatState currentState;
     //public PlayerTurnStateMachine playerTurnStateMachine;
     public MenuController menuController;
     [SerializeField] private int currentPlayerIndex = 0;
-    private int currentEnemyIndex = 0;
+    [SerializeField] private int currentEnemyIndex = 0;
     [SerializeField] List<Item> items;
     [SerializeField] private List<PlayerCharacter> players;
     [SerializeField] private List<EnemyCharacter> enemies;
 
+    [Header("Enemy")]
     int enemyCount = 2;
     [SerializeField] int currentEnemyTCount = 1;
     int playersCount = 4;
     [SerializeField] int currentPlayersCount = 1;
 
 
-
+    [Header("Camera")]
     public Camera cam;
     Transform cameraPlayerPos1;
     Transform cameraPlayerPos2;
     Transform cameraPlayerPos3;
     Transform cameraPlayerPos4;
-
-    #region For Data Values Vars
-    public GameObject P1;
-    public GameObject P2;
-    public GameObject P3;
-    public GameObject P4;
-
-    PlayerCharacter P1Stats;
-    PlayerCharacter P2Stats;
-    PlayerCharacter P3Stats;
-    PlayerCharacter P4Stats;
-
-
-    public GameObject E1;
-    public GameObject E2;
-    public GameObject E3;
-    public GameObject E4;
-
-    EnemyCharacter E1Stats;     //Overall we have 4 enemy types. Though the enemies go thepugh 3 diffrent stages. Instead of making 9 enemies, we can make other data sets to be used for the diffrent levels. So scrptable objects[SObj] that all contain data, but the level will detemine which SObj to use, creating varations of enemies without having to make other physical versions. 
-    EnemyCharacter E2Stats;
-    EnemyCharacter E3Stats;
-    EnemyCharacter E4Stats;
-
-
-
-
-
-
-
-    #endregion
 
 
 
@@ -76,24 +48,8 @@ public class CombatStateMachine : MonoBehaviour
         PersonaAttacking
     }
 
-    void Start() //Maybe we can use Awake here 
+    void Start()
     {
-        #region For Data Values [Gets]
-        P1Stats = P1.GetComponent<PlayerCharacter>();
-        P2Stats = P2.GetComponent<PlayerCharacter>();
-        P3Stats = P3.GetComponent<PlayerCharacter>();
-        P4Stats = P4.GetComponent<PlayerCharacter>();
-
-
-
-        E1Stats = E1.GetComponent<EnemyCharacter>();
-        E2Stats = E2.GetComponent<EnemyCharacter>();
-        E3Stats = E3.GetComponent<EnemyCharacter>();
-        E4Stats = E4.GetComponent<EnemyCharacter>();
-
-        #endregion
-
-
         //ChangeState(1);
         HandleState();
     }
@@ -197,6 +153,10 @@ public class CombatStateMachine : MonoBehaviour
                 menuController.SetUpPersonaMoves(players[currentPlayerIndex].playerMoves);
                 Debug.Log(players[currentPlayerIndex].playerMoves);
                 //StartCoroutine(PersonaAttack());
+
+                //Player Summons Persona Animation
+                players[currentPlayerIndex].playerAnim.SetInteger("CallPersona", 1);
+
                 break;
 
             case CombatState.GunAttack:
@@ -310,10 +270,16 @@ public class CombatStateMachine : MonoBehaviour
     {
         menuController.HideEnemyReticles();
         menuController.HideAllMenus();
-        //Put Attack Anim here
+
+        //do the attack animation
+        players[currentPlayerIndex].playerAnim.SetInteger("BasicAttack", 1);
+
         //Put damage Calc here
 
         yield return new WaitForSeconds(2f);
+
+        //return to idle animation
+        players[currentPlayerIndex].playerAnim.SetInteger("BasicAttack", 0);
 
         currentPlayerIndex++;
         if (currentPlayerIndex >= players.Count)
@@ -331,7 +297,10 @@ public class CombatStateMachine : MonoBehaviour
     IEnumerator Gaurd()
     {
         menuController.HideAllMenus();
-        //Put Gaurd Anim here
+
+        //do guard animation
+        players[currentPlayerIndex].playerAnim.SetInteger("Guard", 1);
+
         //Put Gaurd Calc here
 
         yield return new WaitForSeconds(2f);
@@ -353,10 +322,16 @@ public class CombatStateMachine : MonoBehaviour
     {
         menuController.HideAllMenus();
         Debug.Log($"Healing Player: {currentPlayersCount}");
-        //Put Heal Anim here
+
+        //Do heal animation
+        players[currentPlayerIndex].playerAnim.SetInteger("Heal", 1);
+
         //Put Heal Calc here
 
         yield return new WaitForSeconds(2f);
+
+        //Return to Idle Animation
+        players[currentPlayerIndex].playerAnim.SetInteger("Heal", 0);
 
         currentPlayerIndex++;
         if (currentPlayerIndex >= players.Count)
@@ -379,6 +354,9 @@ public class CombatStateMachine : MonoBehaviour
 
         yield return new WaitForSeconds(2f);
 
+        //Revert to Idle Animation
+        players[currentPlayerIndex].playerAnim.SetInteger("CallPersona", 0);
+
         currentPlayerIndex++;
         if (currentPlayerIndex >= players.Count)
         {
@@ -396,15 +374,21 @@ public class CombatStateMachine : MonoBehaviour
     IEnumerator EnemyAttack()
     {
         //Put Enemy Attack Anim here
+        //Do enemy attack animation
+        enemies[currentEnemyIndex].enemyAnim.SetInteger("EnemyAttack", 1);
+
         //Randomise Party member to hit
         //Put Damage Calc here
 
         yield return new WaitForSeconds(2f);
 
+        //Return to Enemy Idle Animation
+        enemies[currentEnemyIndex].enemyAnim.SetInteger("EnemyAttack", 0);
+
         currentEnemyIndex++;
         if (currentEnemyIndex >= enemies.Count)
         {
-            currentPlayerIndex = 0;
+            currentEnemyIndex = 0;
             ChangeState(2);
         }
         else
@@ -418,6 +402,7 @@ public class CombatStateMachine : MonoBehaviour
         UpdateCameraPosition();
         menuController.HideAllMenus();
         menuController.HideEnemyReticles();
+        menuController.HidePlayerReticles();
         yield return new WaitForSeconds(2f);
         ChangeState(9);
     }

@@ -25,8 +25,8 @@ public class MenuController : MonoBehaviour
 
     TextMeshProUGUI stateTMP;
 
-    Transform enemyReticle1;
-    Transform enemyReticle2;
+    [SerializeField] Transform enemyReticle1;
+    [SerializeField] Transform enemyReticle2;
     Transform playerReticle1;
     Transform playerReticle2;
     Transform playerReticle3;
@@ -60,12 +60,14 @@ public class MenuController : MonoBehaviour
         enemy1Location = GameObject.Find("E1").transform;
         enemy2Location = GameObject.Find("E2").transform;
 
+        enemyReticle1 = enemy1Location.GetChild(1).GetChild(0).GetChild(0);
+        enemyReticle2 = enemy2Location.GetChild(1).GetChild(0).GetChild(0);
 
-        Vector3 screenPos = cam.WorldToScreenPoint(enemy1Location.position);
-        enemyReticle1.position = screenPos;
+        //Vector3 screenPos = cam.WorldToScreenPoint(enemy1Location.position);
+        //enemyReticle1.position = screenPos;
 
-        screenPos = cam.WorldToScreenPoint(enemy2Location.position);
-        enemyReticle2.position = screenPos;
+        //screenPos = cam.WorldToScreenPoint(enemy2Location.position);
+        //enemyReticle2.position = screenPos;
 
         enemyReticle1.gameObject.SetActive(false);
         enemyReticle2.gameObject.SetActive(false);
@@ -93,11 +95,13 @@ public class MenuController : MonoBehaviour
         switch (newTarget)
         {
             case 0:
+                Debug.Log("case 0 ran");
                 currentEnemyTCount = 0;
                 enemyReticle1.gameObject.SetActive(true);
                 enemyReticle2.gameObject.SetActive(false);
                 break;
             case 1:
+                Debug.Log("case 1 ran");
                 currentEnemyTCount = 1;
                 enemyReticle1.gameObject.SetActive(false);
                 enemyReticle2.gameObject.SetActive(true);

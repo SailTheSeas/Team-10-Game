@@ -463,7 +463,7 @@ public class CombatStateMachine : MonoBehaviour
         }
 
 
-        menuController.UpdateReticlePlacement();
+        //menuController.UpdateReticlePlacement();
     }
 }
 

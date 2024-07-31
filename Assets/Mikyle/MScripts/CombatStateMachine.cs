@@ -27,6 +27,7 @@ public class CombatStateMachine : MonoBehaviour
     Transform cameraPlayerPos2;
     Transform cameraPlayerPos3;
     Transform cameraPlayerPos4;
+    [SerializeField] Transform playerLight;
 
 
 
@@ -119,7 +120,7 @@ public class CombatStateMachine : MonoBehaviour
             case CombatState.PlayerTurn:
                 menuController.UpdateStateText($"{players[currentPlayerIndex].characterName} is Aiming");
                 menuController.ShowMainMenu();
-
+                playerLight.position = new Vector3(players[currentPlayerIndex].transform.position.x, players[currentPlayerIndex].transform.position.y + 3, players[currentPlayerIndex].transform.position.z);
 
                 if (currentPlayerIndex < players.Count)
                 {
@@ -260,6 +261,7 @@ public class CombatStateMachine : MonoBehaviour
         cameraPlayerPos4 = GameObject.Find("CameraFifthPos").transform;
 
         yield return new WaitForSeconds(2f);
+        playerLight.gameObject.SetActive(true);
         menuController.SetUpItems(items);
         menuController.UpdateEnemyReticleTarget(0);
         ChangeState(2);
@@ -276,7 +278,7 @@ public class CombatStateMachine : MonoBehaviour
 
         //Put damage Calc here
 
-          enemies[currentEnemyTCount].enemyHealth -= players[currentPlayerIndex].playerPhysAttack;
+        enemies[currentEnemyTCount].enemyHealth -= players[currentPlayerIndex].playerPhysAttack;
 
 
         yield return new WaitForSeconds(2f);
@@ -305,7 +307,7 @@ public class CombatStateMachine : MonoBehaviour
         players[currentPlayerIndex].playerAnim.SetInteger("Guard", 1);
         players[currentPlayerIndex].isGuarding = true;
         //Put Gaurd Calc here
-        
+
         yield return new WaitForSeconds(2f);
 
         currentPlayerIndex++;
@@ -379,6 +381,9 @@ public class CombatStateMachine : MonoBehaviour
 
     IEnumerator EnemyAttack()
     {
+        playerLight.GetComponent<Light>().color = Color.red;
+        playerLight.position = new Vector3(enemies[currentEnemyIndex].transform.position.x, enemies[currentEnemyIndex].transform.position.y + 3, enemies[currentEnemyIndex].transform.position.z);
+        yield return new WaitForSeconds(1f);
         //Put Enemy Attack Anim here
         //Do enemy attack animation
         enemies[currentEnemyIndex].enemyAnim.SetInteger("EnemyAttack", 1);
@@ -396,10 +401,12 @@ public class CombatStateMachine : MonoBehaviour
         currentEnemyIndex++;
         if (currentEnemyIndex >= enemies.Count)
         {
-            for (int i = 0; i <= playersCount -1; i++)
+            for (int i = 0; i <= playersCount - 1; i++)
             {
 
                 players[i].isGuarding = false;
+                //playerLight.gameObject.SetActive(true);
+                playerLight.GetComponent<Light>().color = Color.green;
                 players[i].playerAnim.SetInteger("Guard", 0);
 
 
@@ -417,11 +424,14 @@ public class CombatStateMachine : MonoBehaviour
 
     IEnumerator PlayerTurnEnd()
     {
+        playerLight.GetComponent<Light>().color = Color.red;
+        playerLight.position = new Vector3(enemies[currentEnemyIndex].transform.position.x, enemies[currentEnemyIndex].transform.position.y + 3, enemies[currentEnemyIndex].transform.position.z);
         UpdateCameraPosition();
         menuController.HideAllMenus();
         menuController.HideEnemyReticles();
         menuController.HidePlayerReticles();
-        yield return new WaitForSeconds(2f);
+        //playerLight.gameObject.SetActive(false);
+        yield return new WaitForSeconds(1f);
         ChangeState(9);
     }
 

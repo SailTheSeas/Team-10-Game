@@ -22,7 +22,7 @@ public class EnemyCharacter : MonoBehaviour
     //What are we communicating with the state machine?
     //Communicate the Player Affordance (decisions they can make/actions they can take) from discrete states
 
-    void Start()
+    void Awake()
     {
         EnemyName = enemyData.enemyName;
         EnemyHealth = enemyData.health;

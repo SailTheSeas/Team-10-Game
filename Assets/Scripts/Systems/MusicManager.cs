@@ -28,6 +28,9 @@ public class MusicManager : MonoBehaviour
                 default:
                     break;
             }*/
+        } else
+        {
+            fightMusicSource.Play();
         }
     }
 

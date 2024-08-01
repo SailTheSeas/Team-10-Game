@@ -38,10 +38,16 @@ public class EnemyCharacter : MonoBehaviour
         enemyAnim = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
 
+
+    public void UpdateData()
+    {
+        EnemyName = enemyData.enemyName;
+        EnemyHealth = enemyData.health;
+        EnemyDamage = enemyData.damage;
+        EnemyWeakness = enemyData.weakness;
+        EnemyResistance = enemyData.resistance;
+        enemyMoveList = enemyData.enemyMoveList;
     }
 
 

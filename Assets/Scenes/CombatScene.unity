@@ -7278,6 +7278,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 81ed3ac5bc4bf9a4786853521d083c79, type: 2}
   - {fileID: 11400000, guid: 79ccd37adbd111c488a71b3434fa0986, type: 2}
   - {fileID: 11400000, guid: b5e8df2231edc9b4fa0a5855077cb5b2, type: 2}
+  - {fileID: 11400000, guid: 8d2cbe86042b4ce40abcae10f2527309, type: 2}
+  - {fileID: 11400000, guid: 75a844204593d094798143665adee172, type: 2}
   personaModels:
   - {fileID: 1907895762}
   - {fileID: 1924740251}

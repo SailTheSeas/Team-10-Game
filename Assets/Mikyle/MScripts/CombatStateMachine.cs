@@ -6,7 +6,7 @@ public class CombatStateMachine : MonoBehaviour
 {
     [Header("Admin")]
     private DataHolder DH;
-    public CombatState currentState;
+    public CombatState currentState = CombatState.CombatStart;
     //public PlayerTurnStateMachine playerTurnStateMachine;
     [SerializeField] MenuController menuController;
     [SerializeField] PauseMenu pauseMenu;
@@ -63,11 +63,15 @@ public class CombatStateMachine : MonoBehaviour
         PersonaAttacking
     }
 
+
+
     private void Awake()
     {
+        Debug.Log("AWAKESETUP");
         DH = FindAnyObjectByType<DataHolder>();
         if (DH != null)
         {
+            currentState = CombatState.CombatStart;
             switch (DH.GetCurrentCombat())
             {
                 case 1:
@@ -78,7 +82,9 @@ public class CombatStateMachine : MonoBehaviour
                 case 2:
                     Debug.Log("Combat: " + DH.GetCurrentCombat());
                     enemies[0].enemyData = enemyDatas[2];
+                    Debug.Log("first data uploaded");
                     enemies[1].enemyData = enemyDatas[3];
+                    Debug.Log("second data uploaded");
                     break;
                 case 3:
                     Debug.Log("Combat: " + DH.GetCurrentCombat());
@@ -87,13 +93,14 @@ public class CombatStateMachine : MonoBehaviour
                     break;
                 case 4:
                     Debug.Log("Combat: " + DH.GetCurrentCombat());
+                    enemies[0].enemyData = enemyDatas[6];
+                    enemies[1].enemyData = enemyDatas[7];
                     break;
                 default:
                     break;
             }
-        }
-        else
-        {
+
+
         }
     }
     void Start()
@@ -169,6 +176,7 @@ public class CombatStateMachine : MonoBehaviour
                 break;
 
             case CombatState.PlayerTurn:
+                Debug.Log("PlayerTurnStarted");
                 menuController.UpdateStateText($"{players[currentPlayerIndex].characterName} is Aiming");
                 players[currentPlayerIndex].playerAnim.SetInteger("CallPersona", 0);
                 menuController.ShowMainMenu();
@@ -315,6 +323,70 @@ public class CombatStateMachine : MonoBehaviour
 
     IEnumerator SetupCombat()
     {
+        Debug.Log("CoRoutineRan");
+        enemies[0].UpdateData();
+        enemies[1].UpdateData();
+        if (enemies[0])
+        {
+            Debug.Log("E1 Exists");
+            switch (enemies[0].EnemyResistance)
+            {
+                case "FIRE":
+                    Debug.Log("E1 res to fire");
+                    enemies[0].transform.GetChild(0).GetChild(0).GetComponent<SkinnedMeshRenderer>().material.color = Color.red;
+                    break;
+                case "ICE":
+                    Debug.Log("E1 res to ice");
+                    enemies[0].transform.GetChild(0).GetChild(0).GetComponent<SkinnedMeshRenderer>().material.color = Color.cyan;
+                    break;
+                case "WIND":
+                    Debug.Log("E1 res to wind");
+                    enemies[0].transform.GetChild(0).GetChild(0).GetComponent<SkinnedMeshRenderer>().material.color = Color.green;
+                    break;
+                case "NA":
+                    Debug.Log("E1 res to NA");
+                    enemies[0].transform.GetChild(0).GetChild(0).GetComponent<SkinnedMeshRenderer>().material.color = Color.yellow;
+                    break;
+            }
+        }
+        else
+        {
+            Debug.Log("E2 Does NOT Exist");
+        }
+
+
+        if (enemies[1])
+        {
+            Debug.Log("E2 Exists");
+            switch (enemies[1].EnemyResistance)
+            {
+                case "FIRE":
+                    Debug.Log("E2 res to fire");
+                    enemies[1].transform.GetChild(0).GetChild(0).GetComponent<SkinnedMeshRenderer>().material.color = Color.red;
+                    break;
+                case "ICE":
+                    Debug.Log("E2 res to ice");
+                    enemies[1].transform.GetChild(0).GetChild(0).GetComponent<SkinnedMeshRenderer>().material.color = Color.cyan;
+                    break;
+                case "WIND":
+                    Debug.Log("E2 res to wind");
+                    enemies[1].transform.GetChild(0).GetChild(0).GetComponent<SkinnedMeshRenderer>().material.color = Color.green;
+                    break;
+                case "NA":
+                    Debug.Log("E2 res to NA");
+                    enemies[1].transform.GetChild(0).GetChild(0).GetComponent<SkinnedMeshRenderer>().material.color = Color.yellow;
+                    break;
+            }
+        }
+        else
+        {
+            Debug.Log("E2 Does NOT Exist");
+        }
+
+
+
+
+
         currentPlayerIndex = 0;
         currentEnemyIndex = 0;
 
@@ -326,6 +398,7 @@ public class CombatStateMachine : MonoBehaviour
         cameraPlayerPos5 = GameObject.Find("CameraSixthPos").transform;
 
         yield return new WaitForSeconds(2f);
+        Debug.Log("PING");
         playerLight.gameObject.SetActive(true);
         menuController.SetUpItems(items);
         menuController.UpdateEnemyReticleTarget(0);
@@ -764,7 +837,7 @@ public class CombatStateMachine : MonoBehaviour
             {
                 if (enemies[i].gameObject.name == "E1")
                 {
-                    Debug.Log("E1 if, must die");
+                    //Debug.Log("E1 if, must die");
                     menuController.UpdateNewReticles();
                 }
 

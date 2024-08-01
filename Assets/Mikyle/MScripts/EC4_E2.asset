@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f7859a1e1076b6b4986cac2f6ca92d80, type: 3}
-  m_Name: EC1_E1
+  m_Name: EC4_E2
   m_EditorClassIdentifier: 
-  enemyName: Fairy
-  health: 200
+  enemyName: Kamoshida
+  health: 1
   damage: 40
-  weakness: FIRE
-  resistance: WIND
+  weakness: PHYSICAL
+  resistance: NA
   isDown: 0
   enemyMoveList:
-  - moveName: Bafu
-    damageValue: 40
-    elementalType: ICE
+  - moveName: Bite
+    damageValue: 1
+    elementalType: PHYSICAL

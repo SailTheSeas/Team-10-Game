@@ -387,7 +387,8 @@ public class CombatStateMachine : MonoBehaviour
 
         players[currentPlayerIndex].playerMP -= CurrentMove.mpCost;
 
-
+        //Anim when enemies take damage
+        enemies[currentEnemyTCount].enemyAnim.SetInteger("TakeDamage", 1);
         //=--------------------
 
         yield return new WaitForSeconds(0.7f);
@@ -408,6 +409,7 @@ public class CombatStateMachine : MonoBehaviour
 
         //Revert to Idle Animation
         players[currentPlayerIndex].playerAnim.SetInteger("CallPersona", 0);
+        enemies[currentEnemyTCount].enemyAnim.SetInteger("TakeDamage", 0);
         //Revert Persona to Idle
         personaAnim.SetInteger("Attack" + attackNumber, 0);
         //Despawn Persona

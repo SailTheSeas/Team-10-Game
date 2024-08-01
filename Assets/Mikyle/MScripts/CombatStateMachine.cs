@@ -121,6 +121,8 @@ public class CombatStateMachine : MonoBehaviour
         {
             case CombatState.CombatStart:
                 //Debug.Log("Ping0");
+                //enemies[currentEnemyTCount].enemyAnim.SetInteger("TakeDamage", 1);
+                //enemies[currentEnemyTCount].enemyAnim.SetInteger("EnemyAttack", 1);
                 menuController.UpdateStateText("SetUp");
                 StartCoroutine(SetupCombat());
                 break;
@@ -297,8 +299,8 @@ public class CombatStateMachine : MonoBehaviour
         //Put damage Calc here
         yield return new WaitForSeconds(0.7f);
         enemies[currentEnemyTCount].enemyHealth -= players[currentPlayerIndex].playerPhysAttack;
-        //Anim to make enemies take damage
-        //enemies[currentEnemyTCount].enemyAnim.SetInteger("TakeDamage", 0);
+        //Anim when enemies take damage
+        enemies[currentEnemyTCount].enemyAnim.SetInteger("TakeDamage", 1);
 
 
         yield return new WaitForSeconds(1.3f);
@@ -306,6 +308,7 @@ public class CombatStateMachine : MonoBehaviour
 
         //return to idle animation
         players[currentPlayerIndex].playerAnim.SetInteger("BasicAttack", 0);
+        enemies[currentEnemyTCount].enemyAnim.SetInteger("TakeDamage", 0);
 
         currentPlayerIndex++;
         if (currentPlayerIndex >= players.Count)

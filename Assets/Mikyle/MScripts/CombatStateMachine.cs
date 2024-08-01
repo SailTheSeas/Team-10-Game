@@ -295,6 +295,7 @@ public class CombatStateMachine : MonoBehaviour
 
         //do the attack animation
         players[currentPlayerIndex].playerAnim.SetInteger("BasicAttack", 1);
+        menuController.UpdateEnemyText(currentEnemyTCount, "-" + players[currentPlayerIndex].playerPhysAttack.ToString());
 
         //Put damage Calc here
         yield return new WaitForSeconds(0.7f);
@@ -309,6 +310,8 @@ public class CombatStateMachine : MonoBehaviour
         //return to idle animation
         players[currentPlayerIndex].playerAnim.SetInteger("BasicAttack", 0);
         enemies[currentEnemyTCount].enemyAnim.SetInteger("TakeDamage", 0);
+        menuController.UpdateEnemyText(currentEnemyTCount, "");
+
 
         currentPlayerIndex++;
         if (currentPlayerIndex >= players.Count)
@@ -362,6 +365,7 @@ public class CombatStateMachine : MonoBehaviour
 
         //Return to Idle Animation
         players[currentPlayerIndex].playerAnim.SetInteger("Heal", 0);
+        menuController.UpdatePlayerText(currentPlayersTCount, "");
 
         currentPlayerIndex++;
         if (currentPlayerIndex >= players.Count)
@@ -397,15 +401,19 @@ public class CombatStateMachine : MonoBehaviour
         {
             enemies[currentEnemyTCount].enemyHealth -= (CurrentMove.damageValue + CurrentMove.damageValue / 2);
             enemies[currentEnemyTCount].isDown = true;
+            menuController.UpdateEnemyText(currentEnemyTCount, "-" + (CurrentMove.damageValue + CurrentMove.damageValue / 2).ToString() + "!");
         }
         else
         {
             enemies[currentEnemyTCount].enemyHealth -= CurrentMove.damageValue;
+            menuController.UpdateEnemyText(currentEnemyTCount, "-" + CurrentMove.damageValue.ToString());
+
         }
 
 
 
         yield return new WaitForSeconds(1.3f);
+        menuController.UpdateEnemyText(currentEnemyTCount, "");
 
         //Revert to Idle Animation
         players[currentPlayerIndex].playerAnim.SetInteger("CallPersona", 0);
@@ -452,10 +460,13 @@ public class CombatStateMachine : MonoBehaviour
         if (players[temp1].isGuarding == false)
         {
             players[temp1].playerHealth -= enemies[currentEnemyIndex].enemyMoveList[temp2].damageValue;
+            menuController.UpdatePlayerText(temp1, "-" + enemies[currentEnemyIndex].enemyMoveList[temp2].damageValue.ToString());
         }
         else
         {
             players[temp1].playerHealth -= (enemies[currentEnemyIndex].enemyMoveList[temp2].damageValue / 2);
+            menuController.UpdatePlayerText(temp1, "-" + (enemies[currentEnemyIndex].enemyMoveList[temp2].damageValue / 2).ToString());
+
         }
 
 
@@ -468,6 +479,8 @@ public class CombatStateMachine : MonoBehaviour
         if (!players[temp1].isGuarding)
             players[temp1].playerAnim.SetInteger("TakeDamage", 0);
         enemies[currentEnemyIndex].enemyAnim.SetInteger("EnemyAttack", 0);
+        menuController.UpdatePlayerText(temp1, "");
+
 
         currentEnemyIndex++;
         if (currentEnemyIndex >= enemies.Count)
@@ -598,22 +611,21 @@ public class CombatStateMachine : MonoBehaviour
     {
         if (items[0].isHP)
         {
-            Debug.Log("item0 is HP");
-            Debug.Log("Target hp is " + players[currentPlayersTCount].playerHealth);
-            Debug.Log("Item heals: " + items[0].amount);
+            //Debug.Log("Target hp is " + players[currentPlayersTCount].playerHealth);
+            //Debug.Log("Item heals: " + items[0].amount);
             players[currentPlayersTCount].playerHealth += items[0].amount;
-            Debug.Log("Target hp is " + players[currentPlayersTCount].playerHealth);
+            //Debug.Log("Target hp is " + players[currentPlayersTCount].playerHealth);
             if (players[currentPlayersTCount].playerHealth > players[currentPlayersTCount].playerMaxHP)
                 players[currentPlayersTCount].playerHealth = players[currentPlayersTCount].playerMaxHP;
         }
         else
         {
-            Debug.Log("item0 is HP");
             players[currentPlayersTCount].playerMP += items[0].amount;
             if (players[currentPlayersTCount].playerMP > players[currentPlayersTCount].playerMaxMP)
                 players[currentPlayersTCount].playerMP = players[currentPlayersTCount].playerMaxMP;
         }
 
+        menuController.UpdatePlayerText(currentPlayersTCount, "+" + items[0].amount.ToString());
         menuController.I1ButtonPressed();
     }
 
@@ -631,7 +643,7 @@ public class CombatStateMachine : MonoBehaviour
             if (players[currentPlayersTCount].playerMP > players[currentPlayersTCount].playerMaxMP)
                 players[currentPlayersTCount].playerMP = players[currentPlayersTCount].playerMaxMP;
         }
-
+        menuController.UpdatePlayerText(currentPlayersTCount, "+" + items[1].amount.ToString());
         menuController.I2ButtonPressed();
 
     }
@@ -650,7 +662,7 @@ public class CombatStateMachine : MonoBehaviour
             if (players[currentPlayersTCount].playerMP > players[currentPlayersTCount].playerMaxMP)
                 players[currentPlayersTCount].playerMP = players[currentPlayersTCount].playerMaxMP;
         }
-
+        menuController.UpdatePlayerText(currentPlayersTCount, "+" + items[2].amount.ToString());
         menuController.I3ButtonPressed();
 
     }
@@ -669,7 +681,7 @@ public class CombatStateMachine : MonoBehaviour
             if (players[currentPlayersTCount].playerMP > players[currentPlayersTCount].playerMaxMP)
                 players[currentPlayersTCount].playerMP = players[currentPlayersTCount].playerMaxMP;
         }
-
+        menuController.UpdatePlayerText(currentPlayersTCount, "+" + items[3].amount.ToString());
         menuController.I4ButtonPressed();
 
     }

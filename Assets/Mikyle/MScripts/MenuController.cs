@@ -32,8 +32,10 @@ public class MenuController : MonoBehaviour
     Transform playerReticle3;
     Transform playerReticle4;
 
-    Transform enemy1Location;
-    Transform enemy2Location;
+    [SerializeField] Transform enemy1Location;
+    [SerializeField] Transform enemy2Location;
+    [SerializeField] List<TextMeshProUGUI> enemyText;
+    [SerializeField] List<TextMeshProUGUI> playerText;
     Transform cameraPos1;
     Transform cameraPos2;
 
@@ -49,9 +51,11 @@ public class MenuController : MonoBehaviour
     {
         stateTMP = statePanel.GetComponentInChildren<TextMeshProUGUI>();
 
+
+
         //Reticle Setups
-        enemyReticle1 = mainPanel.transform.GetChild(0);
-        enemyReticle2 = mainPanel.transform.GetChild(1);
+        //enemyReticle1 = mainPanel.transform.GetChild(0);
+        //enemyReticle2 = mainPanel.transform.GetChild(1);
         playerReticle1 = mainPanel.transform.GetChild(2);
         playerReticle2 = mainPanel.transform.GetChild(3);
         playerReticle3 = mainPanel.transform.GetChild(4);
@@ -62,6 +66,12 @@ public class MenuController : MonoBehaviour
 
         enemyReticle1 = enemy1Location.GetChild(1).GetChild(0).GetChild(0);
         enemyReticle2 = enemy2Location.GetChild(1).GetChild(0).GetChild(0);
+
+        enemyText.Add(enemy1Location.GetChild(1).GetChild(0).Find("DamageDisp").GetComponent<TextMeshProUGUI>());
+        enemyText.Add(enemy2Location.GetChild(1).GetChild(0).Find("DamageDisp").GetComponent<TextMeshProUGUI>());
+
+
+
 
         //Vector3 screenPos = cam.WorldToScreenPoint(enemy1Location.position);
         //enemyReticle1.position = screenPos;
@@ -366,5 +376,13 @@ public class MenuController : MonoBehaviour
         combatStateMachine.ChangeState(13);
     }
 
+    public void UpdateEnemyText(int enNum, string text)
+    {
+        enemyText[enNum].text = text;
+    }
 
+    public void UpdatePlayerText(int enNum, string text)
+    {
+        playerText[enNum].text = text;
+    }
 }

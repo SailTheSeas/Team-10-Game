@@ -6,6 +6,7 @@ public class UpdateEnemyBars : MonoBehaviour
     [SerializeField] EnemyCharacter enemyCharacter;
     [SerializeField] Slider hpSlider;
 
+    private 
 
     void Start()
     {
@@ -19,6 +20,7 @@ public class UpdateEnemyBars : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        hpSlider.value = enemyCharacter.enemyHealth;
+        if (hpSlider.value > enemyCharacter.enemyHealth)
+            hpSlider.value-= 0.5f;
     }
 }

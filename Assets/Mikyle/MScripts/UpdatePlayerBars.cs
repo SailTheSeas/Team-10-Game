@@ -23,7 +23,9 @@ public class UpdatePlayerBars : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        hpSlider.value = playerCharacerScript.PlayerHealth;
-        mpSlider.value = playerCharacerScript.playerMP;
+        if (hpSlider.value > playerCharacerScript.PlayerHealth)
+            hpSlider.value--;
+        if (mpSlider.value > playerCharacerScript.playerMP)
+            mpSlider.value--;
     }
 }

@@ -120,6 +120,16 @@ public class MenuController : MonoBehaviour
         }
     }
 
+    public void UpdateNewReticles()
+    {
+        Debug.Log("ran");
+        Transform temp = enemyReticle1;
+        enemyReticle1 = enemyReticle2;
+        enemyReticle2 = temp;
+
+        enemyText.RemoveAt(0);
+    }
+
     public void UpdatePlayerReticleTarget(int newTarget)
     {
         switch (newTarget)
@@ -238,45 +248,6 @@ public class MenuController : MonoBehaviour
             personaButton4.GetComponentInChildren<TextMeshProUGUI>().text = personaMoveItems[3].moveName;
         }
     }
-
-
-
-    //public void OnMainMenuOptionSelected(string option)
-    //{
-    //    switch (option)
-    //    {
-    //        case "Attack":
-    //            // Handle attack action
-    //            combatStateMachine.ChangeStateToResolve();
-    //            break;
-    //        case "Guard":
-    //            // Handle guard action
-    //            combatStateMachine.ChangeStateToResolve();
-    //            break;
-    //        case "Item":
-    //            ShowItemMenu();
-    //            break;
-    //        case "Persona":
-    //            ShowPersonaMenu();
-    //            break;
-    //        case "Gun":
-    //            // Handle gun action
-    //            combatStateMachine.ChangeStateToResolve();
-    //            break;
-    //    }
-    //}
-
-    //public void OnItemSelected(string item)
-    //{
-    //    // Handle item selection
-    //    combatStateMachine.ChangeStateToResolve();
-    //}
-
-    //public void OnPersonaAttackSelected(string attack)
-    //{
-    //    // Handle persona attack selection
-    //    combatStateMachine.ChangeStateToResolve();
-    //}
 
     public void UpdateStateText(string text)
     {

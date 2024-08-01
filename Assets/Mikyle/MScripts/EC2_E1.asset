@@ -10,15 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f7859a1e1076b6b4986cac2f6ca92d80, type: 3}
-  m_Name: EC1
+  m_Name: EC2_E1
   m_EditorClassIdentifier: 
-  enemyName: Fairy
-  health: 200
+  enemyName: BirdGod
+  health: 250
   damage: 40
-  weakness: FIRE
-  resistance: ICE
+  weakness: ICE
+  resistance: WIND
   isDown: 0
   enemyMoveList:
-  - moveName: Bafu
+  - moveName: Garu
     damageValue: 40
-    elementalType: ICE
+    elementalType: WIND
+  - moveName: Garula
+    damageValue: 100
+    elementalType: WIND

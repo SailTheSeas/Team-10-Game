@@ -15,10 +15,10 @@ MonoBehaviour:
   enemyName: Fairy
   health: 200
   damage: 40
-  weakness: Fire
-  resistance: Ice
+  weakness: FIRE
+  resistance: ICE
   isDown: 0
   enemyMoveList:
   - moveName: Bafu
     damageValue: 40
-    elementalType: Ice
+    elementalType: ICE

@@ -15,10 +15,10 @@ MonoBehaviour:
   enemyName: Jack-O Lantern
   health: 200
   damage: 40
-  weakness: Wind
-  resistance: Fire
+  weakness: WIND
+  resistance: FIRE
   isDown: 0
   enemyMoveList:
   - moveName: Bafu
     damageValue: 40
-    elementalType: Ice
+    elementalType: ICE

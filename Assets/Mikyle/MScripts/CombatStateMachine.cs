@@ -161,6 +161,8 @@ public class CombatStateMachine : MonoBehaviour
                 //Player Summons Persona Animation
                 players[currentPlayerIndex].playerAnim.SetInteger("CallPersona", 1);
 
+                //Instantiate Persona
+
                 break;
 
             case CombatState.GunAttack:

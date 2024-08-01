@@ -136,7 +136,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &132051882
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2038,8 +2038,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1302582438}
-        m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
+      - m_Target: {fileID: 1302582440}
+        m_TargetAssemblyTypeName: CombatStateMachine, Assembly-CSharp
         m_MethodName: I2ButtonPressed
         m_Mode: 1
         m_Arguments:
@@ -2376,8 +2376,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 426901154}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.04323885, y: -0.91823906, z: 0.10462014, w: 0.37950248}
-  m_LocalPosition: {x: 6.76, y: 1.91, z: 0.1}
+  m_LocalRotation: {x: 0.12172886, y: -0.35782084, z: 0.04710799, w: 0.9246228}
+  m_LocalPosition: {x: 7.844, y: 2.13, z: -5.505}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2787,8 +2787,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1302582438}
-        m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
+      - m_Target: {fileID: 1302582440}
+        m_TargetAssemblyTypeName: CombatStateMachine, Assembly-CSharp
         m_MethodName: I4ButtonPressed
         m_Mode: 1
         m_Arguments:
@@ -4679,7 +4679,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1009707281
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5165,7 +5165,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1063888149
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5696,7 +5696,9 @@ MonoBehaviour:
   playerData: {fileID: 11400000, guid: 7e12053dae632574fb747737a6437229, type: 2}
   characterName: Yusuke
   playerHealth: 250
+  playerMaxHP: 0
   playerMP: 100
+  playerMaxMP: 0
   playerPhysAttack: 35
   playerBulletAmount: 10
   PGuard: 0
@@ -6981,19 +6983,19 @@ MonoBehaviour:
   currentEnemyIndex: 0
   items:
   - itemName: Recover-R 50mg
-    amount: 0
+    amount: 50
     isHP: 1
     isUsed: 0
   - itemName: Recover-R 100mg
-    amount: 0
+    amount: 100
     isHP: 1
     isUsed: 0
   - itemName: Soul Drop
-    amount: 0
+    amount: 10
     isHP: 0
     isUsed: 0
   - itemName: Snuff Soul
-    amount: 0
+    amount: 50
     isHP: 0
     isUsed: 0
   players:
@@ -7016,7 +7018,7 @@ MonoBehaviour:
   cam: {fileID: 426901156}
   playerLight: {fileID: 1228878561}
   CurrentMove:
-  - moveName: 
+    moveName: 
     damageValue: 0
     elementalType: 
     mpCost: 0
@@ -7550,7 +7552,9 @@ MonoBehaviour:
   playerData: {fileID: 11400000, guid: db0ad9699e0c70f469ec42b62c012969, type: 2}
   characterName: Joker
   playerHealth: 250
+  playerMaxHP: 0
   playerMP: 100
+  playerMaxMP: 0
   playerPhysAttack: 35
   playerBulletAmount: 10
   PGuard: 0
@@ -7987,7 +7991,9 @@ MonoBehaviour:
   playerData: {fileID: 11400000, guid: 1a5a4bf949cb7d64abbb1c5b479569a6, type: 2}
   characterName: Ryuji
   playerHealth: 250
+  playerMaxHP: 0
   playerMP: 100
+  playerMaxMP: 0
   playerPhysAttack: 35
   playerBulletAmount: 10
   PGuard: 0
@@ -8584,7 +8590,9 @@ MonoBehaviour:
   playerData: {fileID: 11400000, guid: fcd99952a2a8a1b479eaa64f1e96c044, type: 2}
   characterName: Morgana
   playerHealth: 250
+  playerMaxHP: 0
   playerMP: 100
+  playerMaxMP: 0
   playerPhysAttack: 35
   playerBulletAmount: 10
   PGuard: 0
@@ -8907,7 +8915,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1588525940
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9962,8 +9970,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1302582438}
-        m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
+      - m_Target: {fileID: 1302582440}
+        m_TargetAssemblyTypeName: CombatStateMachine, Assembly-CSharp
         m_MethodName: I3ButtonPressed
         m_Mode: 1
         m_Arguments:
@@ -10830,8 +10838,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1302582438}
-        m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
+      - m_Target: {fileID: 1302582440}
+        m_TargetAssemblyTypeName: CombatStateMachine, Assembly-CSharp
         m_MethodName: I1ButtonPressed
         m_Mode: 1
         m_Arguments:
@@ -11783,6 +11791,14 @@ MonoBehaviour:
   enemyDamage: 0
   enemyWeakness: 
   enemyResistance: 
+  isDown: 0
+  enemyMoveList:
+  - moveName: 
+    damageValue: 0
+    elementalType: 
+  - moveName: 
+    damageValue: 0
+    elementalType: 
   enemyAnim: {fileID: 0}
 --- !u!95 &2125350163
 Animator:

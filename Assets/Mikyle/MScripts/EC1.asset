@@ -17,3 +17,8 @@ MonoBehaviour:
   damage: 40
   weakness: Fire
   resistance: Ice
+  isDown: 0
+  enemyMoveList:
+  - moveName: Bafu
+    damageValue: 40
+    elementalType: Ice

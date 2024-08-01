@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyCharacter : MonoBehaviour
@@ -9,6 +10,9 @@ public class EnemyCharacter : MonoBehaviour
     public int enemyDamage;
     public string enemyWeakness;
     public string enemyResistance;
+    public bool isDown = false;
+    public List<EnemyMove> enemyMoveList;
+
 
     public string EnemyName { get => enemyName; set => enemyName = value; }
     public int EnemyHealth { get => enemyHealth; set => enemyHealth = value; }
@@ -29,6 +33,7 @@ public class EnemyCharacter : MonoBehaviour
         EnemyDamage = enemyData.damage;
         EnemyWeakness = enemyData.weakness;
         EnemyResistance = enemyData.resistance;
+        enemyMoveList = enemyData.enemyMoveList;
 
         enemyAnim = GetComponent<Animator>();
     }

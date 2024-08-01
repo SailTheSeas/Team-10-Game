@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -9,6 +10,8 @@ public class EnemyData : ScriptableObject
     public int damage;
     public string weakness;
     public string resistance;
+    public bool isDown = false;
+    public List<EnemyMove> enemyMoveList;
 }
 
 

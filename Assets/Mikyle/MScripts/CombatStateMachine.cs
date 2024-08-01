@@ -68,7 +68,7 @@ public class CombatStateMachine : MonoBehaviour
         //HandleState();
 
 
-        if (currentState == CombatState.PlayerTurn || currentState == CombatState.PersonaAttack)
+        if (currentState == CombatState.PlayerTurn || currentState == CombatState.PersonaAttack || currentState == CombatState.GunAttack)
         {
             if (Input.GetKeyDown(KeyCode.D))
             {
@@ -297,6 +297,8 @@ public class CombatStateMachine : MonoBehaviour
         //Put damage Calc here
         yield return new WaitForSeconds(0.7f);
         enemies[currentEnemyTCount].enemyHealth -= players[currentPlayerIndex].playerPhysAttack;
+        //Anim to make enemies take damage
+        //enemies[currentEnemyTCount].enemyAnim.SetInteger("TakeDamage", 0);
 
 
         yield return new WaitForSeconds(1.3f);
@@ -386,7 +388,17 @@ public class CombatStateMachine : MonoBehaviour
         //=--------------------
 
         yield return new WaitForSeconds(0.7f);
-        enemies[currentEnemyTCount].enemyHealth -= CurrentMove.damageValue;
+
+        if (CurrentMove.elementalType == enemies[currentEnemyTCount].EnemyWeakness)
+        {
+            enemies[currentEnemyTCount].enemyHealth -= (CurrentMove.damageValue + CurrentMove.damageValue / 2);
+            enemies[currentEnemyTCount].isDown = true;
+        }
+        else
+        {
+            enemies[currentEnemyTCount].enemyHealth -= CurrentMove.damageValue;
+        }
+
 
 
         yield return new WaitForSeconds(1.3f);
@@ -419,34 +431,37 @@ public class CombatStateMachine : MonoBehaviour
     {
         playerLight.GetComponent<Light>().color = Color.red;
         playerLight.position = new Vector3(enemies[currentEnemyIndex].transform.position.x, enemies[currentEnemyIndex].transform.position.y + 3, enemies[currentEnemyIndex].transform.position.z);
-        yield return new WaitForSeconds(1f);
+        if (currentEnemyIndex == 0)
+            yield return new WaitForSeconds(1f);
         //Put Enemy Attack Anim here
         //Do enemy attack animation
-        enemies[currentEnemyIndex].enemyAnim.SetInteger("EnemyAttack", 1);
-
         //Randomise Party member to hit
+        int temp1 = Random.Range(0, 4);
+        int temp2 = Random.Range(0, enemies[currentEnemyIndex].enemyMoveList.Count);
+
+        enemies[currentEnemyIndex].enemyAnim.SetInteger("EnemyAttack", 1);
+        yield return new WaitForSeconds(0.6f);
+        if (!players[temp1].isGuarding)
+            players[temp1].playerAnim.SetInteger("TakeDamage", 1);
         //Put Damage Calc here
-        if (players[currentPlayerIndex].isGuarding == false)
+        if (players[temp1].isGuarding == false)
         {
-
-            players[currentPlayersTCount].playerHealth -= enemies[currentEnemyIndex].enemyDamage;
-
-
+            players[temp1].playerHealth -= enemies[currentEnemyIndex].enemyMoveList[temp2].damageValue;
         }
-        else if (players[currentPlayerIndex].isGuarding == true)
+        else
         {
-
-            players[currentPlayersTCount].playerHealth -= (enemies[currentEnemyIndex].enemyDamage - enemies[currentEnemyIndex].enemyDamage / 2);
-
-
+            players[temp1].playerHealth -= (enemies[currentEnemyIndex].enemyMoveList[temp2].damageValue / 2);
         }
+
+
 
 
         //---------------
 
-        yield return new WaitForSeconds(2f);
-
-        //Return to Enemy Idle Animation
+        yield return new WaitForSeconds(1.4f);
+        //Return to Idle Animation
+        if (!players[temp1].isGuarding)
+            players[temp1].playerAnim.SetInteger("TakeDamage", 0);
         enemies[currentEnemyIndex].enemyAnim.SetInteger("EnemyAttack", 0);
 
         currentEnemyIndex++;

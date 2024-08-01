@@ -2471,13 +2471,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 426901154}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.12172886, y: -0.35782084, z: 0.04710799, w: 0.9246228}
-  m_LocalPosition: {x: 7.844, y: 2.13, z: -5.505}
+  m_LocalRotation: {x: -0.0010037376, y: 0.99141556, z: -0.13052262, w: -0.007623885}
+  m_LocalPosition: {x: 3.05, y: 2.13, z: -0.53}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 15, y: 180.881, z: 0}
 --- !u!1 &432088001
 GameObject:
   m_ObjectHideFlags: 0
@@ -3255,6 +3255,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 551566491}
   m_CullTransparentMesh: 1
+--- !u!1 &558569774
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 558569775}
+  m_Layer: 0
+  m_Name: CameraSixthPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &558569775
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 558569774}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.0010037376, y: 0.99141556, z: -0.13052262, w: -0.007623885}
+  m_LocalPosition: {x: 3.05, y: 2.13, z: -0.53}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 15, y: 180.881, z: 0}
 --- !u!114 &558786813 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8006561579612931042, guid: 50817d396cf1af54290358cdaed3a23d, type: 3}
@@ -7228,7 +7259,10 @@ MonoBehaviour:
   hurtClip: {fileID: 8300000, guid: ec7f1e379c978ac47bc38aaba21623f8, type: 3}
   personaAnim: {fileID: 0}
   attackNumber: 0
+  enemyCount: 2
   currentEnemyTCount: 0
+  bottomEnemy: 0
+  playersCount: 4
   currentPlayersTCount: 0
   cam: {fileID: 426901156}
   playerLight: {fileID: 1228878561}
@@ -12700,6 +12734,7 @@ SceneRoots:
   - {fileID: 398693684}
   - {fileID: 1510086546}
   - {fileID: 598243873}
+  - {fileID: 558569775}
   - {fileID: 2122367135}
   - {fileID: 432088005}
   - {fileID: 421470097}

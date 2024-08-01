@@ -325,11 +325,13 @@ public class CombatStateMachine : MonoBehaviour
         currentPlayerIndex++;
         if (currentPlayerIndex >= players.Count)
         {
+            CheckEnemies();
             currentPlayerIndex = 0;
             ChangeState(8);
         }
         else
         {
+            CheckEnemies();
             ChangeState(2);
         }
 

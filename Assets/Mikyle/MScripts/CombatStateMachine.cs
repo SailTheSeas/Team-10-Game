@@ -34,7 +34,8 @@ public class CombatStateMachine : MonoBehaviour
     Transform cameraPlayerPos4;
     [SerializeField] Transform playerLight;
 
-    public List<PersonaMove> CurrentMove = new List<PersonaMove>(1);
+    //public List<PersonaMove> CurrentMove = new List<PersonaMove>(1);
+    public PersonaMove CurrentMove;
 
     public enum CombatState
     {
@@ -56,7 +57,7 @@ public class CombatStateMachine : MonoBehaviour
 
     void Start()
     {
-       
+
 
         //ChangeState(1);
         HandleState();
@@ -294,12 +295,12 @@ public class CombatStateMachine : MonoBehaviour
         players[currentPlayerIndex].playerAnim.SetInteger("BasicAttack", 1);
 
         //Put damage Calc here
-
+        yield return new WaitForSeconds(0.7f);
         enemies[currentEnemyTCount].enemyHealth -= players[currentPlayerIndex].playerPhysAttack;
 
 
+        yield return new WaitForSeconds(1.3f);
 
-        yield return new WaitForSeconds(2f);
 
         //return to idle animation
         players[currentPlayerIndex].playerAnim.SetInteger("BasicAttack", 0);
@@ -345,7 +346,7 @@ public class CombatStateMachine : MonoBehaviour
     IEnumerator Healing()
     {
         menuController.HideAllMenus();
-        Debug.Log($"Healing Player: {currentPlayersTCount}");
+        //Debug.Log($"Healing Player: {currentPlayersTCount}");
 
         //Do heal animation
         players[currentPlayerIndex].playerAnim.SetInteger("Heal", 1);
@@ -378,14 +379,17 @@ public class CombatStateMachine : MonoBehaviour
 
         //Put Damage Calc here
 
-        enemies[currentEnemyTCount].enemyHealth -= CurrentMove[0].damageValue;
 
-        players[currentPlayerIndex].playerMP -= CurrentMove[0].mpCost;
+        players[currentPlayerIndex].playerMP -= CurrentMove.mpCost;
 
 
         //=--------------------
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.7f);
+        enemies[currentEnemyTCount].enemyHealth -= CurrentMove.damageValue;
+
+
+        yield return new WaitForSeconds(1.3f);
 
         //Revert to Idle Animation
         players[currentPlayerIndex].playerAnim.SetInteger("CallPersona", 0);
@@ -432,15 +436,15 @@ public class CombatStateMachine : MonoBehaviour
         else if (players[currentPlayerIndex].isGuarding == true)
         {
 
-            players[currentPlayersTCount].playerHealth -= (enemies[currentEnemyIndex].enemyDamage - enemies[currentEnemyIndex].enemyDamage/2);
+            players[currentPlayersTCount].playerHealth -= (enemies[currentEnemyIndex].enemyDamage - enemies[currentEnemyIndex].enemyDamage / 2);
 
 
         }
 
 
-            //---------------
+        //---------------
 
-            yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(2f);
 
         //Return to Enemy Idle Animation
         enemies[currentEnemyIndex].enemyAnim.SetInteger("EnemyAttack", 0);
@@ -525,52 +529,130 @@ public class CombatStateMachine : MonoBehaviour
 
     public void PButton1()
     {
-       
-        CurrentMove[0] = players[currentPlayerIndex].playerMoves[0];
+
+        CurrentMove = players[currentPlayerIndex].playerMoves[0];
         //Number for the animator
         attackNumber = 1;
-       
-        ChangeState(14); 
+
+        ChangeState(14);
 
 
     }
 
     public void PButton2()
     {
-        CurrentMove[0] = players[currentPlayerIndex].playerMoves[1];
+        CurrentMove = players[currentPlayerIndex].playerMoves[1];
         //Number for the animator
         attackNumber = 2;
 
-        ChangeState(14); 
+        ChangeState(14);
 
 
     }
 
     public void PButton3()
     {
-        CurrentMove[0] = players[currentPlayerIndex].playerMoves[2];
+        CurrentMove = players[currentPlayerIndex].playerMoves[2];
         //Number for the animator
         attackNumber = 3;
 
-        ChangeState(14); 
+        ChangeState(14);
 
 
     }
 
     public void PButton4()
     {
-        CurrentMove[0] = players[currentPlayerIndex].playerMoves[3];
+        CurrentMove = players[currentPlayerIndex].playerMoves[3];
         //Number for the animator
         attackNumber = 4;
 
-        ChangeState(14); 
+        ChangeState(14);
 
 
 
     }
 
 
+    public void I1ButtonPressed()
+    {
+        if (items[0].isHP)
+        {
+            Debug.Log("item0 is HP");
+            Debug.Log("Target hp is " + players[currentPlayersTCount].playerHealth);
+            Debug.Log("Item heals: " + items[0].amount);
+            players[currentPlayersTCount].playerHealth += items[0].amount;
+            Debug.Log("Target hp is " + players[currentPlayersTCount].playerHealth);
+            if (players[currentPlayersTCount].playerHealth > players[currentPlayersTCount].playerMaxHP)
+                players[currentPlayersTCount].playerHealth = players[currentPlayersTCount].playerMaxHP;
+        }
+        else
+        {
+            Debug.Log("item0 is HP");
+            players[currentPlayersTCount].playerMP += items[0].amount;
+            if (players[currentPlayersTCount].playerMP > players[currentPlayersTCount].playerMaxMP)
+                players[currentPlayersTCount].playerMP = players[currentPlayersTCount].playerMaxMP;
+        }
 
+        menuController.I1ButtonPressed();
+    }
+
+    public void I2ButtonPressed()
+    {
+        if (items[1].isHP)
+        {
+            players[currentPlayersTCount].playerHealth += items[1].amount;
+            if (players[currentPlayersTCount].playerHealth > players[currentPlayersTCount].playerMaxHP)
+                players[currentPlayersTCount].playerHealth = players[currentPlayersTCount].playerMaxHP;
+        }
+        else
+        {
+            players[currentPlayersTCount].playerMP += items[1].amount;
+            if (players[currentPlayersTCount].playerMP > players[currentPlayersTCount].playerMaxMP)
+                players[currentPlayersTCount].playerMP = players[currentPlayersTCount].playerMaxMP;
+        }
+
+        menuController.I2ButtonPressed();
+
+    }
+
+    public void I3ButtonPressed()
+    {
+        if (items[2].isHP)
+        {
+            players[currentPlayersTCount].playerHealth += items[2].amount;
+            if (players[currentPlayersTCount].playerHealth > players[currentPlayersTCount].playerMaxHP)
+                players[currentPlayersTCount].playerHealth = players[currentPlayersTCount].playerMaxHP;
+        }
+        else
+        {
+            players[currentPlayersTCount].playerMP += items[2].amount;
+            if (players[currentPlayersTCount].playerMP > players[currentPlayersTCount].playerMaxMP)
+                players[currentPlayersTCount].playerMP = players[currentPlayersTCount].playerMaxMP;
+        }
+
+        menuController.I3ButtonPressed();
+
+    }
+
+    public void I4ButtonPressed()
+    {
+        if (items[3].isHP)
+        {
+            players[currentPlayersTCount].playerHealth += items[3].amount;
+            if (players[currentPlayersTCount].playerHealth > players[currentPlayersTCount].playerMaxHP)
+                players[currentPlayersTCount].playerHealth = players[currentPlayersTCount].playerMaxHP;
+        }
+        else
+        {
+            players[currentPlayersTCount].playerMP += items[3].amount;
+            if (players[currentPlayersTCount].playerMP > players[currentPlayersTCount].playerMaxMP)
+                players[currentPlayersTCount].playerMP = players[currentPlayersTCount].playerMaxMP;
+        }
+
+        menuController.I4ButtonPressed();
+
+    }
 
 
 

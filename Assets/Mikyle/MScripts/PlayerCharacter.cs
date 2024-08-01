@@ -8,7 +8,9 @@ public class PlayerCharacter : MonoBehaviour
 
     public string characterName;
     public int playerHealth;
+    public int playerMaxHP;
     public int playerMP;
+    public int playerMaxMP;
     public int playerPhysAttack;
     public int playerBulletAmount;
     public int PGuard;
@@ -30,13 +32,15 @@ public class PlayerCharacter : MonoBehaviour
     [Header("Animation")]
     public Animator playerAnim;
 
-    
+
 
     void Start()
     {
         CharacterName = playerData.characterName;
         PlayerHealth = playerData.health;
+        playerMaxHP = PlayerHealth;
         PlayerMP = playerData.mp;
+        playerMaxMP = PlayerMP;
         PlayerPhysAttack = playerData.physicalAttack;
         PlayerBulletAmount = playerData.bulletAmount;
         PlayerBulletDamage = playerData.bulletDamage;
@@ -53,6 +57,6 @@ public class PlayerCharacter : MonoBehaviour
 
     }
 
-    
+
 
 }

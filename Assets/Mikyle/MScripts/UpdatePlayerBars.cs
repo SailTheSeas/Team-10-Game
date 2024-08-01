@@ -27,5 +27,11 @@ public class UpdatePlayerBars : MonoBehaviour
             hpSlider.value--;
         if (mpSlider.value > playerCharacerScript.playerMP)
             mpSlider.value--;
+
+
+        if (hpSlider.value < playerCharacerScript.PlayerHealth)
+            hpSlider.value++;
+        if (mpSlider.value < playerCharacerScript.playerMP)
+            mpSlider.value++;
     }
 }

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7859a1e1076b6b4986cac2f6ca92d80, type: 3}
   m_Name: EC1
   m_EditorClassIdentifier: 
-  enemyName: Fairy1
-  health: 20
-  damage: 8
-  weakness: Gun
-  resistance: Wind
+  enemyName: Fairy
+  health: 200
+  damage: 40
+  weakness: Fire
+  resistance: Ice

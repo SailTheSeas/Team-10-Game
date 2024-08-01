@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7859a1e1076b6b4986cac2f6ca92d80, type: 3}
   m_Name: EC2
   m_EditorClassIdentifier: 
-  enemyName: Kelpi
-  health: 30
-  damage: 10
-  weakness: Fire
-  resistance: Ice
+  enemyName: Jack-O Lantern
+  health: 200
+  damage: 40
+  weakness: Ice
+  resistance: Fire

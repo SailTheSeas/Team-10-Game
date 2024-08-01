@@ -16,6 +16,8 @@ public class CombatStateMachine : MonoBehaviour
 
     [Header("Persona")]
     [SerializeField] private GameObject[] personaModels;
+    public Animator personaAnim;
+    public int attackNumber;
 
     [Header("Enemy")]
     int enemyCount = 2;
@@ -232,7 +234,8 @@ public class CombatStateMachine : MonoBehaviour
                 currentState = CombatState.PersonaAttack;
 
                 personaModels[currentPlayerIndex].SetActive(true);
-                
+                personaAnim = personaModels[currentPlayerIndex].GetComponent<Animator>();
+
                 break;
             case 7:
                 currentState = CombatState.GunAttack;
@@ -370,6 +373,8 @@ public class CombatStateMachine : MonoBehaviour
     {
         menuController.HideAllMenus();
         //Put Persona Attack Anim here
+        personaAnim.SetInteger("Attack" + attackNumber, 1);
+
         //Put Damage Calc here
 
         enemies[currentEnemyTCount].enemyHealth -= CurrentMove[0].damageValue;
@@ -381,7 +386,14 @@ public class CombatStateMachine : MonoBehaviour
 
         //Revert to Idle Animation
         players[currentPlayerIndex].playerAnim.SetInteger("CallPersona", 0);
+        //Revert Persona to Idle
+        personaAnim.SetInteger("Attack" + attackNumber, 0);
+        //Despawn Persona
         personaModels[currentPlayerIndex].SetActive(false);
+
+        //revert persona attack number
+        attackNumber = 0;
+
         currentPlayerIndex++;
         if (currentPlayerIndex >= players.Count)
         {
@@ -497,6 +509,8 @@ public class CombatStateMachine : MonoBehaviour
     {
        
         CurrentMove[0] = players[currentPlayerIndex].playerMoves[0];
+        //Number for the animator
+        attackNumber = 1;
        
         ChangeState(14); 
 
@@ -506,7 +520,9 @@ public class CombatStateMachine : MonoBehaviour
     public void PButton2()
     {
         CurrentMove[0] = players[currentPlayerIndex].playerMoves[1];
-        
+        //Number for the animator
+        attackNumber = 2;
+
         ChangeState(14); 
 
 
@@ -515,7 +531,9 @@ public class CombatStateMachine : MonoBehaviour
     public void PButton3()
     {
         CurrentMove[0] = players[currentPlayerIndex].playerMoves[2];
-       
+        //Number for the animator
+        attackNumber = 3;
+
         ChangeState(14); 
 
 
@@ -524,7 +542,9 @@ public class CombatStateMachine : MonoBehaviour
     public void PButton4()
     {
         CurrentMove[0] = players[currentPlayerIndex].playerMoves[3];
-        
+        //Number for the animator
+        attackNumber = 4;
+
         ChangeState(14); 
 
 

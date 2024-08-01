@@ -6,7 +6,7 @@ public class CombatStateMachine : MonoBehaviour
 {
     [Header("Admin")]
     private DataHolder DH;
-    public CombatState currentState = CombatState.CombatStart;
+    public CombatState currentState;
     //public PlayerTurnStateMachine playerTurnStateMachine;
     [SerializeField] MenuController menuController;
     [SerializeField] PauseMenu pauseMenu;
@@ -16,6 +16,7 @@ public class CombatStateMachine : MonoBehaviour
     [SerializeField] private List<PlayerCharacter> players;
     [SerializeField] private List<EnemyCharacter> enemies;
     [SerializeField] private List<EnemyData> enemyDatas;
+    [SerializeField] private List<Material> materials;
 
     [Header("Persona")]
     [SerializeField] private GameObject[] personaModels;
@@ -71,7 +72,6 @@ public class CombatStateMachine : MonoBehaviour
         DH = FindAnyObjectByType<DataHolder>();
         if (DH != null)
         {
-            currentState = CombatState.CombatStart;
             switch (DH.GetCurrentCombat())
             {
                 case 1:
@@ -79,22 +79,26 @@ public class CombatStateMachine : MonoBehaviour
                     enemies[0].enemyData = enemyDatas[0];
                     enemies[1].enemyData = enemyDatas[1];
                     break;
+                    ChangeState(1);
                 case 2:
                     Debug.Log("Combat: " + DH.GetCurrentCombat());
                     enemies[0].enemyData = enemyDatas[2];
                     Debug.Log("first data uploaded");
                     enemies[1].enemyData = enemyDatas[3];
                     Debug.Log("second data uploaded");
+                    ChangeState(1);
                     break;
                 case 3:
                     Debug.Log("Combat: " + DH.GetCurrentCombat());
                     enemies[0].enemyData = enemyDatas[4];
                     enemies[1].enemyData = enemyDatas[5];
+                    ChangeState(1);
                     break;
                 case 4:
                     Debug.Log("Combat: " + DH.GetCurrentCombat());
                     enemies[0].enemyData = enemyDatas[6];
                     enemies[1].enemyData = enemyDatas[7];
+                    ChangeState(1);
                     break;
                 default:
                     break;
@@ -171,7 +175,7 @@ public class CombatStateMachine : MonoBehaviour
                 //Debug.Log("Ping0");
                 //enemies[currentEnemyTCount].enemyAnim.SetInteger("TakeDamage", 1);
                 //enemies[currentEnemyTCount].enemyAnim.SetInteger("EnemyAttack", 1);
-                menuController.UpdateStateText("SetUp");
+                //menuController.UpdateStateText("SetUp");
                 StartCoroutine(SetupCombat());
                 break;
 
@@ -323,7 +327,6 @@ public class CombatStateMachine : MonoBehaviour
 
     IEnumerator SetupCombat()
     {
-        Debug.Log("CoRoutineRan");
         enemies[0].UpdateData();
         enemies[1].UpdateData();
         if (enemies[0])
@@ -333,19 +336,19 @@ public class CombatStateMachine : MonoBehaviour
             {
                 case "FIRE":
                     Debug.Log("E1 res to fire");
-                    enemies[0].transform.GetChild(0).GetChild(0).GetComponent<SkinnedMeshRenderer>().material.color = Color.red;
+                    enemies[0].transform.GetChild(0).GetChild(0).GetComponent<SkinnedMeshRenderer>().material = materials[0];
                     break;
                 case "ICE":
                     Debug.Log("E1 res to ice");
-                    enemies[0].transform.GetChild(0).GetChild(0).GetComponent<SkinnedMeshRenderer>().material.color = Color.cyan;
+                    enemies[0].transform.GetChild(0).GetChild(0).GetComponent<SkinnedMeshRenderer>().material = materials[1];
                     break;
                 case "WIND":
                     Debug.Log("E1 res to wind");
-                    enemies[0].transform.GetChild(0).GetChild(0).GetComponent<SkinnedMeshRenderer>().material.color = Color.green;
+                    enemies[0].transform.GetChild(0).GetChild(0).GetComponent<SkinnedMeshRenderer>().material = materials[2];
                     break;
                 case "NA":
                     Debug.Log("E1 res to NA");
-                    enemies[0].transform.GetChild(0).GetChild(0).GetComponent<SkinnedMeshRenderer>().material.color = Color.yellow;
+                    enemies[0].transform.GetChild(0).GetChild(0).GetComponent<SkinnedMeshRenderer>().material = materials[3];
                     break;
             }
         }
@@ -362,19 +365,19 @@ public class CombatStateMachine : MonoBehaviour
             {
                 case "FIRE":
                     Debug.Log("E2 res to fire");
-                    enemies[1].transform.GetChild(0).GetChild(0).GetComponent<SkinnedMeshRenderer>().material.color = Color.red;
+                    enemies[1].transform.GetChild(0).GetChild(0).GetComponent<SkinnedMeshRenderer>().material = materials[0];
                     break;
                 case "ICE":
                     Debug.Log("E2 res to ice");
-                    enemies[1].transform.GetChild(0).GetChild(0).GetComponent<SkinnedMeshRenderer>().material.color = Color.cyan;
+                    enemies[1].transform.GetChild(0).GetChild(0).GetComponent<SkinnedMeshRenderer>().material = materials[1];
                     break;
                 case "WIND":
                     Debug.Log("E2 res to wind");
-                    enemies[1].transform.GetChild(0).GetChild(0).GetComponent<SkinnedMeshRenderer>().material.color = Color.green;
+                    enemies[1].transform.GetChild(0).GetChild(0).GetComponent<SkinnedMeshRenderer>().material = materials[2];
                     break;
                 case "NA":
                     Debug.Log("E2 res to NA");
-                    enemies[1].transform.GetChild(0).GetChild(0).GetComponent<SkinnedMeshRenderer>().material.color = Color.yellow;
+                    enemies[1].transform.GetChild(0).GetChild(0).GetComponent<SkinnedMeshRenderer>().material = materials[3];
                     break;
             }
         }

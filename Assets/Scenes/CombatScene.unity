@@ -2830,13 +2830,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 426901154}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.12172886, y: -0.35782084, z: 0.04710799, w: 0.9246228}
-  m_LocalPosition: {x: 7.844, y: 2.13, z: -5.505}
+  m_LocalRotation: {x: -0.0031469353, y: 0.99446833, z: -0.104907826, w: -0.004163064}
+  m_LocalPosition: {x: 3.03, y: 2.05, z: -0.48}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 12.045, y: 180.446, z: -0.316}
 --- !u!1 &432088001
 GameObject:
   m_ObjectHideFlags: 0
@@ -6040,6 +6040,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1149764927}
   m_CullTransparentMesh: 1
+--- !u!1 &1150851597
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1150851598}
+  m_Layer: 0
+  m_Name: CameraSixthPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1150851598
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1150851597}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.0031469353, y: 0.99446833, z: -0.104907826, w: -0.004163064}
+  m_LocalPosition: {x: 3.03, y: 2.05, z: -0.48}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 12.045, y: 180.446, z: -0.316}
 --- !u!1 &1176259990
 GameObject:
   m_ObjectHideFlags: 0
@@ -7475,6 +7506,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 0
   menuController: {fileID: 1302582438}
+  pauseMenu: {fileID: 309264}
   currentPlayerIndex: 0
   currentEnemyIndex: 0
   items:
@@ -7502,6 +7534,20 @@ MonoBehaviour:
   enemies:
   - {fileID: 1849510626}
   - {fileID: 544423218}
+  enemyDatas:
+  - {fileID: 11400000, guid: 6d0f44e0af7be5f41b24bc5472b35c20, type: 2}
+  - {fileID: 11400000, guid: 2807299d23bc0294399476c2a791c4af, type: 2}
+  - {fileID: 11400000, guid: 90135c25791cb42459b3975f90408c7c, type: 2}
+  - {fileID: 11400000, guid: 81ed3ac5bc4bf9a4786853521d083c79, type: 2}
+  - {fileID: 11400000, guid: 79ccd37adbd111c488a71b3434fa0986, type: 2}
+  - {fileID: 11400000, guid: b5e8df2231edc9b4fa0a5855077cb5b2, type: 2}
+  - {fileID: 11400000, guid: 8d2cbe86042b4ce40abcae10f2527309, type: 2}
+  - {fileID: 11400000, guid: 75a844204593d094798143665adee172, type: 2}
+  materials:
+  - {fileID: 2100000, guid: fd07b80a4b8fd734c9f922a1e03641d0, type: 2}
+  - {fileID: 2100000, guid: 96fd50b068b072643a0bd274eeb2df88, type: 2}
+  - {fileID: 2100000, guid: 5de5b7ccf086e8f468a9331e3b30bef6, type: 2}
+  - {fileID: 2100000, guid: a8ae5f025cde1da478008baa27b48bff, type: 2}
   personaModels:
   - {fileID: 1907895762}
   - {fileID: 1924740251}
@@ -7511,7 +7557,10 @@ MonoBehaviour:
   hurtClip: {fileID: 8300000, guid: ec7f1e379c978ac47bc38aaba21623f8, type: 3}
   personaAnim: {fileID: 0}
   attackNumber: 0
+  enemyCount: 2
   currentEnemyTCount: 0
+  bottomEnemy: 0
+  playersCount: 4
   currentPlayersTCount: 0
   cam: {fileID: 426901156}
   playerLight: {fileID: 1228878561}
@@ -13287,6 +13336,7 @@ SceneRoots:
   - {fileID: 398693684}
   - {fileID: 1510086546}
   - {fileID: 598243873}
+  - {fileID: 1150851598}
   - {fileID: 2122367135}
   - {fileID: 432088005}
   - {fileID: 421470097}

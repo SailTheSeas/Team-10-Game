@@ -102,7 +102,9 @@ public class TextHandler : MonoBehaviour
             }
             else
             {
+                
                 Debug.Log("The End");
+                Application.Quit();
             }
         } else
         {

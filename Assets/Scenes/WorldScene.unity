@@ -1184,23 +1184,24 @@ MonoBehaviour:
     stay sharp everyone.\t"
   - I hear movement, move slowly.
   - There is an enemy ahead, get ready to attack on my signal.
-  - NOW!!!!
+  - 3..... 2........ 1........ NOW!!!!
   - Phew, that wasn't too bad.
   - "Up the stairs again!\t"
-  - OH NO
+  - MORE OF THEM
   - That went well
   - "Time to carry on\t"
   - Some more enemies
   - I hope that was the last of them
   - Up and up
-  - This reminds me of my youth
-  - Of when I was young and free
-  - of when I was ignorant and stupid
-  - How far I have come
+  - I think the last few are up ahead
+  - I'm really glad we got this job guys, we've been struggling for work and honestly,
+    I thought we wouldn't make it.
+  - Maybe I can fix my marriage after all!
+  - And you guys can start that podcast you have always talked about
   - Why do I hear boss music?
-  - THATS ALOT OF ENEMIES
+  - FACE ME IF YOU DARE
   - That was easy
-  - GGS EZ
+  - Lets go home team!
   dialogueBox: {fileID: 257277666}
   nextDialogue: {fileID: 1267880464}
   imageDisplay: {fileID: 1600481320}

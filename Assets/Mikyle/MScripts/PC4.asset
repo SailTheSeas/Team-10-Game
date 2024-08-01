@@ -18,19 +18,20 @@ MonoBehaviour:
   physicalAttack: 35
   bulletAmount: 10
   bulletDamage: 15
+  Guard: 25
   personaMoves:
   - moveName: Bafu
     damageValue: 40
     elementalType: ICE
-    mpCost: 0
+    mpCost: 5
   - moveName: Bafula
     damageValue: 100
     elementalType: ICE
-    mpCost: 0
+    mpCost: 15
   - moveName: Bufudyne
     damageValue: 160
     elementalType: ICE
-    mpCost: 0
+    mpCost: 30
   - moveName: na
     damageValue: 0
     elementalType: '-'

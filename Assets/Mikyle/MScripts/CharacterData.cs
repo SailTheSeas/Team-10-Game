@@ -10,6 +10,7 @@ public class CharacterData : ScriptableObject
     public int physicalAttack;
     public int bulletAmount;
     public int bulletDamage;
+    public int Guard;
     public List<PersonaMove> personaMoves;
     //public List<Item> items;
 }

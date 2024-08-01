@@ -5635,6 +5635,7 @@ MonoBehaviour:
   playerMP: 100
   playerPhysAttack: 35
   playerBulletAmount: 10
+  PGuard: 0
   playerBulletDamage: 15
   playerMoves: []
   isGuarding: 0
@@ -6944,6 +6945,8 @@ MonoBehaviour:
   - {fileID: 1924740251}
   - {fileID: 1715172080}
   - {fileID: 1802468734}
+  personaAnim: {fileID: 0}
+  attackNumber: 0
   currentEnemyTCount: 0
   currentPlayersTCount: 0
   cam: {fileID: 426901156}
@@ -7486,6 +7489,7 @@ MonoBehaviour:
   playerMP: 100
   playerPhysAttack: 35
   playerBulletAmount: 10
+  PGuard: 0
   playerBulletDamage: 15
   playerMoves:
   - moveName: Agi
@@ -7922,6 +7926,7 @@ MonoBehaviour:
   playerMP: 100
   playerPhysAttack: 35
   playerBulletAmount: 10
+  PGuard: 0
   playerBulletDamage: 15
   playerMoves:
   - moveName: Lunge
@@ -8486,6 +8491,7 @@ MonoBehaviour:
   playerMP: 100
   playerPhysAttack: 35
   playerBulletAmount: 10
+  PGuard: 0
   playerBulletDamage: 15
   playerMoves:
   - moveName: Garu

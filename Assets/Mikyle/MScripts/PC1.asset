@@ -18,19 +18,20 @@ MonoBehaviour:
   physicalAttack: 35
   bulletAmount: 10
   bulletDamage: 15
+  Guard: 25
   personaMoves:
   - moveName: Agi
     damageValue: 40
     elementalType: FIRE
-    mpCost: 0
+    mpCost: 5
   - moveName: Agilao
     damageValue: 100
     elementalType: FIRE
-    mpCost: 0
+    mpCost: 15
   - moveName: Agidyne
     damageValue: 160
     elementalType: FIRE
-    mpCost: 0
+    mpCost: 30
   - moveName: na
     damageValue: 0
     elementalType: '-'

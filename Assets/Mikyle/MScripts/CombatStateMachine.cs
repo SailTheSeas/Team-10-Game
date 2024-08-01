@@ -20,9 +20,10 @@ public class CombatStateMachine : MonoBehaviour
     public int attackNumber;
 
     [Header("Enemy")]
-    int enemyCount = 2;
+    [SerializeField] int enemyCount = 2;
     [SerializeField] int currentEnemyTCount = 0;
-    int playersCount = 4;
+    [SerializeField] int bottomEnemy = 0;
+    [SerializeField] int playersCount = 4;
     [SerializeField] int currentPlayersTCount = 0;
 
 
@@ -32,6 +33,7 @@ public class CombatStateMachine : MonoBehaviour
     Transform cameraPlayerPos2;
     Transform cameraPlayerPos3;
     Transform cameraPlayerPos4;
+    Transform cameraPlayerPos5;
     [SerializeField] Transform playerLight;
 
     //public List<PersonaMove> CurrentMove = new List<PersonaMove>(1);
@@ -74,7 +76,7 @@ public class CombatStateMachine : MonoBehaviour
             {
                 Debug.Log("D was pressed");
                 currentEnemyTCount--;
-                if (currentEnemyTCount < 0)
+                if (currentEnemyTCount < bottomEnemy)
                     currentEnemyTCount = enemyCount - 1;
 
                 menuController.UpdateEnemyReticleTarget(currentEnemyTCount);
@@ -85,7 +87,7 @@ public class CombatStateMachine : MonoBehaviour
                 Debug.Log("A was pressed");
                 currentEnemyTCount++;
                 if (currentEnemyTCount >= enemyCount)
-                    currentEnemyTCount = 0;
+                    currentEnemyTCount = bottomEnemy;
 
                 menuController.UpdateEnemyReticleTarget(currentEnemyTCount);
             }
@@ -196,7 +198,7 @@ public class CombatStateMachine : MonoBehaviour
                 break;
 
             case CombatState.CombatEnd:
-                EndCombat();
+                StartCoroutine(EndCombat());
                 break;
 
             case CombatState.Healing:
@@ -249,6 +251,9 @@ public class CombatStateMachine : MonoBehaviour
             case 9:
                 currentState = CombatState.EnemyTurn;
                 break;
+            case 12:
+                currentState = CombatState.CombatEnd;
+                break;
             case 13:
                 currentState = CombatState.Healing;
                 break;
@@ -279,6 +284,7 @@ public class CombatStateMachine : MonoBehaviour
         cameraPlayerPos2 = GameObject.Find("CameraThirdPos").transform;
         cameraPlayerPos3 = GameObject.Find("CameraForthPos").transform;
         cameraPlayerPos4 = GameObject.Find("CameraFifthPos").transform;
+        cameraPlayerPos5 = GameObject.Find("CameraSixthPos").transform;
 
         yield return new WaitForSeconds(2f);
         playerLight.gameObject.SetActive(true);
@@ -342,10 +348,12 @@ public class CombatStateMachine : MonoBehaviour
         {
 
             currentPlayerIndex = 0;
+            CheckEnemies();
             ChangeState(8);
         }
         else
         {
+            CheckEnemies();
             ChangeState(2);
         }
 
@@ -430,10 +438,12 @@ public class CombatStateMachine : MonoBehaviour
         if (currentPlayerIndex >= players.Count)
         {
             currentPlayerIndex = 0;
+            CheckEnemies();
             ChangeState(8);
         }
         else
         {
+            CheckEnemies();
             ChangeState(2);
         }
 
@@ -525,9 +535,24 @@ public class CombatStateMachine : MonoBehaviour
         ChangeState(3);
     }
 
-    void EndCombat()
+    IEnumerator EndCombat()
     {
         // End combat
+        yield return new WaitForSeconds(0.1f);
+        playerLight.gameObject.SetActive(false);
+        cam.transform.position = cameraPlayerPos5.position;
+        cam.transform.rotation = cameraPlayerPos5.rotation;
+        menuController.HideAllMenus();
+        foreach (var player in players)
+        {
+            player.transform.GetChild(1).gameObject.SetActive(false);
+        }
+        yield return new WaitForSeconds(1f);
+
+        foreach (var player in players)
+        {
+            player.playerAnim.SetInteger("Heal", 1);
+        }
     }
 
     public void UpdateCameraPosition()
@@ -686,7 +711,32 @@ public class CombatStateMachine : MonoBehaviour
 
     }
 
+    public void CheckEnemies()
+    {
+        for (int i = enemies.Count - 1; i >= 0; i--)
+        {
+            if (enemies[i].enemyHealth <= 0)
+            {
+                if (enemies[i].gameObject.name == "E1")
+                {
+                    Debug.Log("E1 if, must die");
+                    menuController.UpdateNewReticles();
+                }
 
+                enemies[i].gameObject.SetActive(false);
+                enemies.RemoveAt(i);
+                enemyCount = enemies.Count;
+
+            }
+        }
+
+        menuController.UpdateEnemyReticleTarget(0);
+
+
+        if (enemyCount <= 0)
+            ChangeState(12);
+
+    }
 
 
 

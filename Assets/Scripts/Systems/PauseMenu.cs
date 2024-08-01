@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] private GameObject pauseScreen;
-    [SerializeField] private string menuScene;
+    [SerializeField] private string menuScene, combatScene;
 
     private DataHolder DH;
     bool isPaused;
@@ -29,6 +29,11 @@ public class PauseMenu : MonoBehaviour
 
             PauseGame();
         }
+    }
+
+    public void RestartLevel()
+    {
+        SceneManager.LoadScene(combatScene);
     }
 
     public void PauseGame()

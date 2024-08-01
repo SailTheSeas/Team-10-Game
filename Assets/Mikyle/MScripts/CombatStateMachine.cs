@@ -298,6 +298,7 @@ public class CombatStateMachine : MonoBehaviour
         enemies[currentEnemyTCount].enemyHealth -= players[currentPlayerIndex].playerPhysAttack;
 
 
+
         yield return new WaitForSeconds(2f);
 
         //return to idle animation
@@ -379,6 +380,8 @@ public class CombatStateMachine : MonoBehaviour
 
         enemies[currentEnemyTCount].enemyHealth -= CurrentMove[0].damageValue;
 
+        players[currentPlayerIndex].playerMP -= CurrentMove[0].mpCost;
+
 
         //=--------------------
 
@@ -419,10 +422,25 @@ public class CombatStateMachine : MonoBehaviour
 
         //Randomise Party member to hit
         //Put Damage Calc here
+        if (players[currentPlayerIndex].isGuarding == false)
+        {
 
-        //---------------
+            players[currentPlayersTCount].playerHealth -= enemies[currentEnemyIndex].enemyDamage;
 
-        yield return new WaitForSeconds(2f);
+
+        }
+        else if (players[currentPlayerIndex].isGuarding == true)
+        {
+
+            players[currentPlayersTCount].playerHealth -= (enemies[currentEnemyIndex].enemyDamage - enemies[currentEnemyIndex].enemyDamage/2);
+
+
+        }
+
+
+            //---------------
+
+            yield return new WaitForSeconds(2f);
 
         //Return to Enemy Idle Animation
         enemies[currentEnemyIndex].enemyAnim.SetInteger("EnemyAttack", 0);

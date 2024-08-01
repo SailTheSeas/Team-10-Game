@@ -11,6 +11,7 @@ public class PlayerCharacter : MonoBehaviour
     public int playerMP;
     public int playerPhysAttack;
     public int playerBulletAmount;
+    public int PGuard;
     public int playerBulletDamage;
     public List<PersonaMove> playerMoves;
     public bool isGuarding = false;
@@ -22,6 +23,7 @@ public class PlayerCharacter : MonoBehaviour
     public int PlayerPhysAttack { get => playerPhysAttack; set => playerPhysAttack = value; }
     public int PlayerBulletAmount { get => playerBulletAmount; set => playerBulletAmount = value; }
     public int PlayerBulletDamage { get => playerBulletDamage; set => playerBulletDamage = value; }
+    public int PlayerGuard { get => PGuard; set => PGuard = value; }
     public List<PersonaMove> PlayerMoves { get => playerMoves; set => playerMoves = value; }
     //public List<Item> Items { get => items; set => items = value; }
 
@@ -39,6 +41,7 @@ public class PlayerCharacter : MonoBehaviour
         PlayerBulletAmount = playerData.bulletAmount;
         PlayerBulletDamage = playerData.bulletDamage;
         PlayerMoves = playerData.personaMoves;
+        PlayerGuard = playerData.Guard;
         //Items = playerData.items;
 
         playerAnim = GetComponent<Animator>();

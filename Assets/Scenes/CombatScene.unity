@@ -5699,6 +5699,7 @@ MonoBehaviour:
   playerMP: 100
   playerPhysAttack: 35
   playerBulletAmount: 10
+  PGuard: 0
   playerBulletDamage: 15
   playerMoves: []
   isGuarding: 0
@@ -7552,6 +7553,7 @@ MonoBehaviour:
   playerMP: 100
   playerPhysAttack: 35
   playerBulletAmount: 10
+  PGuard: 0
   playerBulletDamage: 15
   playerMoves:
   - moveName: Agi
@@ -7988,6 +7990,7 @@ MonoBehaviour:
   playerMP: 100
   playerPhysAttack: 35
   playerBulletAmount: 10
+  PGuard: 0
   playerBulletDamage: 15
   playerMoves:
   - moveName: Lunge
@@ -8584,6 +8587,7 @@ MonoBehaviour:
   playerMP: 100
   playerPhysAttack: 35
   playerBulletAmount: 10
+  PGuard: 0
   playerBulletDamage: 15
   playerMoves:
   - moveName: Garu

@@ -18,20 +18,21 @@ MonoBehaviour:
   physicalAttack: 35
   bulletAmount: 10
   bulletDamage: 15
+  Guard: 25
   personaMoves:
   - moveName: Lunge
     damageValue: 60
     elementalType: PHYSICAL
-    mpCost: 0
+    mpCost: 8
   - moveName: CLEAVE
     damageValue: 65
     elementalType: PHYSICAL
-    mpCost: 0
+    mpCost: 10
   - moveName: GIANT SLICE
     damageValue: 90
     elementalType: PHYSICAL
-    mpCost: 0
+    mpCost: 20
   - moveName: Megaton Raid
     damageValue: 300
     elementalType: PHYSICAL
-    mpCost: 0
+    mpCost: 60

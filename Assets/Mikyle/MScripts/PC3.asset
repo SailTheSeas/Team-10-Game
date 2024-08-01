@@ -18,19 +18,20 @@ MonoBehaviour:
   physicalAttack: 35
   bulletAmount: 10
   bulletDamage: 15
+  Guard: 25
   personaMoves:
   - moveName: Garu
     damageValue: 40
     elementalType: WIND
-    mpCost: 0
+    mpCost: 5
   - moveName: Garula
     damageValue: 100
     elementalType: WIND
-    mpCost: 0
+    mpCost: 15
   - moveName: Magarula
     damageValue: 160
     elementalType: WIND
-    mpCost: 0
+    mpCost: 30
   - moveName: na
     damageValue: 0
     elementalType: '-'

@@ -16,8 +16,11 @@ public class CombatStateMachine : MonoBehaviour
 
     [Header("Persona")]
     [SerializeField] private GameObject[] personaModels;
+    [SerializeField] private AudioClip blockClip;
+    [SerializeField] private AudioClip hurtClip;
     public Animator personaAnim;
     public int attackNumber;
+    private AudioSource comSource;
 
     [Header("Enemy")]
     int enemyCount = 2;
@@ -58,7 +61,7 @@ public class CombatStateMachine : MonoBehaviour
     void Start()
     {
 
-
+        comSource = GetComponent<AudioSource>();
         //ChangeState(1);
         HandleState();
     }
@@ -459,11 +462,13 @@ public class CombatStateMachine : MonoBehaviour
         //Put Damage Calc here
         if (players[temp1].isGuarding == false)
         {
+            comSource.PlayOneShot(hurtClip);
             players[temp1].playerHealth -= enemies[currentEnemyIndex].enemyMoveList[temp2].damageValue;
             menuController.UpdatePlayerText(temp1, "-" + enemies[currentEnemyIndex].enemyMoveList[temp2].damageValue.ToString());
         }
         else
         {
+            comSource.PlayOneShot(blockClip);
             players[temp1].playerHealth -= (enemies[currentEnemyIndex].enemyMoveList[temp2].damageValue / 2);
             menuController.UpdatePlayerText(temp1, "-" + (enemies[currentEnemyIndex].enemyMoveList[temp2].damageValue / 2).ToString());
 

@@ -6213,6 +6213,10 @@ MonoBehaviour:
   playerMoves: []
   isGuarding: 0
   playerAnim: {fileID: 0}
+  particleSystems:
+  - {fileID: 7458799498041721542, guid: 9d9be2e9b404a9944a63f1719c94d113, type: 3}
+  - {fileID: 5878993456658891920, guid: 7c11eb8d8f7499b46b96faaf52041201, type: 3}
+  - {fileID: 8371791299407717762, guid: e853088200e7fc94ea57e5e23a8b58b7, type: 3}
 --- !u!95 &1176259996
 Animator:
   serializedVersion: 7
@@ -7557,6 +7561,7 @@ MonoBehaviour:
   hurtClip: {fileID: 8300000, guid: ec7f1e379c978ac47bc38aaba21623f8, type: 3}
   personaAnim: {fileID: 0}
   attackNumber: 0
+  particleSpawnPoint: {fileID: 1831381813}
   enemyCount: 2
   currentEnemyTCount: 0
   bottomEnemy: 0
@@ -8218,6 +8223,10 @@ MonoBehaviour:
     mpCost: 0
   isGuarding: 0
   playerAnim: {fileID: 0}
+  particleSystems:
+  - {fileID: 213785566921191797, guid: 48d3dfadd3d4dbb459aa499223a880d2, type: 3}
+  - {fileID: 5105114440282542215, guid: 90978b9514916a044a9733dcf9c0176a, type: 3}
+  - {fileID: 7831330909515497169, guid: 1c81e53043e59894799755c4fa87ddc2, type: 3}
 --- !u!95 &1411513508
 Animator:
   serializedVersion: 7
@@ -8661,6 +8670,11 @@ MonoBehaviour:
     mpCost: 0
   isGuarding: 0
   playerAnim: {fileID: 0}
+  particleSystems:
+  - {fileID: 213785566921191797, guid: b9c3339f279abd245a74bbb2058de09b, type: 3}
+  - {fileID: 7831330909515497169, guid: 0245be944f53cfb41b7d10f7256d782c, type: 3}
+  - {fileID: 6761320551842311169, guid: 99102d9ee15656046a27896c81cbc6df, type: 3}
+  - {fileID: 1707646045359607167, guid: ce09c986c537a11459ab2bd0da15c4ac, type: 3}
 --- !u!95 &1479236801
 Animator:
   serializedVersion: 7
@@ -9335,6 +9349,10 @@ MonoBehaviour:
     mpCost: 0
   isGuarding: 0
   playerAnim: {fileID: 0}
+  particleSystems:
+  - {fileID: 6761320551842311169, guid: 2b728c3cef2d3e941a17ca00b926fa01, type: 3}
+  - {fileID: 475067058373364032, guid: 2d672a5a06983bb45a11428ed5c64932, type: 3}
+  - {fileID: 1707646045359607167, guid: fc32b559d8f34734184dccc85325d879, type: 3}
 --- !u!95 &1556385378
 Animator:
   serializedVersion: 7
@@ -10541,6 +10559,37 @@ MonoBehaviour:
   attackThreeClip: {fileID: 8300000, guid: bc5139c8c4868f34da98a246d73d52b9, type: 3}
   attackFourClip: {fileID: 0}
   impactClip: {fileID: 8300000, guid: 7b19a083dca5b63449f86536dcd2659c, type: 3}
+--- !u!1 &1831381813
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1831381814}
+  m_Layer: 0
+  m_Name: ParticleSystemSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1831381814
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1831381813}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1510.1768, y: 400.7035, z: 844.72437}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1846446464
 GameObject:
   m_ObjectHideFlags: 0
@@ -13348,6 +13397,7 @@ SceneRoots:
   - {fileID: 1072289268558394094}
   - {fileID: 1762661636}
   - {fileID: 2125350161}
+  - {fileID: 1831381814}
   - {fileID: 1846446465}
   - {fileID: 1008764247}
   - {fileID: 872617726}

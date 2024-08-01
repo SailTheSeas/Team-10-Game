@@ -26,6 +26,9 @@ public class CombatStateMachine : MonoBehaviour
     public int attackNumber;
     private AudioSource comSource;
 
+    [Header("Particles")]
+    [SerializeField] private GameObject particleSpawnPoint;
+
     [Header("Enemy")]
     [SerializeField] int enemyCount = 2;
     [SerializeField] int currentEnemyTCount = 0;
@@ -222,7 +225,9 @@ public class CombatStateMachine : MonoBehaviour
                 //Player Summons Persona Animation
                 players[currentPlayerIndex].playerAnim.SetInteger("CallPersona", 1);
 
-                //Instantiate Persona
+                //supposed to find the position of the current target for the particle spawn point
+                Vector3 enemyPosition = enemies[currentEnemyTCount].transform.position;
+                particleSpawnPoint.transform.position = enemyPosition;
 
                 break;
 
@@ -516,6 +521,9 @@ public class CombatStateMachine : MonoBehaviour
 
         players[currentPlayerIndex].playerMP -= CurrentMove.mpCost;
 
+
+        //Play the particle system
+        InstantiateParticle();
         //Anim when enemies take damage
         enemies[currentEnemyTCount].enemyAnim.SetInteger("TakeDamage", 1);
         //=--------------------
@@ -860,7 +868,19 @@ public class CombatStateMachine : MonoBehaviour
 
     }
 
-
+    public void InstantiateParticle()
+    {
+        //find particle number
+        int particleNumber = attackNumber - 1;
+        //instantiate the correct partice system
+        GameObject particleInstance = Instantiate(players[currentPlayerIndex].particleSystems[attackNumber - 1], particleSpawnPoint.transform.position, Quaternion.identity);
+        //Get particle system component
+        ParticleSystem particleSystem = particleInstance.GetComponent<ParticleSystem>();
+        //play particle system
+        particleSystem.Play();
+        //destroy it
+        Destroy(particleInstance, particleSystem.main.duration + particleSystem.main.startLifetime.constantMax);
+    }
 
 
 

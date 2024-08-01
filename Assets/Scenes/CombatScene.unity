@@ -10852,9 +10852,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioPlayer: {fileID: 1479236802}
   attackOneClip: {fileID: 8300000, guid: 448cd821ceceb064d89e0603b9cfa97e, type: 3}
-  attackTwoClip: {fileID: 8300000, guid: 666682cd78253ff47b5d0f476df3280a, type: 3}
+  attackTwoClip: {fileID: 8300000, guid: 3e74354fca5e87e43b11e56db3232e35, type: 3}
   attackThreeClip: {fileID: 8300000, guid: 3e74354fca5e87e43b11e56db3232e35, type: 3}
-  attackFourClip: {fileID: 8300000, guid: bd686a61b3809464aab7fed3808b8620, type: 3}
+  attackFourClip: {fileID: 8300000, guid: 666682cd78253ff47b5d0f476df3280a, type: 3}
   impactClip: {fileID: 8300000, guid: 7b19a083dca5b63449f86536dcd2659c, type: 3}
 --- !u!1001 &1925377747
 PrefabInstance:

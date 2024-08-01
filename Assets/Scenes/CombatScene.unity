@@ -282,6 +282,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1743538644141110758, guid: d012daed2c5828141979ce689b54e893, type: 3}
+      propertyPath: pauseScreen
+      value: 
+      objectReference: {fileID: 1546693778}
+    - target: {fileID: 2541539522270556020, guid: d012daed2c5828141979ce689b54e893, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4958124898419196307, guid: d012daed2c5828141979ce689b54e893, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadMainMenu
+      objectReference: {fileID: 0}
     - target: {fileID: 7156538193609418653, guid: d012daed2c5828141979ce689b54e893, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -366,9 +378,17 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8902031208215917909, guid: d012daed2c5828141979ce689b54e893, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Quit
+      objectReference: {fileID: 0}
     - target: {fileID: 9006448247405652978, guid: d012daed2c5828141979ce689b54e893, type: 3}
       propertyPath: m_Name
       value: PauseMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 9006448247405652978, guid: d012daed2c5828141979ce689b54e893, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5683,7 +5703,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1149764928
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7223,6 +7243,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 0
   menuController: {fileID: 1302582438}
+  pauseMenu: {fileID: 2102831681}
   currentPlayerIndex: 0
   currentEnemyIndex: 0
   items:
@@ -7250,6 +7271,13 @@ MonoBehaviour:
   enemies:
   - {fileID: 1849510626}
   - {fileID: 544423218}
+  enemyDatas:
+  - {fileID: 11400000, guid: 6d0f44e0af7be5f41b24bc5472b35c20, type: 2}
+  - {fileID: 11400000, guid: 2807299d23bc0294399476c2a791c4af, type: 2}
+  - {fileID: 11400000, guid: 90135c25791cb42459b3975f90408c7c, type: 2}
+  - {fileID: 11400000, guid: 81ed3ac5bc4bf9a4786853521d083c79, type: 2}
+  - {fileID: 11400000, guid: 79ccd37adbd111c488a71b3434fa0986, type: 2}
+  - {fileID: 11400000, guid: b5e8df2231edc9b4fa0a5855077cb5b2, type: 2}
   personaModels:
   - {fileID: 1907895762}
   - {fileID: 1924740251}
@@ -8924,6 +8952,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1542419382}
   m_CullTransparentMesh: 1
+--- !u!1 &1546693778 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8635128541291870124, guid: d012daed2c5828141979ce689b54e893, type: 3}
+  m_PrefabInstance: {fileID: 148046930}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1556385372
 GameObject:
   m_ObjectHideFlags: 0
@@ -11928,6 +11961,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50817d396cf1af54290358cdaed3a23d, type: 3}
+--- !u!114 &2102831681 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1743538644141110758, guid: d012daed2c5828141979ce689b54e893, type: 3}
+  m_PrefabInstance: {fileID: 148046930}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65b9eac0fc6fdf743bb908598c77778e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2103625563 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8006561579612931042, guid: 50817d396cf1af54290358cdaed3a23d, type: 3}

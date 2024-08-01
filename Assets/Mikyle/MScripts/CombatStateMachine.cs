@@ -5,14 +5,17 @@ using UnityEngine;
 public class CombatStateMachine : MonoBehaviour
 {
     [Header("Admin")]
+    private DataHolder DH;
     public CombatState currentState;
     //public PlayerTurnStateMachine playerTurnStateMachine;
-    public MenuController menuController;
+    [SerializeField] MenuController menuController;
+    [SerializeField] PauseMenu pauseMenu;
     [SerializeField] private int currentPlayerIndex = 0;
     [SerializeField] private int currentEnemyIndex = 0;
     [SerializeField] List<Item> items;
     [SerializeField] private List<PlayerCharacter> players;
     [SerializeField] private List<EnemyCharacter> enemies;
+    [SerializeField] private List<EnemyData> enemyDatas;
 
     [Header("Persona")]
     [SerializeField] private GameObject[] personaModels;
@@ -60,6 +63,39 @@ public class CombatStateMachine : MonoBehaviour
         PersonaAttacking
     }
 
+    private void Awake()
+    {
+        DH = FindAnyObjectByType<DataHolder>();
+        if (DH != null)
+        {
+            switch (DH.GetCurrentCombat())
+            {
+                case 1:
+                    Debug.Log("Combat: " + DH.GetCurrentCombat());
+                    enemies[0].enemyData = enemyDatas[0];
+                    enemies[1].enemyData = enemyDatas[1];
+                    break;
+                case 2:
+                    Debug.Log("Combat: " + DH.GetCurrentCombat());
+                    enemies[0].enemyData = enemyDatas[2];
+                    enemies[1].enemyData = enemyDatas[3];
+                    break;
+                case 3:
+                    Debug.Log("Combat: " + DH.GetCurrentCombat());
+                    enemies[0].enemyData = enemyDatas[4];
+                    enemies[1].enemyData = enemyDatas[5];
+                    break;
+                case 4:
+                    Debug.Log("Combat: " + DH.GetCurrentCombat());
+                    break;
+                default:
+                    break;
+            }
+        }
+        else
+        {
+        }
+    }
     void Start()
     {
 
@@ -560,6 +596,8 @@ public class CombatStateMachine : MonoBehaviour
         {
             player.playerAnim.SetInteger("Heal", 1);
         }
+        yield return new WaitForSeconds(1.5f);
+        pauseMenu.LoadWorldScene();
     }
 
     public void UpdateCameraPosition()
@@ -737,6 +775,7 @@ public class CombatStateMachine : MonoBehaviour
             }
         }
 
+        currentEnemyTCount = 0;
         menuController.UpdateEnemyReticleTarget(0);
 
 

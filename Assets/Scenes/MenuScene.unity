@@ -223,7 +223,8 @@ PrefabInstance:
       propertyPath: m_text
       value: "World Ambience:\nX/1999 OST - Destiny \n\nBGM Music:\nX/1999 OST -
         Battle\nX/1999 OST - Encounter\nX/1999 OST - Suite (Dragons of Earth)\nX/1999
-        OST - The Two Kamui, The Two Sacred Swords"
+        OST - The Two Kamui, The Two Sacred Swords\n\nCharacters and Enemy Model:\nY-Bot
+        - Mixamo"
       objectReference: {fileID: 0}
     - target: {fileID: 560931497792709974, guid: 8cad9bef718b09442ad468b12414b608, type: 3}
       propertyPath: m_fontStyle

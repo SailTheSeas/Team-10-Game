@@ -2421,7 +2421,7 @@ MonoBehaviour:
   dialogueLines:
   - "Here we are, the WSOA building. We were sent here to clear the building of monsters,
     stay sharp everyone.\t"
-  - I hear movement, move slowly.
+  - <color=green> Test </color>
   - There is an enemy ahead, get ready to attack on my signal.
   - 3..... 2........ 1........ NOW!!!!
   - Phew, that wasn't too bad.

@@ -24,14 +24,14 @@ public class UpdatePlayerBars : MonoBehaviour
     void Update()
     {
         if (hpSlider.value > playerCharacerScript.PlayerHealth)
-            hpSlider.value--;
+            hpSlider.value -= 2;
         if (mpSlider.value > playerCharacerScript.playerMP)
-            mpSlider.value--;
+            mpSlider.value -= 2;
 
 
         if (hpSlider.value < playerCharacerScript.PlayerHealth)
-            hpSlider.value++;
+            hpSlider.value +=2;
         if (mpSlider.value < playerCharacerScript.playerMP)
-            mpSlider.value++;
+            mpSlider.value += 2;
     }
 }

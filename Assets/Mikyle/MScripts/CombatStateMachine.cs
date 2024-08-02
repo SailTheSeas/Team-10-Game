@@ -543,6 +543,11 @@ public class CombatStateMachine : MonoBehaviour
             enemies[currentEnemyTCount].isDown = true;
             menuController.UpdateEnemyText(currentEnemyTCount, "-" + (CurrentMove.damageValue + CurrentMove.damageValue / 2).ToString() + "!");
         }
+        else if (CurrentMove.elementalType == enemies[currentEnemyTCount].enemyResistance)
+        {
+            enemies[currentEnemyTCount].enemyHealth -= (CurrentMove.damageValue - CurrentMove.damageValue / 2);
+            menuController.UpdateEnemyText(currentEnemyTCount, "-" + (CurrentMove.damageValue - CurrentMove.damageValue / 2).ToString() + "...");
+        }
         else
         {
             enemies[currentEnemyTCount].enemyHealth -= CurrentMove.damageValue;

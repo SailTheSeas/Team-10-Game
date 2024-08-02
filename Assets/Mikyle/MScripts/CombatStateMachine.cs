@@ -437,7 +437,7 @@ public class CombatStateMachine : MonoBehaviour
         enemies[currentEnemyTCount].enemyAnim.SetInteger("TakeDamage", 1);
 
 
-        yield return new WaitForSeconds(1.3f);
+        yield return new WaitForSeconds(1.6f);
 
 
         //return to idle animation
@@ -448,6 +448,7 @@ public class CombatStateMachine : MonoBehaviour
         //Do down animation if health is 0
         CheckEnemyHPForAnimation();
 
+        yield return new WaitForSeconds(1.5f);
         currentPlayerIndex++;
         if (currentPlayerIndex >= players.Count)
         {
@@ -537,7 +538,7 @@ public class CombatStateMachine : MonoBehaviour
         enemies[currentEnemyTCount].enemyAnim.SetInteger("TakeDamage", 1);
         //=--------------------
 
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(1.2f);
 
         if (CurrentMove.elementalType == enemies[currentEnemyTCount].EnemyWeakness)
         {
@@ -576,6 +577,7 @@ public class CombatStateMachine : MonoBehaviour
         //Do down animation if health is 0
         CheckEnemyHPForAnimation();
 
+        yield return new WaitForSeconds(1.5f);
         currentPlayerIndex++;
         if (currentPlayerIndex >= players.Count)
         {
@@ -605,7 +607,7 @@ public class CombatStateMachine : MonoBehaviour
         int temp2 = Random.Range(0, enemies[currentEnemyIndex].enemyMoveList.Count);
 
         enemies[currentEnemyIndex].enemyAnim.SetInteger("EnemyAttack", 1);
-        yield return new WaitForSeconds(0.6f);
+        yield return new WaitForSeconds(0.8f);
         if (!players[temp1].isGuarding)
             players[temp1].playerAnim.SetInteger("TakeDamage", 1);
         //Put Damage Calc here
@@ -628,7 +630,7 @@ public class CombatStateMachine : MonoBehaviour
 
         //---------------
 
-        yield return new WaitForSeconds(1.4f);
+        yield return new WaitForSeconds(1.8f);
         //Return to Idle Animation
         if (!players[temp1].isGuarding)
             players[temp1].playerAnim.SetInteger("TakeDamage", 0);
@@ -870,10 +872,11 @@ public class CombatStateMachine : MonoBehaviour
                     //Debug.Log("E1 if, must die");
                     menuController.UpdateNewReticles();
                 }
-
-                enemies[i].gameObject.SetActive(false);
+                StartCoroutine(EnemyDeathDelay(i));
+                /*enemies[i].gameObject.SetActive(false);
                 enemies.RemoveAt(i);
-                enemyCount = enemies.Count;
+                enemyCount = enemies.Count;*/
+                
 
             }
         }
@@ -882,9 +885,20 @@ public class CombatStateMachine : MonoBehaviour
         menuController.UpdateEnemyReticleTarget(0);
 
 
+        
+
+    }
+
+    IEnumerator EnemyDeathDelay(int i)
+    {
+        Debug.Log(i);
+        yield return new WaitForSeconds(0.2f);
+        enemies[i].gameObject.SetActive(false);
+        enemies.RemoveAt(i);
+        enemyCount = enemies.Count;
+
         if (enemyCount <= 0)
             ChangeState(12);
-
     }
 
     public void InstantiateParticle()
@@ -905,11 +919,13 @@ public class CombatStateMachine : MonoBehaviour
     {
         if (enemies[currentEnemyTCount].enemyHealth <= 0)
         {
+            
             enemies[currentEnemyTCount].enemyAnim.SetInteger("Down", 1);
+            
         }
         else
         {
-            Debug.Log("Enemy is not defeated for animation");
+            //Debug.Log("Enemy is not defeated for animation");
         }
     }
 
@@ -917,13 +933,16 @@ public class CombatStateMachine : MonoBehaviour
     {
         if (players[currentPlayersTCount].playerHealth <= 0)
         {
+            
             players[currentPlayersTCount].playerAnim.SetInteger("Down", 1);
+            
         }
         else
         {
-            Debug.Log("Enemy is not defeated for animation");
+            //Debug.Log("Enemy is not defeated for animation");
         }
     }
+
 
 
 

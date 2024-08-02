@@ -343,7 +343,7 @@ public class CombatStateMachine : MonoBehaviour
         enemies[1].UpdateData();
         if (enemies[0])
         {
-            Debug.Log("E1 Exists");
+            //Debug.Log("E1 Exists");
             switch (enemies[0].EnemyResistance)
             {
                 case "FIRE":
@@ -372,7 +372,7 @@ public class CombatStateMachine : MonoBehaviour
 
         if (enemies[1])
         {
-            Debug.Log("E2 Exists");
+            //Debug.Log("E2 Exists");
             switch (enemies[1].EnemyResistance)
             {
                 case "FIRE":
@@ -413,7 +413,7 @@ public class CombatStateMachine : MonoBehaviour
         cameraPlayerPos5 = GameObject.Find("CameraSixthPos").transform;
 
         yield return new WaitForSeconds(2f);
-        Debug.Log("PING");
+        //Debug.Log("PING");
         playerLight.gameObject.SetActive(true);
         menuController.SetUpItems(items);
         menuController.UpdateEnemyReticleTarget(0);

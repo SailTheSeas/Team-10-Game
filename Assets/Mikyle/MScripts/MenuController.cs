@@ -8,10 +8,14 @@ public class MenuController : MonoBehaviour
     public GameObject statePanel;
     public GameObject mainMenuPanel;
     public GameObject itemMenuPanel;
-    GameObject itemButton1;
-    GameObject itemButton2;
-    GameObject itemButton3;
-    GameObject itemButton4;
+    public GameObject itemButton1;
+    public GameObject itemButton2;
+    public GameObject itemButton3;
+    public GameObject itemButton4;
+    //public TextMeshProUGUI itemButton1TextMesh;
+    //public TextMeshProUGUI itemButton2TextMesh;
+    //public TextMeshProUGUI itemButton3TextMesh;
+    //public TextMeshProUGUI itemButton4TextMesh;
     List<Item> menuItems;
     public GameObject personaMenuPanel;
     GameObject personaButton1;
@@ -225,10 +229,17 @@ public class MenuController : MonoBehaviour
     public void SetUpItems(List<Item> items)
     {
         menuItems = items;
-        itemButton1.GetComponentInChildren<TextMeshProUGUI>().text = menuItems[0].itemName;
-        itemButton2.GetComponentInChildren<TextMeshProUGUI>().text = menuItems[1].itemName;
-        itemButton3.GetComponentInChildren<TextMeshProUGUI>().text = menuItems[2].itemName;
-        itemButton4.GetComponentInChildren<TextMeshProUGUI>().text = menuItems[3].itemName;
+        foreach (Item item in menuItems)
+        {
+            Debug.Log(item);
+
+        }
+
+
+        itemButton1.transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text = menuItems[0].itemName;
+        itemButton2.transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text = menuItems[1].itemName;
+        itemButton3.transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text = menuItems[2].itemName;
+        itemButton4.transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text = menuItems[3].itemName;
     }
 
     public void SetUpPersonaMoves(List<PersonaMove> moves)

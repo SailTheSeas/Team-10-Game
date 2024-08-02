@@ -7482,6 +7482,10 @@ MonoBehaviour:
   statePanel: {fileID: 1901568172}
   mainMenuPanel: {fileID: 411537083}
   itemMenuPanel: {fileID: 136700057}
+  itemButton1: {fileID: 0}
+  itemButton2: {fileID: 0}
+  itemButton3: {fileID: 0}
+  itemButton4: {fileID: 0}
   personaMenuPanel: {fileID: 1354227413}
   mainPanel: {fileID: 1424486074}
   cam: {fileID: 426901156}
@@ -11961,9 +11965,9 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 923665978}
   - {fileID: 1871380241}
   - {fileID: 1227646106}
-  - {fileID: 923665978}
   m_Father: {fileID: 136700058}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}

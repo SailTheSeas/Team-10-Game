@@ -12,8 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7859a1e1076b6b4986cac2f6ca92d80, type: 3}
   m_Name: EC1
   m_EditorClassIdentifier: 
+<<<<<<< Updated upstream:Assets/Mikyle/MScripts/EC1.asset
   enemyName: Fairy
   health: 200
+=======
+  enemyName: ICEMAN
+  health: 300
+>>>>>>> Stashed changes:Assets/Mikyle/MScripts/EC1_E1.asset
   damage: 40
   weakness: Fire
   resistance: Ice

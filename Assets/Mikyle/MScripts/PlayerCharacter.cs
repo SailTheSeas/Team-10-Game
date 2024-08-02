@@ -17,6 +17,7 @@ public class PlayerCharacter : MonoBehaviour
     public int playerBulletDamage;
     public List<PersonaMove> playerMoves;
     public bool isGuarding = false;
+    public string playerName;
     //[SerializeField] List<Item> items;
 
     public string CharacterName { get => characterName; set => characterName = value; }
@@ -27,6 +28,7 @@ public class PlayerCharacter : MonoBehaviour
     public int PlayerBulletDamage { get => playerBulletDamage; set => playerBulletDamage = value; }
     public int PlayerGuard { get => PGuard; set => PGuard = value; }
     public List<PersonaMove> PlayerMoves { get => playerMoves; set => playerMoves = value; }
+   
     //public List<Item> Items { get => items; set => items = value; }
 
     [Header("Animation")]

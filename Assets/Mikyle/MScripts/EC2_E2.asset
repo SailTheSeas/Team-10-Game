@@ -10,20 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f7859a1e1076b6b4986cac2f6ca92d80, type: 3}
-  m_Name: EC2
+  m_Name: EC2_E2
   m_EditorClassIdentifier: 
-<<<<<<< Updated upstream:Assets/Mikyle/MScripts/EC2.asset
-  enemyName: Jack-O Lantern
-  health: 200
-=======
-  enemyName: FIREMAN
-  health: 300
->>>>>>> Stashed changes:Assets/Mikyle/MScripts/EC1_E2.asset
+  enemyName: A Dude
+  health: 350
   damage: 40
-  weakness: Wind
-  resistance: Fire
+  weakness: NA
+  resistance: NA
   isDown: 0
   enemyMoveList:
-  - moveName: Bafu
-    damageValue: 40
-    elementalType: Ice
+  - moveName: Lunge
+    damageValue: 60
+    elementalType: PHYSICAL
+  - moveName: CLEAVE
+    damageValue: 65
+    elementalType: PHYSICAL

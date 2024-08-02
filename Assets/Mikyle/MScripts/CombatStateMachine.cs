@@ -445,6 +445,8 @@ public class CombatStateMachine : MonoBehaviour
         enemies[currentEnemyTCount].enemyAnim.SetInteger("TakeDamage", 0);
         menuController.UpdateEnemyText(currentEnemyTCount, "");
 
+        CheckEnemyHPForAnimation();
+
         yield return new WaitForSeconds(1.3f);
         currentPlayerIndex++;
         if (currentPlayerIndex >= players.Count)
@@ -570,6 +572,8 @@ public class CombatStateMachine : MonoBehaviour
 
         //revert persona attack number
         attackNumber = 0;
+
+        CheckEnemyHPForAnimation();
         yield return new WaitForSeconds(1.3f);
         currentPlayerIndex++;
         if (currentPlayerIndex >= players.Count)
@@ -630,7 +634,7 @@ public class CombatStateMachine : MonoBehaviour
         enemies[currentEnemyIndex].enemyAnim.SetInteger("EnemyAttack", 0);
         menuController.UpdatePlayerText(temp1, "");
 
-
+        CheckPlayerHPForAnimation();
         currentEnemyIndex++;
         if (currentEnemyIndex >= enemies.Count)
         {

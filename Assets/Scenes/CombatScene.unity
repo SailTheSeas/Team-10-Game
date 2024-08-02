@@ -1990,10 +1990,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fightMusic:
   - {fileID: 8300000, guid: 2e9afe20558eb9440ab0b5490d7fa621, type: 3}
-  - {fileID: 8300000, guid: 2e9afe20558eb9440ab0b5490d7fa621, type: 3}
   - {fileID: 8300000, guid: ac0a2011f18b8e44cb40d2129f655219, type: 3}
   - {fileID: 8300000, guid: 07e9900b23e61eb4baea1dc10c0ef6fb, type: 3}
   - {fileID: 8300000, guid: 0d85e9073ab2ee14b95fd405dd510368, type: 3}
+  - {fileID: 8300000, guid: 2e9afe20558eb9440ab0b5490d7fa621, type: 3}
   fightMusicSource: {fileID: 384061688}
 --- !u!4 &384061690
 Transform:

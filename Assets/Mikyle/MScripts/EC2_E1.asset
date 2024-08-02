@@ -16,7 +16,7 @@ MonoBehaviour:
   health: 350
   damage: 40
   weakness: ICE
-  resistance: WIND
+  resistance: FIRE
   isDown: 0
   enemyMoveList:
   - moveName: Garu

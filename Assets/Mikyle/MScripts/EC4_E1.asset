@@ -13,12 +13,15 @@ MonoBehaviour:
   m_Name: EC4_E1
   m_EditorClassIdentifier: 
   enemyName: Kamoshida
-  health: 1
+  health: 450
   damage: 40
-  weakness: PHYSICAL
+  weakness: NA
   resistance: NA
   isDown: 0
   enemyMoveList:
-  - moveName: Bite
-    damageValue: 1
+  - moveName: GIANT SLICE
+    damageValue: 90
+    elementalType: PHYSICAL
+  - moveName: MEGATON RAID
+    damageValue: 300
     elementalType: PHYSICAL

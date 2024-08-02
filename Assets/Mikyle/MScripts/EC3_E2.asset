@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7859a1e1076b6b4986cac2f6ca92d80, type: 3}
   m_Name: EC3_E2
   m_EditorClassIdentifier: 
-  enemyName: Slime
+  enemyName: Charcoal
   health: 400
   damage: 40
-  weakness: NA
-  resistance: NA
+  weakness: WIND
+  resistance: ICE
   isDown: 0
   enemyMoveList:
-  - moveName: Gaint Slice
-    damageValue: 90
-    elementalType: PHYSICAL
-  - moveName: Bufudyne
-    damageValue: 230
-    elementalType: PHYSICAL
+  - moveName: Agilao
+    damageValue: 100
+    elementalType: FIRE
+  - moveName: Agidyne
+    damageValue: 160
+    elementalType: FIRE

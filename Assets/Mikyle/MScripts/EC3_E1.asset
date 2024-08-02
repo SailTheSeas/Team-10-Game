@@ -16,7 +16,7 @@ MonoBehaviour:
   health: 400
   damage: 40
   weakness: FIRE
-  resistance: ICE
+  resistance: WIND
   isDown: 0
   enemyMoveList:
   - moveName: Bafula

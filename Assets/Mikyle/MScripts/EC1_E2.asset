@@ -16,9 +16,9 @@ MonoBehaviour:
   health: 300
   damage: 40
   weakness: WIND
-  resistance: FIRE
+  resistance: ICE
   isDown: 0
   enemyMoveList:
-  - moveName: Bafu
+  - moveName: Agi
     damageValue: 40
-    elementalType: ICE
+    elementalType: FIRE

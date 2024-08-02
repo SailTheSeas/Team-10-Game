@@ -15,6 +15,7 @@ MonoBehaviour:
   enemyName: Jack-O Lantern
   health: 300
   damage: 40
+  ElementType: FIRE
   weakness: WIND
   resistance: ICE
   isDown: 0

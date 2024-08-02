@@ -15,6 +15,7 @@ MonoBehaviour:
   enemyName: Charcoal
   health: 400
   damage: 40
+  ElementType: FIRE
   weakness: WIND
   resistance: ICE
   isDown: 0

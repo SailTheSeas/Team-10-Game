@@ -10,11 +10,13 @@ public class EnemyCharacter : MonoBehaviour
     public int enemyDamage;
     public string enemyWeakness;
     public string enemyResistance;
+    public string enemyElementType;
     public bool isDown = false;
     public List<EnemyMove> enemyMoveList;
 
 
     public string EnemyName { get => enemyName; set => enemyName = value; }
+    public string EnemyElementType { get => enemyElementType; set => enemyElementType = value; }
     public int EnemyHealth { get => enemyHealth; set => enemyHealth = value; }
     public int EnemyDamage { get => enemyDamage; set => enemyDamage = value; }
     public string EnemyWeakness { get => enemyWeakness; set => enemyWeakness = value; }
@@ -29,6 +31,7 @@ public class EnemyCharacter : MonoBehaviour
     void Awake()
     {
         EnemyName = enemyData.enemyName;
+        EnemyElementType = enemyData.ElementType;
         EnemyHealth = enemyData.health;
         EnemyDamage = enemyData.damage;
         EnemyWeakness = enemyData.weakness;
@@ -43,6 +46,7 @@ public class EnemyCharacter : MonoBehaviour
     public void UpdateData()
     {
         EnemyName = enemyData.enemyName;
+        EnemyElementType = enemyData.ElementType;
         EnemyHealth = enemyData.health;
         EnemyDamage = enemyData.damage;
         EnemyWeakness = enemyData.weakness;

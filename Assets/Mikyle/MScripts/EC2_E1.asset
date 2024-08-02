@@ -15,6 +15,7 @@ MonoBehaviour:
   enemyName: BirdGod
   health: 350
   damage: 40
+  ElementType: WIND
   weakness: ICE
   resistance: FIRE
   isDown: 0

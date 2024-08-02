@@ -15,6 +15,7 @@ MonoBehaviour:
   enemyName: Kamoshida
   health: 450
   damage: 40
+  ElementType: NA
   weakness: NA
   resistance: NA
   isDown: 0

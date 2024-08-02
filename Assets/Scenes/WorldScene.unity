@@ -2425,9 +2425,9 @@ MonoBehaviour:
     and <color=red> Pyro </color>, I need you to focus on <color=blue>Ice </color>enemies.
   - There is an enemy ahead, get ready to attack on my signal.
   - 3..... 2........ 1........ NOW!!!!
-  - Phew, that wasn't too bad. Hope we don't run into any weird people, they aren't
-    weak to anything.
-  - Up the stairs again! Also, <color=green>Blower<color>, focus any <color=red>Fire<color>
+  - Phew, that wasn't too bad. Hope we don't run into any <color=grey>weird people</color>,
+    they aren't weak to anything.
+  - Up the stairs again! Also, <color=green>Blower</color>, focus any <color=red>Fire</color>
     enemies we see, ok?
   - MORE OF THEM, ATTACK!!!
   - That went well

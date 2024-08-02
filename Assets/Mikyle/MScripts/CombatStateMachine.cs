@@ -445,7 +445,7 @@ public class CombatStateMachine : MonoBehaviour
         enemies[currentEnemyTCount].enemyAnim.SetInteger("TakeDamage", 0);
         menuController.UpdateEnemyText(currentEnemyTCount, "");
 
-
+        yield return new WaitForSeconds(1.3f);
         currentPlayerIndex++;
         if (currentPlayerIndex >= players.Count)
         {
@@ -570,7 +570,7 @@ public class CombatStateMachine : MonoBehaviour
 
         //revert persona attack number
         attackNumber = 0;
-
+        yield return new WaitForSeconds(1.3f);
         currentPlayerIndex++;
         if (currentPlayerIndex >= players.Count)
         {
@@ -864,9 +864,7 @@ public class CombatStateMachine : MonoBehaviour
                     menuController.UpdateNewReticles();
                 }
 
-                enemies[i].gameObject.SetActive(false);
-                enemies.RemoveAt(i);
-                enemyCount = enemies.Count;
+                StartCoroutine(DownEnemy(i));
 
             }
         }
@@ -878,6 +876,16 @@ public class CombatStateMachine : MonoBehaviour
         if (enemyCount <= 0)
             ChangeState(12);
 
+    }
+
+    IEnumerator DownEnemy(int i)
+    {
+        yield return new WaitForSeconds(1f);
+        enemies[i].gameObject.SetActive(false);
+        enemies.RemoveAt(i);
+        enemyCount = enemies.Count;
+        if (enemyCount <= 0)
+            ChangeState(12);
     }
 
     public void InstantiateParticle()

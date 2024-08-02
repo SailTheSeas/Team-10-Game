@@ -902,7 +902,33 @@ public class CombatStateMachine : MonoBehaviour
         Destroy(particleInstance, particleSystem.main.duration + particleSystem.main.startLifetime.constantMax);
     }
 
+    public void CheckEnemyHPForAnimation()
+    {
+        if (enemies[currentEnemyTCount].enemyHealth <= 0)
+        {
 
+            enemies[currentEnemyTCount].enemyAnim.SetInteger("Down", 1);
+
+        }
+        else
+        {
+            //Debug.Log("Enemy is not defeated for animation");
+        }
+    }
+
+    public void CheckPlayerHPForAnimation()
+    {
+        if (players[currentPlayersTCount].playerHealth <= 0)
+        {
+
+            players[currentPlayersTCount].playerAnim.SetInteger("Down", 1);
+
+        }
+        else
+        {
+            //Debug.Log("Enemy is not defeated for animation");
+        }
+    }
 
 
 

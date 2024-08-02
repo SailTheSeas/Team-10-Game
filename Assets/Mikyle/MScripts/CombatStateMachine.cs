@@ -445,6 +445,8 @@ public class CombatStateMachine : MonoBehaviour
         enemies[currentEnemyTCount].enemyAnim.SetInteger("TakeDamage", 0);
         menuController.UpdateEnemyText(currentEnemyTCount, "");
 
+        //Do down animation if health is 0
+        CheckEnemyHPForAnimation();
 
         currentPlayerIndex++;
         if (currentPlayerIndex >= players.Count)
@@ -571,6 +573,9 @@ public class CombatStateMachine : MonoBehaviour
         //revert persona attack number
         attackNumber = 0;
 
+        //Do down animation if health is 0
+        CheckEnemyHPForAnimation();
+
         currentPlayerIndex++;
         if (currentPlayerIndex >= players.Count)
         {
@@ -630,6 +635,8 @@ public class CombatStateMachine : MonoBehaviour
         enemies[currentEnemyIndex].enemyAnim.SetInteger("EnemyAttack", 0);
         menuController.UpdatePlayerText(temp1, "");
 
+        //Do down animation if health is 0
+        CheckPlayerHPForAnimation();
 
         currentEnemyIndex++;
         if (currentEnemyIndex >= enemies.Count)
@@ -894,7 +901,29 @@ public class CombatStateMachine : MonoBehaviour
         Destroy(particleInstance, particleSystem.main.duration + particleSystem.main.startLifetime.constantMax);
     }
 
+    public void CheckEnemyHPForAnimation()
+    {
+        if (enemies[currentEnemyTCount].enemyHealth <= 0)
+        {
+            enemies[currentEnemyTCount].enemyAnim.SetInteger("Down", 1);
+        }
+        else
+        {
+            Debug.Log("Enemy is not defeated for animation");
+        }
+    }
 
+    public void CheckPlayerHPForAnimation()
+    {
+        if (players[currentPlayersTCount].playerHealth <= 0)
+        {
+            players[currentPlayersTCount].playerAnim.SetInteger("Down", 1);
+        }
+        else
+        {
+            Debug.Log("Enemy is not defeated for animation");
+        }
+    }
 
 
 

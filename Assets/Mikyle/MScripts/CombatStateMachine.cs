@@ -447,7 +447,7 @@ public class CombatStateMachine : MonoBehaviour
 
         CheckEnemyHPForAnimation();
 
-        yield return new WaitForSeconds(1.3f);
+        yield return new WaitForSeconds(1.8f);
         currentPlayerIndex++;
         if (currentPlayerIndex >= players.Count)
         {
@@ -574,7 +574,7 @@ public class CombatStateMachine : MonoBehaviour
         attackNumber = 0;
 
         CheckEnemyHPForAnimation();
-        yield return new WaitForSeconds(1.3f);
+        yield return new WaitForSeconds(1.8f);
         currentPlayerIndex++;
         if (currentPlayerIndex >= players.Count)
         {
@@ -884,7 +884,7 @@ public class CombatStateMachine : MonoBehaviour
 
     IEnumerator DownEnemy(int i)
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.3f);
         enemies[i].gameObject.SetActive(false);
         enemies.RemoveAt(i);
         enemyCount = enemies.Count;

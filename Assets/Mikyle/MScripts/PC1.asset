@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bf60543fa5cc449935c8ca3c4a6910, type: 3}
   m_Name: PC1
   m_EditorClassIdentifier: 
-  characterName: Joker
+  characterName: Pyro
   health: 250
   mp: 100
   physicalAttack: 35

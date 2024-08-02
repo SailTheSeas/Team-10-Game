@@ -15,6 +15,7 @@ MonoBehaviour:
   enemyName: Kamoshida's Breath
   health: 450
   damage: 40
+  ElementType: WIND
   weakness: ICE
   resistance: FIRE
   isDown: 0

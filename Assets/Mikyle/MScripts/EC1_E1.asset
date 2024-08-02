@@ -15,6 +15,7 @@ MonoBehaviour:
   enemyName: Fairy
   health: 300
   damage: 40
+  ElementType: ICE
   weakness: FIRE
   resistance: WIND
   isDown: 0

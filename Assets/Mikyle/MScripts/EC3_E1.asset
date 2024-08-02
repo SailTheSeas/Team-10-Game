@@ -15,6 +15,7 @@ MonoBehaviour:
   enemyName: Slime
   health: 400
   damage: 40
+  ElementType: ICE
   weakness: FIRE
   resistance: WIND
   isDown: 0

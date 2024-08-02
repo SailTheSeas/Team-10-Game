@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: EC2_E1
   m_EditorClassIdentifier: 
   enemyName: BirdGod
-  health: 250
+  health: 350
   damage: 40
   weakness: ICE
   resistance: WIND

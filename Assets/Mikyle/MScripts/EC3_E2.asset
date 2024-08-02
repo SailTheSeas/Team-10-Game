@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: EC3_E2
   m_EditorClassIdentifier: 
   enemyName: Slime
-  health: 300
+  health: 400
   damage: 40
   weakness: NA
   resistance: NA

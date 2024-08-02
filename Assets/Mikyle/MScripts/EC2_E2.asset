@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: EC2_E2
   m_EditorClassIdentifier: 
   enemyName: Charcoal
-  health: 250
+  health: 350
   damage: 40
   weakness: WIND
   resistance: FIRE

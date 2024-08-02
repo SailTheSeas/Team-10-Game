@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: EC1_E1
   m_EditorClassIdentifier: 
   enemyName: Fairy
-  health: 200
+  health: 300
   damage: 40
   weakness: FIRE
   resistance: WIND

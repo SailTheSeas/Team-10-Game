@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: EC1_E2
   m_EditorClassIdentifier: 
   enemyName: Jack-O Lantern
-  health: 200
+  health: 300
   damage: 40
   weakness: WIND
   resistance: FIRE

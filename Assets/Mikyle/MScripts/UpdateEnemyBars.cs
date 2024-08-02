@@ -25,6 +25,6 @@ public class UpdateEnemyBars : MonoBehaviour
     void Update()
     {
         if (hpSlider.value > enemyCharacter.enemyHealth)
-            hpSlider.value-= 0.5f;
+            hpSlider.value-= 2f;
     }
 }

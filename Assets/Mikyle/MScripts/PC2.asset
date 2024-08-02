@@ -32,7 +32,7 @@ MonoBehaviour:
     damageValue: 90
     elementalType: PHYSICAL
     mpCost: 20
-  - moveName: Megaton Raid
-    damageValue: 300
-    elementalType: PHYSICAL
-    mpCost: 60
+  - moveName: na
+    damageValue: 0
+    elementalType: '-'
+    mpCost: 0

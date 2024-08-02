@@ -219,9 +219,36 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 560931497792709974, guid: 8cad9bef718b09442ad468b12414b608, type: 3}
+      propertyPath: m_text
+      value: "World Ambience:\nX/1999 OST - Destiny \n\nBGM Music:\nX/1999 OST -
+        Battle\nX/1999 OST - Encounter\nX/1999 OST - Suite (Dragons of Earth)\nX/1999
+        OST - The Two Kamui, The Two Sacred Swords\n\nCharacters and Enemy Model:\nY-Bot
+        - Mixamo"
+      objectReference: {fileID: 0}
+    - target: {fileID: 560931497792709974, guid: 8cad9bef718b09442ad468b12414b608, type: 3}
+      propertyPath: m_fontStyle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1127942888302641828, guid: 8cad9bef718b09442ad468b12414b608, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3368643955154672316, guid: 8cad9bef718b09442ad468b12414b608, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4398524908694083666, guid: 8cad9bef718b09442ad468b12414b608, type: 3}
       propertyPath: m_Name
       value: MainMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 4782331175534196002, guid: 8cad9bef718b09442ad468b12414b608, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6519090036654660178, guid: 8cad9bef718b09442ad468b12414b608, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7443741421802960756, guid: 8cad9bef718b09442ad468b12414b608, type: 3}
       propertyPath: m_Pivot.x
@@ -302,6 +329,15 @@ PrefabInstance:
     - target: {fileID: 7443741421802960756, guid: 8cad9bef718b09442ad468b12414b608, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8785932442191008458, guid: 8cad9bef718b09442ad468b12414b608, type: 3}
+      propertyPath: m_text
+      value: 'Click to advance text.
+
+        In Combat, use [A] and [D] to swap
+        between targets.
+
+        Kill all the enmies.'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

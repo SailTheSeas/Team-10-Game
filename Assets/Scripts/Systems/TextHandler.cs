@@ -28,9 +28,11 @@ public class TextHandler : MonoBehaviour
     [SerializeField] private string typingChar;
     [SerializeField] private bool hasTypingChar;
 
+    [SerializeField] private Animator menuAnimator;
+
 
     private DataHolder DH;
-    private bool isTyping, startBattle;
+    private bool isTyping, startBattle, canClick;
     private string textWriter;    
     private int dialogueTracker, battleTriggerTracker, backgroundTriggerTracker;    
 
@@ -55,7 +57,7 @@ public class TextHandler : MonoBehaviour
         textWriter = dialogueLines[dialogueTracker];
         dialogueTracker++;
         backgroundTriggerTracker++;
-
+        canClick = true;
         isTyping = true;
         startBattle = false;
         StartCoroutine(TypeTMP());
@@ -63,54 +65,69 @@ public class TextHandler : MonoBehaviour
 
     public void NextDialogue()
     {
-        if (!isTyping)
+        if (canClick)
         {
-            if (dialogueTracker == backgroundTriggerPoints[backgroundTriggerTracker])
+            if (!isTyping)
             {
-                imageDisplay.sprite = backgroundImage[backgroundTriggerTracker];
-                if (DH != null)
-                    DH.SetCurrentBackground(backgroundTriggerTracker);
-                backgroundTriggerTracker++;
-                
-            }
-
-            if (dialogueTracker == (battleTriggerPoints[battleTriggerTracker]-1))
-                enemyDisp.SetActive(true);
-
-            if (dialogueTracker == battleTriggerPoints[battleTriggerTracker])
-            {
-                startBattle = true;
-
-                battleTriggerTracker++;
-                if (DH != null)
-                    DH.SetCurrentCombat(battleTriggerTracker);
-            }
-
-            if (dialogueTracker < totalDialogue)
-            {
-                dialogueBox.text = dialogueLines[dialogueTracker];
-                textWriter = dialogueLines[dialogueTracker];
-                dialogueTracker++;                
-                isTyping = true;
-                if (startBattle)
+                if (dialogueTracker == backgroundTriggerPoints[backgroundTriggerTracker])
                 {
-                    startBattle = false;
-                    enemyDisp.SetActive(false);
-                    SceneManager.LoadScene("CombatScene");
+                    imageDisplay.sprite = backgroundImage[backgroundTriggerTracker];
+                    if (DH != null)
+                        DH.SetCurrentBackground(backgroundTriggerTracker);
+                    backgroundTriggerTracker++;
+
                 }
-                StartCoroutine(TypeTMP());
+
+                if (dialogueTracker == (battleTriggerPoints[battleTriggerTracker] - 1))
+                    enemyDisp.SetActive(true);
+
+                if (dialogueTracker == battleTriggerPoints[battleTriggerTracker])
+                {
+                    startBattle = true;
+
+                    battleTriggerTracker++;
+                    if (DH != null)
+                        DH.SetCurrentCombat(battleTriggerTracker);
+                }
+
+                if (dialogueTracker < totalDialogue)
+                {
+                    if (startBattle)
+                    {
+                        canClick = false;
+                        startBattle = false;
+                        enemyDisp.SetActive(false);
+                        /*SceneManager.LoadScene("CombatScene");*/
+                        menuAnimator.SetInteger("ChangeScene", 1);
+                        isTyping = false;
+                        dialogueTracker++;
+                    }
+                    else
+                    {
+                        dialogueBox.text = dialogueLines[dialogueTracker];
+                        textWriter = dialogueLines[dialogueTracker];
+                        dialogueTracker++;
+                        isTyping = true;
+                        StartCoroutine(TypeTMP());
+                    }
+
+
+                }
+                else
+                {
+
+                    Debug.Log("The End");
+                    Application.Quit();
+                }
             }
             else
             {
-                Debug.Log("The End");
+                StopCoroutine(TypeTMP());
+                if (DH != null)
+                    DH.SetCurrentDialogue(dialogueTracker);
+                isTyping = false;
+                dialogueBox.text = textWriter;
             }
-        } else
-        {
-            StopCoroutine(TypeTMP());
-            if (DH != null)
-                DH.SetCurrentDialogue(dialogueTracker);
-            isTyping = false;
-            dialogueBox.text = textWriter;
         }
     }
    

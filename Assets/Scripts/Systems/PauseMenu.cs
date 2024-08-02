@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] private GameObject pauseScreen;
-    [SerializeField] private string menuScene;
+    [SerializeField] private string menuScene, combatScene;
 
     private DataHolder DH;
     bool isPaused;
@@ -29,6 +27,11 @@ public class PauseMenu : MonoBehaviour
 
             PauseGame();
         }
+    }
+
+    public void RestartLevel()
+    {
+        SceneManager.LoadScene(combatScene);
     }
 
     public void PauseGame()
@@ -55,5 +58,11 @@ public class PauseMenu : MonoBehaviour
     public void Quit()
     {
         Application.Quit();
+    }
+
+    public void LoadWorldScene()
+    {
+
+        SceneManager.LoadScene("worldScene");
     }
 }

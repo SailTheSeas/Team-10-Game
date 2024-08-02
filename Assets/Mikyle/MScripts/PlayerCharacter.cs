@@ -34,6 +34,9 @@ public class PlayerCharacter : MonoBehaviour
     [Header("Animation")]
     public Animator playerAnim;
 
+    [Header("Particles")]
+    public List<GameObject> particleSystems;
+
 
 
     void Start()

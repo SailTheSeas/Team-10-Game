@@ -5,14 +5,18 @@ using UnityEngine;
 public class CombatStateMachine : MonoBehaviour
 {
     [Header("Admin")]
+    private DataHolder DH;
     public CombatState currentState;
     //public PlayerTurnStateMachine playerTurnStateMachine;
-    public MenuController menuController;
+    [SerializeField] MenuController menuController;
+    [SerializeField] PauseMenu pauseMenu;
     [SerializeField] private int currentPlayerIndex = 0;
     [SerializeField] private int currentEnemyIndex = 0;
     [SerializeField] List<Item> items;
     [SerializeField] private List<PlayerCharacter> players;
     [SerializeField] private List<EnemyCharacter> enemies;
+    [SerializeField] private List<EnemyData> enemyDatas;
+    [SerializeField] private List<Material> materials;
 
     [Header("Persona")]
     [SerializeField] private GameObject[] personaModels;
@@ -22,10 +26,14 @@ public class CombatStateMachine : MonoBehaviour
     public int attackNumber;
     private AudioSource comSource;
 
+    [Header("Particles")]
+    [SerializeField] private GameObject particleSpawnPoint;
+
     [Header("Enemy")]
-    int enemyCount = 2;
+    [SerializeField] int enemyCount = 2;
     [SerializeField] int currentEnemyTCount = 0;
-    int playersCount = 4;
+    [SerializeField] int bottomEnemy = 0;
+    [SerializeField] int playersCount = 4;
     [SerializeField] int currentPlayersTCount = 0;
 
 
@@ -35,6 +43,7 @@ public class CombatStateMachine : MonoBehaviour
     Transform cameraPlayerPos2;
     Transform cameraPlayerPos3;
     Transform cameraPlayerPos4;
+    Transform cameraPlayerPos5;
     [SerializeField] Transform playerLight;
 
     //public List<PersonaMove> CurrentMove = new List<PersonaMove>(1);
@@ -58,6 +67,49 @@ public class CombatStateMachine : MonoBehaviour
         PersonaAttacking
     }
 
+
+
+    private void Awake()
+    {
+        Debug.Log("AWAKESETUP");
+        DH = FindAnyObjectByType<DataHolder>();
+        if (DH != null)
+        {
+            switch (DH.GetCurrentCombat())
+            {
+                case 1:
+                    Debug.Log("Combat: " + DH.GetCurrentCombat());
+                    enemies[0].enemyData = enemyDatas[0];
+                    enemies[1].enemyData = enemyDatas[1];
+                    break;
+                    ChangeState(1);
+                case 2:
+                    Debug.Log("Combat: " + DH.GetCurrentCombat());
+                    enemies[0].enemyData = enemyDatas[2];
+                    Debug.Log("first data uploaded");
+                    enemies[1].enemyData = enemyDatas[3];
+                    Debug.Log("second data uploaded");
+                    ChangeState(1);
+                    break;
+                case 3:
+                    Debug.Log("Combat: " + DH.GetCurrentCombat());
+                    enemies[0].enemyData = enemyDatas[4];
+                    enemies[1].enemyData = enemyDatas[5];
+                    ChangeState(1);
+                    break;
+                case 4:
+                    Debug.Log("Combat: " + DH.GetCurrentCombat());
+                    enemies[0].enemyData = enemyDatas[6];
+                    enemies[1].enemyData = enemyDatas[7];
+                    ChangeState(1);
+                    break;
+                default:
+                    break;
+            }
+
+
+        }
+    }
     void Start()
     {
 
@@ -77,10 +129,14 @@ public class CombatStateMachine : MonoBehaviour
             {
                 Debug.Log("D was pressed");
                 currentEnemyTCount--;
-                if (currentEnemyTCount < 0)
+                if (currentEnemyTCount < bottomEnemy)
                     currentEnemyTCount = enemyCount - 1;
 
                 menuController.UpdateEnemyReticleTarget(currentEnemyTCount);
+
+                //supposed to find the position of the current target for the particle spawn point
+                Vector3 enemyPosition = enemies[currentEnemyTCount].transform.position;
+                particleSpawnPoint.transform.position = enemyPosition;
             }
 
             if (Input.GetKeyDown(KeyCode.A))
@@ -88,9 +144,13 @@ public class CombatStateMachine : MonoBehaviour
                 Debug.Log("A was pressed");
                 currentEnemyTCount++;
                 if (currentEnemyTCount >= enemyCount)
-                    currentEnemyTCount = 0;
+                    currentEnemyTCount = bottomEnemy;
 
                 menuController.UpdateEnemyReticleTarget(currentEnemyTCount);
+
+                //supposed to find the position of the current target for the particle spawn point
+                Vector3 enemyPosition = enemies[currentEnemyTCount].transform.position;
+                particleSpawnPoint.transform.position = enemyPosition;
             }
         }
 
@@ -126,11 +186,12 @@ public class CombatStateMachine : MonoBehaviour
                 //Debug.Log("Ping0");
                 //enemies[currentEnemyTCount].enemyAnim.SetInteger("TakeDamage", 1);
                 //enemies[currentEnemyTCount].enemyAnim.SetInteger("EnemyAttack", 1);
-                menuController.UpdateStateText("SetUp");
+                //menuController.UpdateStateText("SetUp");
                 StartCoroutine(SetupCombat());
                 break;
 
             case CombatState.PlayerTurn:
+                Debug.Log("PlayerTurnStarted");
                 menuController.UpdateStateText($"{players[currentPlayerIndex].characterName} is Aiming");
                 players[currentPlayerIndex].playerAnim.SetInteger("CallPersona", 0);
                 menuController.ShowMainMenu();
@@ -172,8 +233,9 @@ public class CombatStateMachine : MonoBehaviour
                 //Player Summons Persona Animation
                 players[currentPlayerIndex].playerAnim.SetInteger("CallPersona", 1);
 
-                //Instantiate Persona
-
+                //supposed to find the position of the current target for the particle spawn point
+                Vector3 enemyPosition = enemies[currentEnemyTCount].transform.position;
+                particleSpawnPoint.transform.position = enemyPosition;
                 break;
 
             case CombatState.GunAttack:
@@ -199,7 +261,7 @@ public class CombatStateMachine : MonoBehaviour
                 break;
 
             case CombatState.CombatEnd:
-                EndCombat();
+                StartCoroutine(EndCombat());
                 break;
 
             case CombatState.Healing:
@@ -252,6 +314,9 @@ public class CombatStateMachine : MonoBehaviour
             case 9:
                 currentState = CombatState.EnemyTurn;
                 break;
+            case 12:
+                currentState = CombatState.CombatEnd;
+                break;
             case 13:
                 currentState = CombatState.Healing;
                 break;
@@ -274,6 +339,69 @@ public class CombatStateMachine : MonoBehaviour
 
     IEnumerator SetupCombat()
     {
+        enemies[0].UpdateData();
+        enemies[1].UpdateData();
+        if (enemies[0])
+        {
+            //Debug.Log("E1 Exists");
+            switch (enemies[0].EnemyResistance)
+            {
+                case "FIRE":
+                    Debug.Log("E1 res to fire");
+                    enemies[0].transform.GetChild(0).GetChild(0).GetComponent<SkinnedMeshRenderer>().material = materials[0];
+                    break;
+                case "ICE":
+                    Debug.Log("E1 res to ice");
+                    enemies[0].transform.GetChild(0).GetChild(0).GetComponent<SkinnedMeshRenderer>().material = materials[1];
+                    break;
+                case "WIND":
+                    Debug.Log("E1 res to wind");
+                    enemies[0].transform.GetChild(0).GetChild(0).GetComponent<SkinnedMeshRenderer>().material = materials[2];
+                    break;
+                case "NA":
+                    Debug.Log("E1 res to NA");
+                    enemies[0].transform.GetChild(0).GetChild(0).GetComponent<SkinnedMeshRenderer>().material = materials[3];
+                    break;
+            }
+        }
+        else
+        {
+            Debug.Log("E2 Does NOT Exist");
+        }
+
+
+        if (enemies[1])
+        {
+            //Debug.Log("E2 Exists");
+            switch (enemies[1].EnemyResistance)
+            {
+                case "FIRE":
+                    Debug.Log("E2 res to fire");
+                    enemies[1].transform.GetChild(0).GetChild(0).GetComponent<SkinnedMeshRenderer>().material = materials[0];
+                    break;
+                case "ICE":
+                    Debug.Log("E2 res to ice");
+                    enemies[1].transform.GetChild(0).GetChild(0).GetComponent<SkinnedMeshRenderer>().material = materials[1];
+                    break;
+                case "WIND":
+                    Debug.Log("E2 res to wind");
+                    enemies[1].transform.GetChild(0).GetChild(0).GetComponent<SkinnedMeshRenderer>().material = materials[2];
+                    break;
+                case "NA":
+                    Debug.Log("E2 res to NA");
+                    enemies[1].transform.GetChild(0).GetChild(0).GetComponent<SkinnedMeshRenderer>().material = materials[3];
+                    break;
+            }
+        }
+        else
+        {
+            Debug.Log("E2 Does NOT Exist");
+        }
+
+
+
+
+
         currentPlayerIndex = 0;
         currentEnemyIndex = 0;
 
@@ -282,8 +410,10 @@ public class CombatStateMachine : MonoBehaviour
         cameraPlayerPos2 = GameObject.Find("CameraThirdPos").transform;
         cameraPlayerPos3 = GameObject.Find("CameraForthPos").transform;
         cameraPlayerPos4 = GameObject.Find("CameraFifthPos").transform;
+        cameraPlayerPos5 = GameObject.Find("CameraSixthPos").transform;
 
         yield return new WaitForSeconds(2f);
+        //Debug.Log("PING");
         playerLight.gameObject.SetActive(true);
         menuController.SetUpItems(items);
         menuController.UpdateEnemyReticleTarget(0);
@@ -298,6 +428,7 @@ public class CombatStateMachine : MonoBehaviour
 
         //do the attack animation
         players[currentPlayerIndex].playerAnim.SetInteger("BasicAttack", 1);
+        menuController.UpdateEnemyText(currentEnemyTCount, "-" + players[currentPlayerIndex].playerPhysAttack.ToString());
 
         //Put damage Calc here
         yield return new WaitForSeconds(0.7f);
@@ -306,21 +437,28 @@ public class CombatStateMachine : MonoBehaviour
         enemies[currentEnemyTCount].enemyAnim.SetInteger("TakeDamage", 1);
 
 
-        yield return new WaitForSeconds(1.3f);
+        yield return new WaitForSeconds(1.6f);
 
 
         //return to idle animation
         players[currentPlayerIndex].playerAnim.SetInteger("BasicAttack", 0);
         enemies[currentEnemyTCount].enemyAnim.SetInteger("TakeDamage", 0);
+        menuController.UpdateEnemyText(currentEnemyTCount, "");
 
+        //Do down animation if health is 0
+        CheckEnemyHPForAnimation();
+
+        yield return new WaitForSeconds(1.5f);
         currentPlayerIndex++;
         if (currentPlayerIndex >= players.Count)
         {
+            CheckEnemies();
             currentPlayerIndex = 0;
             ChangeState(8);
         }
         else
         {
+            CheckEnemies();
             ChangeState(2);
         }
 
@@ -342,10 +480,12 @@ public class CombatStateMachine : MonoBehaviour
         {
 
             currentPlayerIndex = 0;
+            CheckEnemies();
             ChangeState(8);
         }
         else
         {
+            CheckEnemies();
             ChangeState(2);
         }
 
@@ -365,6 +505,7 @@ public class CombatStateMachine : MonoBehaviour
 
         //Return to Idle Animation
         players[currentPlayerIndex].playerAnim.SetInteger("Heal", 0);
+        menuController.UpdatePlayerText(currentPlayersTCount, "");
 
         currentPlayerIndex++;
         if (currentPlayerIndex >= players.Count)
@@ -390,25 +531,37 @@ public class CombatStateMachine : MonoBehaviour
 
         players[currentPlayerIndex].playerMP -= CurrentMove.mpCost;
 
+
+        //Play the particle system
+        InstantiateParticle();
         //Anim when enemies take damage
         enemies[currentEnemyTCount].enemyAnim.SetInteger("TakeDamage", 1);
         //=--------------------
 
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(1.2f);
 
         if (CurrentMove.elementalType == enemies[currentEnemyTCount].EnemyWeakness)
         {
             enemies[currentEnemyTCount].enemyHealth -= (CurrentMove.damageValue + CurrentMove.damageValue / 2);
             enemies[currentEnemyTCount].isDown = true;
+            menuController.UpdateEnemyText(currentEnemyTCount, "-" + (CurrentMove.damageValue + CurrentMove.damageValue / 2).ToString() + "!");
+        }
+        else if (CurrentMove.elementalType == enemies[currentEnemyTCount].enemyResistance)
+        {
+            enemies[currentEnemyTCount].enemyHealth -= (CurrentMove.damageValue - CurrentMove.damageValue / 2);
+            menuController.UpdateEnemyText(currentEnemyTCount, "-" + (CurrentMove.damageValue - CurrentMove.damageValue / 2).ToString() + "...");
         }
         else
         {
             enemies[currentEnemyTCount].enemyHealth -= CurrentMove.damageValue;
+            menuController.UpdateEnemyText(currentEnemyTCount, "-" + CurrentMove.damageValue.ToString());
+
         }
 
 
 
         yield return new WaitForSeconds(1.3f);
+        menuController.UpdateEnemyText(currentEnemyTCount, "");
 
         //Revert to Idle Animation
         players[currentPlayerIndex].playerAnim.SetInteger("CallPersona", 0);
@@ -421,14 +574,20 @@ public class CombatStateMachine : MonoBehaviour
         //revert persona attack number
         attackNumber = 0;
 
+        //Do down animation if health is 0
+        CheckEnemyHPForAnimation();
+
+        yield return new WaitForSeconds(1.5f);
         currentPlayerIndex++;
         if (currentPlayerIndex >= players.Count)
         {
             currentPlayerIndex = 0;
+            CheckEnemies();
             ChangeState(8);
         }
         else
         {
+            CheckEnemies();
             ChangeState(2);
         }
 
@@ -448,7 +607,7 @@ public class CombatStateMachine : MonoBehaviour
         int temp2 = Random.Range(0, enemies[currentEnemyIndex].enemyMoveList.Count);
 
         enemies[currentEnemyIndex].enemyAnim.SetInteger("EnemyAttack", 1);
-        yield return new WaitForSeconds(0.6f);
+        yield return new WaitForSeconds(0.8f);
         if (!players[temp1].isGuarding)
             players[temp1].playerAnim.SetInteger("TakeDamage", 1);
         //Put Damage Calc here
@@ -456,11 +615,14 @@ public class CombatStateMachine : MonoBehaviour
         {
             comSource.PlayOneShot(hurtClip);
             players[temp1].playerHealth -= enemies[currentEnemyIndex].enemyMoveList[temp2].damageValue;
+            menuController.UpdatePlayerText(temp1, "-" + enemies[currentEnemyIndex].enemyMoveList[temp2].damageValue.ToString());
         }
         else
         {
             comSource.PlayOneShot(blockClip);
             players[temp1].playerHealth -= (enemies[currentEnemyIndex].enemyMoveList[temp2].damageValue / 2);
+            menuController.UpdatePlayerText(temp1, "-" + (enemies[currentEnemyIndex].enemyMoveList[temp2].damageValue / 2).ToString());
+
         }
 
 
@@ -468,11 +630,15 @@ public class CombatStateMachine : MonoBehaviour
 
         //---------------
 
-        yield return new WaitForSeconds(1.4f);
+        yield return new WaitForSeconds(1.8f);
         //Return to Idle Animation
         if (!players[temp1].isGuarding)
             players[temp1].playerAnim.SetInteger("TakeDamage", 0);
         enemies[currentEnemyIndex].enemyAnim.SetInteger("EnemyAttack", 0);
+        menuController.UpdatePlayerText(temp1, "");
+
+        //Do down animation if health is 0
+        CheckPlayerHPForAnimation();
 
         currentEnemyIndex++;
         if (currentEnemyIndex >= enemies.Count)
@@ -517,9 +683,26 @@ public class CombatStateMachine : MonoBehaviour
         ChangeState(3);
     }
 
-    void EndCombat()
+    IEnumerator EndCombat()
     {
         // End combat
+        yield return new WaitForSeconds(0.1f);
+        playerLight.gameObject.SetActive(false);
+        cam.transform.position = cameraPlayerPos5.position;
+        cam.transform.rotation = cameraPlayerPos5.rotation;
+        menuController.HideAllMenus();
+        foreach (var player in players)
+        {
+            player.transform.GetChild(1).gameObject.SetActive(false);
+        }
+        yield return new WaitForSeconds(1f);
+
+        foreach (var player in players)
+        {
+            player.playerAnim.SetInteger("Heal", 1);
+        }
+        yield return new WaitForSeconds(1.5f);
+        pauseMenu.LoadWorldScene();
     }
 
     public void UpdateCameraPosition()
@@ -603,22 +786,21 @@ public class CombatStateMachine : MonoBehaviour
     {
         if (items[0].isHP)
         {
-            Debug.Log("item0 is HP");
-            Debug.Log("Target hp is " + players[currentPlayersTCount].playerHealth);
-            Debug.Log("Item heals: " + items[0].amount);
+            //Debug.Log("Target hp is " + players[currentPlayersTCount].playerHealth);
+            //Debug.Log("Item heals: " + items[0].amount);
             players[currentPlayersTCount].playerHealth += items[0].amount;
-            Debug.Log("Target hp is " + players[currentPlayersTCount].playerHealth);
+            //Debug.Log("Target hp is " + players[currentPlayersTCount].playerHealth);
             if (players[currentPlayersTCount].playerHealth > players[currentPlayersTCount].playerMaxHP)
                 players[currentPlayersTCount].playerHealth = players[currentPlayersTCount].playerMaxHP;
         }
         else
         {
-            Debug.Log("item0 is HP");
             players[currentPlayersTCount].playerMP += items[0].amount;
             if (players[currentPlayersTCount].playerMP > players[currentPlayersTCount].playerMaxMP)
                 players[currentPlayersTCount].playerMP = players[currentPlayersTCount].playerMaxMP;
         }
 
+        menuController.UpdatePlayerText(currentPlayersTCount, "+" + items[0].amount.ToString());
         menuController.I1ButtonPressed();
     }
 
@@ -636,7 +818,7 @@ public class CombatStateMachine : MonoBehaviour
             if (players[currentPlayersTCount].playerMP > players[currentPlayersTCount].playerMaxMP)
                 players[currentPlayersTCount].playerMP = players[currentPlayersTCount].playerMaxMP;
         }
-
+        menuController.UpdatePlayerText(currentPlayersTCount, "+" + items[1].amount.ToString());
         menuController.I2ButtonPressed();
 
     }
@@ -655,7 +837,7 @@ public class CombatStateMachine : MonoBehaviour
             if (players[currentPlayersTCount].playerMP > players[currentPlayersTCount].playerMaxMP)
                 players[currentPlayersTCount].playerMP = players[currentPlayersTCount].playerMaxMP;
         }
-
+        menuController.UpdatePlayerText(currentPlayersTCount, "+" + items[2].amount.ToString());
         menuController.I3ButtonPressed();
 
     }
@@ -674,15 +856,92 @@ public class CombatStateMachine : MonoBehaviour
             if (players[currentPlayersTCount].playerMP > players[currentPlayersTCount].playerMaxMP)
                 players[currentPlayersTCount].playerMP = players[currentPlayersTCount].playerMaxMP;
         }
-
+        menuController.UpdatePlayerText(currentPlayersTCount, "+" + items[3].amount.ToString());
         menuController.I4ButtonPressed();
 
     }
 
+    public void CheckEnemies()
+    {
+        for (int i = enemies.Count - 1; i >= 0; i--)
+        {
+            if (enemies[i].enemyHealth <= 0)
+            {
+                if (enemies[i].gameObject.name == "E1")
+                {
+                    //Debug.Log("E1 if, must die");
+                    menuController.UpdateNewReticles();
+                }
+                StartCoroutine(EnemyDeathDelay(i));
+                /*enemies[i].gameObject.SetActive(false);
+                enemies.RemoveAt(i);
+                enemyCount = enemies.Count;*/
+                
+
+            }
+        }
+
+        currentEnemyTCount = 0;
+        menuController.UpdateEnemyReticleTarget(0);
 
 
+        
 
+    }
 
+    IEnumerator EnemyDeathDelay(int i)
+    {
+        Debug.Log(i);
+        yield return new WaitForSeconds(0.2f);
+        enemies[i].gameObject.SetActive(false);
+        enemies.RemoveAt(i);
+        enemyCount = enemies.Count;
+
+        if (enemyCount <= 0)
+            ChangeState(12);
+    }
+
+    public void InstantiateParticle()
+    {
+        //find particle number
+        int particleNumber = attackNumber - 1;
+        //instantiate the correct partice system
+        GameObject particleInstance = Instantiate(players[currentPlayerIndex].particleSystems[attackNumber - 1], particleSpawnPoint.transform.position, Quaternion.identity);
+        //Get particle system component
+        ParticleSystem particleSystem = particleInstance.GetComponent<ParticleSystem>();
+        //play particle system
+        particleSystem.Play();
+        //destroy it
+        Destroy(particleInstance, particleSystem.main.duration + particleSystem.main.startLifetime.constantMax);
+    }
+
+    public void CheckEnemyHPForAnimation()
+    {
+        if (enemies[currentEnemyTCount].enemyHealth <= 0)
+        {
+            
+            enemies[currentEnemyTCount].enemyAnim.SetInteger("Down", 1);
+            
+        }
+        else
+        {
+            //Debug.Log("Enemy is not defeated for animation");
+        }
+    }
+
+    public void CheckPlayerHPForAnimation()
+    {
+        if (players[currentPlayersTCount].playerHealth <= 0)
+        {
+            
+            players[currentPlayersTCount].playerAnim.SetInteger("Down", 1);
+            
+        }
+        else
+        {
+            //Debug.Log("Enemy is not defeated for animation");
+        }
+    }
 
 
 

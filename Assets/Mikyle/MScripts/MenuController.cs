@@ -8,10 +8,14 @@ public class MenuController : MonoBehaviour
     public GameObject statePanel;
     public GameObject mainMenuPanel;
     public GameObject itemMenuPanel;
-    GameObject itemButton1;
-    GameObject itemButton2;
-    GameObject itemButton3;
-    GameObject itemButton4;
+    public GameObject itemButton1;
+    public GameObject itemButton2;
+    public GameObject itemButton3;
+    public GameObject itemButton4;
+    //public TextMeshProUGUI itemButton1TextMesh;
+    //public TextMeshProUGUI itemButton2TextMesh;
+    //public TextMeshProUGUI itemButton3TextMesh;
+    //public TextMeshProUGUI itemButton4TextMesh;
     List<Item> menuItems;
     public GameObject personaMenuPanel;
     GameObject personaButton1;
@@ -32,8 +36,10 @@ public class MenuController : MonoBehaviour
     Transform playerReticle3;
     Transform playerReticle4;
 
-    Transform enemy1Location;
-    Transform enemy2Location;
+    [SerializeField] Transform enemy1Location;
+    [SerializeField] Transform enemy2Location;
+    [SerializeField] List<TextMeshProUGUI> enemyText;
+    [SerializeField] List<TextMeshProUGUI> playerText;
     Transform cameraPos1;
     Transform cameraPos2;
 
@@ -49,9 +55,11 @@ public class MenuController : MonoBehaviour
     {
         stateTMP = statePanel.GetComponentInChildren<TextMeshProUGUI>();
 
+
+
         //Reticle Setups
-        enemyReticle1 = mainPanel.transform.GetChild(0);
-        enemyReticle2 = mainPanel.transform.GetChild(1);
+        //enemyReticle1 = mainPanel.transform.GetChild(0);
+        //enemyReticle2 = mainPanel.transform.GetChild(1);
         playerReticle1 = mainPanel.transform.GetChild(2);
         playerReticle2 = mainPanel.transform.GetChild(3);
         playerReticle3 = mainPanel.transform.GetChild(4);
@@ -62,6 +70,12 @@ public class MenuController : MonoBehaviour
 
         enemyReticle1 = enemy1Location.GetChild(1).GetChild(0).GetChild(0);
         enemyReticle2 = enemy2Location.GetChild(1).GetChild(0).GetChild(0);
+
+        enemyText.Add(enemy1Location.GetChild(1).GetChild(0).Find("DamageDisp").GetComponent<TextMeshProUGUI>());
+        enemyText.Add(enemy2Location.GetChild(1).GetChild(0).Find("DamageDisp").GetComponent<TextMeshProUGUI>());
+
+
+
 
         //Vector3 screenPos = cam.WorldToScreenPoint(enemy1Location.position);
         //enemyReticle1.position = screenPos;
@@ -108,6 +122,16 @@ public class MenuController : MonoBehaviour
                 break;
 
         }
+    }
+
+    public void UpdateNewReticles()
+    {
+        Debug.Log("ran");
+        Transform temp = enemyReticle1;
+        enemyReticle1 = enemyReticle2;
+        enemyReticle2 = temp;
+
+        enemyText.RemoveAt(0);
     }
 
     public void UpdatePlayerReticleTarget(int newTarget)
@@ -205,10 +229,17 @@ public class MenuController : MonoBehaviour
     public void SetUpItems(List<Item> items)
     {
         menuItems = items;
-        itemButton1.GetComponentInChildren<TextMeshProUGUI>().text = menuItems[0].itemName;
-        itemButton2.GetComponentInChildren<TextMeshProUGUI>().text = menuItems[1].itemName;
-        itemButton3.GetComponentInChildren<TextMeshProUGUI>().text = menuItems[2].itemName;
-        itemButton4.GetComponentInChildren<TextMeshProUGUI>().text = menuItems[3].itemName;
+        foreach (Item item in menuItems)
+        {
+            Debug.Log(item);
+
+        }
+
+
+        itemButton1.transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text = menuItems[0].itemName;
+        itemButton2.transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text = menuItems[1].itemName;
+        itemButton3.transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text = menuItems[2].itemName;
+        itemButton4.transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text = menuItems[3].itemName;
     }
 
     public void SetUpPersonaMoves(List<PersonaMove> moves)
@@ -228,45 +259,6 @@ public class MenuController : MonoBehaviour
             personaButton4.GetComponentInChildren<TextMeshProUGUI>().text = personaMoveItems[3].moveName;
         }
     }
-
-
-
-    //public void OnMainMenuOptionSelected(string option)
-    //{
-    //    switch (option)
-    //    {
-    //        case "Attack":
-    //            // Handle attack action
-    //            combatStateMachine.ChangeStateToResolve();
-    //            break;
-    //        case "Guard":
-    //            // Handle guard action
-    //            combatStateMachine.ChangeStateToResolve();
-    //            break;
-    //        case "Item":
-    //            ShowItemMenu();
-    //            break;
-    //        case "Persona":
-    //            ShowPersonaMenu();
-    //            break;
-    //        case "Gun":
-    //            // Handle gun action
-    //            combatStateMachine.ChangeStateToResolve();
-    //            break;
-    //    }
-    //}
-
-    //public void OnItemSelected(string item)
-    //{
-    //    // Handle item selection
-    //    combatStateMachine.ChangeStateToResolve();
-    //}
-
-    //public void OnPersonaAttackSelected(string attack)
-    //{
-    //    // Handle persona attack selection
-    //    combatStateMachine.ChangeStateToResolve();
-    //}
 
     public void UpdateStateText(string text)
     {
@@ -366,5 +358,13 @@ public class MenuController : MonoBehaviour
         combatStateMachine.ChangeState(13);
     }
 
+    public void UpdateEnemyText(int enNum, string text)
+    {
+        enemyText[enNum].text = text;
+    }
 
+    public void UpdatePlayerText(int enNum, string text)
+    {
+        playerText[enNum].text = text;
+    }
 }

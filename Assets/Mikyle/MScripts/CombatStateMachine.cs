@@ -869,7 +869,9 @@ public class CombatStateMachine : MonoBehaviour
                 }
 
                 StartCoroutine(DownEnemy(i));
-
+                /*enemies[i].gameObject.SetActive(false);
+                enemies.RemoveAt(i);
+                enemyCount = enemies.Count;*/
             }
         }
 
@@ -877,14 +879,14 @@ public class CombatStateMachine : MonoBehaviour
         menuController.UpdateEnemyReticleTarget(0);
 
 
-        if (enemyCount <= 0)
-            ChangeState(12);
+        /*if (enemyCount <= 0)
+            ChangeState(12);*/
 
     }
 
     IEnumerator DownEnemy(int i)
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.1f);
         enemies[i].gameObject.SetActive(false);
         enemies.RemoveAt(i);
         enemyCount = enemies.Count;

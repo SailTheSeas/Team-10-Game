@@ -133,6 +133,10 @@ public class CombatStateMachine : MonoBehaviour
                     currentEnemyTCount = enemyCount - 1;
 
                 menuController.UpdateEnemyReticleTarget(currentEnemyTCount);
+
+                //supposed to find the position of the current target for the particle spawn point
+                Vector3 enemyPosition = enemies[currentEnemyTCount].transform.position;
+                particleSpawnPoint.transform.position = enemyPosition;
             }
 
             if (Input.GetKeyDown(KeyCode.A))
@@ -143,6 +147,10 @@ public class CombatStateMachine : MonoBehaviour
                     currentEnemyTCount = bottomEnemy;
 
                 menuController.UpdateEnemyReticleTarget(currentEnemyTCount);
+
+                //supposed to find the position of the current target for the particle spawn point
+                Vector3 enemyPosition = enemies[currentEnemyTCount].transform.position;
+                particleSpawnPoint.transform.position = enemyPosition;
             }
         }
 
@@ -228,7 +236,6 @@ public class CombatStateMachine : MonoBehaviour
                 //supposed to find the position of the current target for the particle spawn point
                 Vector3 enemyPosition = enemies[currentEnemyTCount].transform.position;
                 particleSpawnPoint.transform.position = enemyPosition;
-
                 break;
 
             case CombatState.GunAttack:

@@ -4501,7 +4501,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &923665978
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5935,7 +5935,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1149764928
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7514,19 +7514,19 @@ MonoBehaviour:
   currentPlayerIndex: 0
   currentEnemyIndex: 0
   items:
-  - itemName: Recover-R 50mg
+  - itemName: HP Recover 50
     amount: 50
     isHP: 1
     isUsed: 0
-  - itemName: Recover-R 100mg
+  - itemName: HP Recover 100
     amount: 100
     isHP: 1
     isUsed: 0
-  - itemName: Soul Drop
+  - itemName: Mana Recover 10
     amount: 10
     isHP: 0
     isUsed: 0
-  - itemName: Snuff Soul
+  - itemName: Mana Recover 50
     amount: 50
     isHP: 0
     isUsed: 0

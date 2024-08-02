@@ -2421,12 +2421,15 @@ MonoBehaviour:
   dialogueLines:
   - "Here we are, the WSOA building. We were sent here to clear the building of monsters,
     stay sharp everyone.\t"
-  - <color=green> Test </color>
+  - If we fight any <color=green> Wind </color> enemies, I'm counting on you <color=blue>nIce</color>,
+    and <color=red> Pyro </color>, I need you to focus on <color=blue>Ice </color>enemies.
   - There is an enemy ahead, get ready to attack on my signal.
   - 3..... 2........ 1........ NOW!!!!
-  - Phew, that wasn't too bad.
-  - "Up the stairs again!\t"
-  - MORE OF THEM
+  - Phew, that wasn't too bad. Hope we don't run into any weird people, they aren't
+    weak to anything.
+  - Up the stairs again! Also, <color=green>Blower<color>, focus any <color=red>Fire<color>
+    enemies we see, ok?
+  - MORE OF THEM, ATTACK!!!
   - That went well
   - "Time to carry on\t"
   - Some more enemies
@@ -2461,7 +2464,7 @@ MonoBehaviour:
   backgroundTriggerPoints: 010000000100000002000000050000000600000008000000090000000b0000000d0000000e0000001000000063000000
   enemyDisp: {fileID: 80005246}
   textStartDelay: 0
-  textCharacterDelay: 0.05
+  textCharacterDelay: 0.005
   typingChar: _
   hasTypingChar: 1
   menuAnimator: {fileID: 1310209788}
